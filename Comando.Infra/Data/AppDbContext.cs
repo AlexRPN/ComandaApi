@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Comanda.Dominio.Empresas.Entidades;
+using Microsoft.EntityFrameworkCore;
 
 namespace Comanda.Infra.Data
 {
@@ -8,5 +9,7 @@ namespace Comanda.Infra.Data
         {
 
         }
+
+        public DbSet<Empresa> Empresas { get; set; }
     }
 }
