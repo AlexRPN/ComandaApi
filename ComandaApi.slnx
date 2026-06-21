@@ -1,3 +1,13 @@
 <Solution>
-  <Project Path="ComandaApi/ComandaApi.csproj" />
+  <Folder Name="/Servicos/">
+    <Project Path="ComandaApi/ComandaApi.csproj" />
+  </Folder>
+  <Folder Name="/Testes/">
+    <Project Path="Comanda.Dominio.Testes/Comanda.Dominio.Testes.csproj" />
+  </Folder>
+  <Project Path="Comanda.Aplicacao/Comanda.Aplicacao.csproj" />
+  <Project Path="Comanda.DataTransfer/Comanda.DataTransfer.csproj" />
+  <Project Path="Comanda.Dominio/Comanda.Dominio.csproj" />
+  <Project Path="Comanda.Ioc/Comanda.Ioc.csproj" />
+  <Project Path="Comando.Infra/Comanda.Infra.csproj" />
 </Solution>

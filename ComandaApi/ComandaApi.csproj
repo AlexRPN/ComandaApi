@@ -8,10 +8,21 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Comanda.Aplicacao\Comanda.Aplicacao.csproj" />
+    <ProjectReference Include="..\Comanda.DataTransfer\Comanda.DataTransfer.csproj" />
+    <ProjectReference Include="..\Comanda.Ioc\Comanda.Ioc.csproj" />
+    <ProjectReference Include="..\Comando.Infra\Comanda.Infra.csproj" />
   </ItemGroup>
 
 </Project>

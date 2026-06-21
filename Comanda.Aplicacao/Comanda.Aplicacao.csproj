@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mapster" Version="10.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Comanda.DataTransfer\Comanda.DataTransfer.csproj" />
+    <ProjectReference Include="..\Comanda.Dominio\Comanda.Dominio.csproj" />
+    <ProjectReference Include="..\Comando.Infra\Comanda.Infra.csproj" />
+  </ItemGroup>
+
+</Project>
