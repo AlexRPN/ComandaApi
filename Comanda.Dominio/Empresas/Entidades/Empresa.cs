@@ -1,10 +1,20 @@
 ﻿using Comanda.Dominio.Empresas.Comandos;
+using Comanda.Dominio.EnderecosEmpresas.Entidades;
+using Comanda.Dominio.HorariosFuncionamento.Entidades;
 using Comanda.Dominio.Utils.Enumeradores;
 
 namespace Comanda.Dominio.Empresas.Entidades
 {
     public class Empresa
     {
+        #region Navegação com os relacionamentos
+        // Relacionamento 1:1 com EnderecoEmpresa
+        public EnderecoEmpresa EnderecoEmpresa { get; set; }
+
+        // Relacionamento 1:N com HorarioFuncionamento
+        public ICollection<HorarioFuncionamento> HorariosFuncionamento { get; set; } = [];
+        #endregion
+
         public int Id { get; private set; }
         public string NomeFantasia { get; private set; }
         public string RazaoSocial { get; private set; }
