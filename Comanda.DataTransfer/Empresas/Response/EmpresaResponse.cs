@@ -1,10 +1,10 @@
-﻿using Comanda.Dominio.EnderecosEmpresas.Comandos;
-using Comanda.Dominio.HorariosFuncionamento.Comando;
+﻿using Comanda.DataTransfer.EnderecosEmpresas.Response;
+using Comanda.DataTransfer.HorariosFuncionamento.Response;
 using Comanda.Dominio.Utils.Enumeradores;
 
-namespace Comanda.Dominio.Empresas.Comandos
+namespace Comanda.DataTransfer.Empresas.Response
 {
-    public class EmpresaComando
+    public class EmpresaResponse
     {
         public int Id { get; set; }
         public string NomeFantasia { get; set; }
@@ -18,7 +18,8 @@ namespace Comanda.Dominio.Empresas.Comandos
         public AtivoInativoEnum Status { get; set; }
         public DateTime DataCadastro { get; set; }
         public DateTime DataAlteracao { get; set; }
-        public EnderecoEmpresaComando Endereco { get; set; }
-        public IEnumerable<HorarioFuncionamentoComando> HorariosFuncionamento { get; set; }
+        public EnderecoEmpresaResponse Endereco { get; set; }
+        public IEnumerable<HorarioFuncionamentoResponse> HorariosFuncionamento { get; set; }
+        public string Mensagem { get; set; }
     }
 }

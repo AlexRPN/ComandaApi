@@ -10,13 +10,4 @@
     <Compile Remove="Class1.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Empresas\Servicos\" />
-    <Folder Include="Empresas\Repositorios\" />
-    <Folder Include="EnderecosEmpresas\Servicos\" />
-    <Folder Include="EnderecosEmpresas\Repositorios\" />
-    <Folder Include="HorariosFuncionamento\Servicos\" />
-    <Folder Include="HorariosFuncionamento\Repositorios\" />
-  </ItemGroup>
-
 </Project>

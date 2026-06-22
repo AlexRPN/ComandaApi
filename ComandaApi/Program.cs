@@ -1,6 +1,7 @@
 using Comanda.Infra.Data;
-using Microsoft.EntityFrameworkCore;
 using Comanda.Ioc.InjecoesDependenciaConfig;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,12 @@ builder.Services.AddOpenApi();
 
 // Adiciona a configuração de injeção de dependência da infraestrutura
 builder.Services.AddInfraestrutura(builder.Configuration);
+
+// Configuração para serializar enums como strings no JSON
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
 // Configuração do Entity Framework Core com SQL Server
 builder.Services.AddDbContext<AppDbContext>(options =>

@@ -1,14 +1,13 @@
 ﻿using Comanda.Dominio.Utils.Enumeradores;
 
-namespace Comanda.Dominio.HorariosFuncionamento.Comando
+namespace Comanda.DataTransfer.HorariosFuncionamento.Response
 {
-    public class HorarioFuncionamentoComando
+    public class HorarioFuncionamentoResponse
     {
         public int Id { get; set; }
         public int EmpresaId { get; set; }
         public DiaSemanaEnum DiaSemana { get; set; }
         public DateTime HoraAbertura { get; set; }
         public DateTime HoraFechamento { get; set; }
-        public AtivoInativoEnum Status { get; set; }
     }
 }

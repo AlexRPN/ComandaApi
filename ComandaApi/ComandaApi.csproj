@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Comanda.Aplicacao\Comanda.Aplicacao.csproj" />
     <ProjectReference Include="..\Comanda.DataTransfer\Comanda.DataTransfer.csproj" />
     <ProjectReference Include="..\Comanda.Ioc\Comanda.Ioc.csproj" />
