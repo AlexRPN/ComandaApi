@@ -78,5 +78,28 @@ namespace Comanda.Aplicacao.Empresas.Servicos
                 throw new Exception("Erro ao cadastrar empresa!", ex);
             }
         }
+
+        public async Task<EmpresaResponse> RecuperarAsync(int id, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var empresa = await empresaServico.RecuperarAsync(id, cancellationToken);
+
+                if (empresa == null)
+                {
+                    throw new Exception("Empresa não encontrada!");
+                }
+
+                var empresaResponse = empresa.Adapt<EmpresaResponse>();
+                empresaResponse.Endereco = empresa.EnderecoEmpresa.Adapt<EnderecoEmpresaResponse>();
+                empresaResponse.HorariosFuncionamento = empresa.HorariosFuncionamento.Adapt<IEnumerable<HorarioFuncionamentoResponse>>();
+
+                return empresaResponse;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao recuperar empresa!", ex);
+            }
+        }
     }
 }

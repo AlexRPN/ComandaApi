@@ -2,6 +2,7 @@
 using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.Empresas.Repositorios.Interfaces;
 using Comanda.Infra.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Comanda.Infra.Empresas.Repositorios
 {
@@ -30,6 +31,16 @@ namespace Comanda.Infra.Empresas.Repositorios
             {
                 throw new Exception("Erro ao inserir Empresa!", ex);
             }
+        }
+
+        public async Task<Empresa> RecuperarAsync(int id, CancellationToken cancellationToken)
+        {
+            var empresa = await appDbContext.Empresas.AsNoTracking()
+                    .Include(e => e.EnderecoEmpresa)
+                    .Include(e => e.HorariosFuncionamento)
+                    .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
+
+            return empresa;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Comanda.Dominio.Empresas.Comandos;
+using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.Empresas.Repositorios.Interfaces;
 using Comanda.Dominio.Empresas.Servicos.Interfaces;
 using Comanda.Dominio.Utils.Enumeradores;
@@ -30,6 +31,11 @@ namespace Comanda.Dominio.Empresas.Servicos
             };
 
             return await empresaRepositorio.InserirAsync(empresa, cancellationToken);
+        }
+
+        public Task<Empresa> RecuperarAsync(int id, CancellationToken cancellationToken)
+        {
+            return empresaRepositorio.RecuperarAsync(id, cancellationToken);
         }
     }
 }

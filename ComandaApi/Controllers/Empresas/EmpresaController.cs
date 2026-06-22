@@ -27,5 +27,19 @@ namespace ComandaApi.Controllers.Empresas
             var response = await empresaAppServico.InserirAsync(request, cancellationToken);
             return Ok(response);
         }
+
+        /// <summary>
+        /// Recupera uma empresa pelo id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        [Route("recuperar/{id}")]
+        public async Task<IActionResult> RecuperarAsync(int id, CancellationToken cancellationToken)
+        {
+            var response = await empresaAppServico.RecuperarAsync(id, cancellationToken);
+            return Ok(response);
+        }
     }
 }
