@@ -18,7 +18,7 @@ namespace Comanda.Infra.EnderecosEmpresas.Repositorios
             try
             {
                 var endereco = new EnderecoEmpresa(comando);
-                
+
                 await appDbContext.EnderecoEmpresas.AddAsync(endereco, cancellationToken);
                 await appDbContext.SaveChangesAsync(cancellationToken);
                 comando.Id = endereco.Id;

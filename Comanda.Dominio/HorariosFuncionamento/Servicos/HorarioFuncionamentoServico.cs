@@ -27,7 +27,7 @@ namespace Comanda.Dominio.HorariosFuncionamento.Servicos
                     Status = AtivoInativoEnum.Ativo
                 });
             }
-            
+
             await horarioFuncionamentoRepositorio.InserirAsync(horariosFuncionamento, cancellationToken);
             return horariosFuncionamento;
         }

@@ -27,7 +27,7 @@ namespace Comanda.Dominio.EnderecosEmpresas.Entidades
 
         private EnderecoEmpresa()
         {
-            
+
         }
 
         public EnderecoEmpresa(EnderecoEmpresaComando comando)
@@ -52,12 +52,12 @@ namespace Comanda.Dominio.EnderecosEmpresas.Entidades
 
         public void SetCep(string cep)
         {
-            if(string.IsNullOrEmpty(cep))
+            if (string.IsNullOrEmpty(cep))
             {
                 throw new ArgumentException("O CEP não pode ser nulo ou vazio.");
             }
 
-            if(cep.Length > 9 || cep.Length < 2)
+            if (cep.Length > 9 || cep.Length < 2)
             {
                 throw new ArgumentException("O CEP deve conter entre 2 e 9 caracteres.");
             }

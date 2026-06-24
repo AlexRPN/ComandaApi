@@ -5,8 +5,8 @@ namespace Comanda.Dominio.Utils.Filtros
     public class PaginacaoFiltro
     {
         private int qt;
-        public int Qt 
-        { 
+        public int Qt
+        {
             get => qt;
             set => qt = (value < 100 ? value : 100);
         }
@@ -24,7 +24,7 @@ namespace Comanda.Dominio.Utils.Filtros
 
         public string ObterSqlOrdenacao()
         {
-            if(string.IsNullOrWhiteSpace(CpOrd))
+            if (string.IsNullOrWhiteSpace(CpOrd))
             {
                 return string.Empty;
             }

@@ -21,7 +21,7 @@ namespace Comanda.Dominio.HorariosFuncionamento.Entidades
 
         private HorarioFuncionamento()
         {
-            
+
         }
 
         public HorarioFuncionamento(HorarioFuncionamentoComando comando)

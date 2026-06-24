@@ -30,7 +30,7 @@ namespace Comanda.Dominio.Empresas.Entidades
 
         private Empresa()
         {
-            
+
         }
 
         public Empresa(EmpresaComando comando)
@@ -44,7 +44,7 @@ namespace Comanda.Dominio.Empresas.Entidades
             SetLogo(comando.Logo);
             SetBannerPrincipal(comando.BannerPrincipal);
             Status = comando.Status;
-            DataCadastro = comando.DataCadastro;    
+            DataCadastro = comando.DataCadastro;
             SetDataAlteracao(comando.DataAlteracao);
         }
 
@@ -60,12 +60,12 @@ namespace Comanda.Dominio.Empresas.Entidades
 
         public void SetCnpj(string cnpj)
         {
-            if(string.IsNullOrEmpty(cnpj))
+            if (string.IsNullOrEmpty(cnpj))
             {
                 throw new ArgumentException("CNPJ não pode ser nulo ou vazio.");
             }
 
-            if(cnpj.Length != 14)
+            if (cnpj.Length != 14)
             {
                 throw new ArgumentException("CNPJ deve conter 14 caracteres.");
             }
@@ -80,12 +80,12 @@ namespace Comanda.Dominio.Empresas.Entidades
 
         public void SetTelefone(string telefone)
         {
-            if(string.IsNullOrEmpty(telefone))
+            if (string.IsNullOrEmpty(telefone))
             {
                 throw new ArgumentException("Telefone não pode ser nulo ou vazio.");
             }
 
-            if(telefone.Length < 10 || telefone.Length > 11)
+            if (telefone.Length < 10 || telefone.Length > 11)
             {
                 throw new ArgumentException("Telefone deve conter entre 10 e 11 caracteres.");
             }
@@ -95,12 +95,12 @@ namespace Comanda.Dominio.Empresas.Entidades
 
         public void SetEmail(string email)
         {
-            if(string.IsNullOrEmpty(email))
+            if (string.IsNullOrEmpty(email))
             {
                 throw new ArgumentException("Email não pode ser nulo ou vazio.");
             }
 
-            if(!email.Contains("@") || !email.Contains("."))
+            if (!email.Contains("@") || !email.Contains("."))
             {
                 throw new ArgumentException("Email deve conter '@' e '.'");
             }

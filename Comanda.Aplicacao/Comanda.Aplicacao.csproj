@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Remove="Class1.cs" />
+    <Compile Remove="Empresas\Servicos\EmpresaListarFiltroComando.cs" />
   </ItemGroup>
 
   <ItemGroup>

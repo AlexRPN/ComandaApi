@@ -4,11 +4,14 @@ using Comanda.DataTransfer.Empresas.Response;
 using Comanda.DataTransfer.EnderecosEmpresas.Response;
 using Comanda.DataTransfer.HorariosFuncionamento.Response;
 using Comanda.Dominio.Empresas.Comandos;
+using Comanda.Dominio.Empresas.Entidades;
+using Comanda.Dominio.Empresas.Repositorios.Filtros;
 using Comanda.Dominio.Empresas.Servicos.Interfaces;
 using Comanda.Dominio.EnderecosEmpresas.Comandos;
 using Comanda.Dominio.EnderecosEmpresas.Servicos.Interfaces;
 using Comanda.Dominio.HorariosFuncionamento.Comando;
 using Comanda.Dominio.HorariosFuncionamento.Servicos.Interfaces;
+using Comanda.Dominio.Utils.Consultas;
 using Mapster;
 using Microsoft.Extensions.Logging;
 
@@ -20,8 +23,8 @@ namespace Comanda.Aplicacao.Empresas.Servicos
         private readonly IEnderecoEmpresaServico enderecoEmpresaServico;
         private readonly IHorarioFuncionamentoServico horarioFuncionamentoServico;
         private readonly ILogger<EmpresaAppServico> logger;
-        public EmpresaAppServico(IEmpresaServico empresaServico, 
-                                 IEnderecoEmpresaServico enderecoEmpresaServico, 
+        public EmpresaAppServico(IEmpresaServico empresaServico,
+                                 IEnderecoEmpresaServico enderecoEmpresaServico,
                                  IHorarioFuncionamentoServico horarioFuncionamentoServico,
                                  ILogger<EmpresaAppServico> logger)
         {
@@ -42,14 +45,14 @@ namespace Comanda.Aplicacao.Empresas.Servicos
 
                 var empresa = await empresaServico.InserirAsync(comando, cancellationToken);
 
-                if(empresa == null)
+                if (empresa == null)
                 {
                     throw new Exception("Erro ao cadastrar empresa!");
                 }
 
                 logger.LogInformation("Iniciando cadastro de endereço para empresa: {EmpresaId}", empresa.Id);
                 EnderecoEmpresaInserirComando enderecoComando = request.Endereco.Adapt<EnderecoEmpresaInserirComando>();
-               
+
                 enderecoComando.EmpresaId = empresa.Id;
                 await enderecoEmpresaServico.InserirAsync(enderecoComando, cancellationToken);
 
@@ -79,16 +82,23 @@ namespace Comanda.Aplicacao.Empresas.Servicos
             }
         }
 
+        public async Task<PaginacaoConsulta<EmpresaResponse>> ListarAsync(EmpresaListarRequest request, CancellationToken cancellationToken)
+        {
+            EmpresaListarFiltro filtro = request.Adapt<EmpresaListarFiltro>();
+            IQueryable<Empresa> query = await empresaServico.FiltrarAsync(filtro, cancellationToken);
+
+            PaginacaoConsulta<Empresa> empresas = await empresaServico.ListarAsync(query, request.Qt, request.Pg, request.CpOrd, request.TpOrd, cancellationToken);
+
+            PaginacaoConsulta<EmpresaResponse> empresasResponse = empresas.Adapt<PaginacaoConsulta<EmpresaResponse>>();
+
+            return empresasResponse;
+        }
+
         public async Task<EmpresaResponse> RecuperarAsync(int id, CancellationToken cancellationToken)
         {
             try
             {
                 var empresa = await empresaServico.RecuperarAsync(id, cancellationToken);
-
-                if (empresa == null)
-                {
-                    throw new Exception("Empresa não encontrada!");
-                }
 
                 var empresaResponse = empresa.Adapt<EmpresaResponse>();
                 empresaResponse.Endereco = empresa.EnderecoEmpresa.Adapt<EnderecoEmpresaResponse>();

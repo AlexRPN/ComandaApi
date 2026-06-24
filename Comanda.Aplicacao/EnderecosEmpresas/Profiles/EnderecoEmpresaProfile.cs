@@ -1,8 +1,9 @@
-﻿
-using Comanda.DataTransfer.Empresas.Response;
+﻿using Comanda.DataTransfer.Empresas.Response;
 using Comanda.DataTransfer.EnderecosEmpresas.Request;
 using Comanda.DataTransfer.EnderecosEmpresas.Response;
+using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.EnderecosEmpresas.Comandos;
+using Comanda.Dominio.EnderecosEmpresas.Entidades;
 using Mapster;
 
 namespace Comanda.Aplicacao.EnderecosEmpresas.Profiles
@@ -13,6 +14,7 @@ namespace Comanda.Aplicacao.EnderecosEmpresas.Profiles
         {
             config.NewConfig<EnderecoEmpresaRequest, EnderecoEmpresaComando>();
             config.NewConfig<EnderecoEmpresaComando, EnderecoEmpresaResponse>();
+            config.NewConfig<Empresa, EnderecoEmpresaResponse>();
         }
     }
 }
