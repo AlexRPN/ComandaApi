@@ -1,4 +1,5 @@
-﻿using Comanda.DataTransfer.HorariosFuncionamento.Request;
+﻿using Comanda.DataTransfer.Empresas.Request;
+using Comanda.DataTransfer.HorariosFuncionamento.Request;
 using Comanda.DataTransfer.HorariosFuncionamento.Response;
 using Comanda.Dominio.HorariosFuncionamento.Comando;
 using Comanda.Dominio.HorariosFuncionamento.Entidades;
@@ -13,6 +14,7 @@ namespace Comanda.Aplicacao.HorariosFuncionamento.Profiles
             config.NewConfig<HorarioFuncionamentoRequest, HorarioFuncionamentoComando>();
             config.NewConfig<HorarioFuncionamentoComando, HorarioFuncionamentoResponse>();
             config.NewConfig<HorarioFuncionamento, HorarioFuncionamentoResponse>();
+            config.NewConfig<EmpresaRequest, HorarioFuncionamentoEditarComando>();
         }
     }
 }

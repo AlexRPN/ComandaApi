@@ -1,5 +1,6 @@
 ﻿
 using Comanda.Dominio.EnderecosEmpresas.Comandos;
+using Comanda.Dominio.EnderecosEmpresas.Entidades;
 using Comanda.Dominio.EnderecosEmpresas.Repositorios.Interfaces;
 using Comanda.Dominio.EnderecosEmpresas.Servicos.Interfaces;
 
@@ -31,6 +32,33 @@ namespace Comanda.Dominio.EnderecosEmpresas.Servicos
             };
 
             return enderecoEmpresaRepositorio.InserirAsync(endereco, cancellationToken);
+        }
+
+        public async Task<EnderecoEmpresa> EditarAsync(EnderecoEmpresaEditarComando comando, CancellationToken cancellationToken)
+        {
+            EnderecoEmpresa enderecoEmpresa = await enderecoEmpresaRepositorio.RecuperarAsync(e => e.EmpresaId == comando.EmpresaId, cancellationToken);
+
+            enderecoEmpresa.SetCep(comando.Cep);
+            enderecoEmpresa.SetLogradouro(comando.Logradouro);
+            enderecoEmpresa.SetNumero(comando.Numero);
+            enderecoEmpresa.SetComplemento(comando.Complemento);
+            enderecoEmpresa.SetBairro(comando.Bairro);
+            enderecoEmpresa.SetCidade(comando.Cidade);
+            enderecoEmpresa.SetEstado(comando.Estado);
+            enderecoEmpresa.SetPais(comando.Pais);
+            enderecoEmpresa.SetLatitude(comando.Latitude);
+            enderecoEmpresa.SetLongitude(comando.Longitude);
+
+            await enderecoEmpresaRepositorio.EditarAsync(enderecoEmpresa, cancellationToken);
+
+            return enderecoEmpresa;
+        }
+
+        public Task<EnderecoEmpresa> ValidarAsync(int id, CancellationToken cancellationToken)
+        {
+            var enderecoEmpresa = enderecoEmpresaRepositorio.RecuperarAsync(id, cancellationToken);
+
+            return enderecoEmpresa;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Comanda.Aplicacao.Empresas.Servicos;
 using Comanda.Aplicacao.Empresas.Servicos.Interfaces;
+using Comanda.Aplicacao.Transacoes.Interfaces;
 using Comanda.Dominio.Empresas.Repositorios.Interfaces;
 using Comanda.Dominio.Empresas.Servicos;
 using Comanda.Dominio.Empresas.Servicos.Interfaces;
@@ -41,6 +42,7 @@ namespace Comanda.Ioc.InjecoesDependenciaConfig
 
             // Aplicação
             services.AddScoped<IEmpresaAppServico, EmpresaAppServico>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }

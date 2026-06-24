@@ -1,4 +1,5 @@
 ﻿using Comanda.Aplicacao.Empresas.Servicos.Interfaces;
+using Comanda.Aplicacao.Transacoes.Interfaces;
 using Comanda.DataTransfer.Empresas.Request;
 using Comanda.DataTransfer.Empresas.Response;
 using Comanda.DataTransfer.EnderecosEmpresas.Response;
@@ -8,8 +9,10 @@ using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.Empresas.Repositorios.Filtros;
 using Comanda.Dominio.Empresas.Servicos.Interfaces;
 using Comanda.Dominio.EnderecosEmpresas.Comandos;
+using Comanda.Dominio.EnderecosEmpresas.Entidades;
 using Comanda.Dominio.EnderecosEmpresas.Servicos.Interfaces;
 using Comanda.Dominio.HorariosFuncionamento.Comando;
+using Comanda.Dominio.HorariosFuncionamento.Entidades;
 using Comanda.Dominio.HorariosFuncionamento.Servicos.Interfaces;
 using Comanda.Dominio.Utils.Consultas;
 using Mapster;
@@ -23,15 +26,18 @@ namespace Comanda.Aplicacao.Empresas.Servicos
         private readonly IEnderecoEmpresaServico enderecoEmpresaServico;
         private readonly IHorarioFuncionamentoServico horarioFuncionamentoServico;
         private readonly ILogger<EmpresaAppServico> logger;
+        private readonly IUnitOfWork unitOfWork;
         public EmpresaAppServico(IEmpresaServico empresaServico,
                                  IEnderecoEmpresaServico enderecoEmpresaServico,
                                  IHorarioFuncionamentoServico horarioFuncionamentoServico,
-                                 ILogger<EmpresaAppServico> logger)
+                                 ILogger<EmpresaAppServico> logger,
+                                 IUnitOfWork unitOfWork)
         {
             this.empresaServico = empresaServico;
             this.enderecoEmpresaServico = enderecoEmpresaServico;
             this.horarioFuncionamentoServico = horarioFuncionamentoServico;
             this.logger = logger;
+            this.unitOfWork = unitOfWork;
         }
 
         public async Task<EmpresaResponse> InserirAsync(EmpresaRequest request, CancellationToken cancellationToken)
@@ -82,6 +88,47 @@ namespace Comanda.Aplicacao.Empresas.Servicos
             }
         }
 
+        public async Task<EmpresaResponse> EditarAsync(EmpresaRequest request, CancellationToken cancellationToken)
+        {
+            EmpresaEditarComando comando = request.Adapt<EmpresaEditarComando>();
+
+            EnderecoEmpresaEditarComando enderecoComando = request.Endereco.Adapt<EnderecoEmpresaEditarComando>();
+
+            IEnumerable<HorarioFuncionamentoEditarComando> horariosComando = request.HorariosFuncionamento.Adapt<IEnumerable<HorarioFuncionamentoEditarComando>>();
+
+            try
+            {
+                await unitOfWork.BeginTransactionAsync(cancellationToken);
+
+                logger.LogInformation("Iniciando atualização de empresa: {NomeFantasia}", request.NomeFantasia);
+                Empresa empresa = await empresaServico.EditarAsync( comando, cancellationToken);
+
+                logger.LogInformation("Iniciando atualização de endereço para empresa: {NomeFantasia}", empresa.NomeFantasia);
+                enderecoComando.EmpresaId = empresa.Id;
+                EnderecoEmpresa enderecoEmpresa = await enderecoEmpresaServico.EditarAsync(enderecoComando, cancellationToken);
+
+                logger.LogInformation("Iniciando atualização de horários de funcionamento para empresa: {NomeFantasia}", empresa.NomeFantasia);
+
+                IEnumerable<HorarioFuncionamento> horariosFuncionamento = await horarioFuncionamentoServico.EditarAsync(empresa.Id, horariosComando, cancellationToken);
+
+                await unitOfWork.CommitAsync(cancellationToken);
+                await unitOfWork.CommitTransactionAsync(cancellationToken);
+
+                var empresaResponse = empresa.Adapt<EmpresaResponse>();
+
+                empresaResponse.Endereco = enderecoEmpresa.Adapt<EnderecoEmpresaResponse>();
+                empresaResponse.HorariosFuncionamento = horariosFuncionamento.Adapt<IEnumerable<HorarioFuncionamentoResponse>>();
+                empresaResponse.Mensagem = "Dados da empresa atualizados com sucesso!";
+
+                return empresaResponse;
+            }
+            catch
+            {
+                await unitOfWork.RollbackTransactionAsync(cancellationToken);
+                throw;
+            }
+        }
+
         public async Task<PaginacaoConsulta<EmpresaResponse>> ListarAsync(EmpresaListarRequest request, CancellationToken cancellationToken)
         {
             EmpresaListarFiltro filtro = request.Adapt<EmpresaListarFiltro>();
@@ -98,7 +145,7 @@ namespace Comanda.Aplicacao.Empresas.Servicos
         {
             try
             {
-                var empresa = await empresaServico.RecuperarAsync(id, cancellationToken);
+                var empresa = await empresaServico.ValidarAsync(id, cancellationToken);
 
                 var empresaResponse = empresa.Adapt<EmpresaResponse>();
                 empresaResponse.Endereco = empresa.EnderecoEmpresa.Adapt<EnderecoEmpresaResponse>();

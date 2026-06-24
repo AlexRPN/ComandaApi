@@ -31,6 +31,20 @@ namespace ComandaApi.Controllers.Empresas
         }
 
         /// <summary>
+        /// Edita uma empresa existente
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("editar")]
+        public async Task<ActionResult> EditarAsync([FromBody] EmpresaRequest request, CancellationToken cancellationToken)
+        {
+            var response = await empresaAppServico.EditarAsync(request, cancellationToken);
+            return Ok(response);
+        }
+
+        /// <summary>
         /// Recupera uma empresa pelo id
         /// </summary>
         /// <param name="id"></param>

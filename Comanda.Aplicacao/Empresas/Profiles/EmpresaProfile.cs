@@ -17,6 +17,7 @@ namespace Comanda.Aplicacao.Empresas.Profiles
                 .Map(dest => dest.Endereco, src => src.EnderecoEmpresa)
                 .Map(dest => dest.HorariosFuncionamento, src => src.HorariosFuncionamento);
             config.NewConfig<EmpresaListarRequest, EmpresaListarFiltro>();
+            config.NewConfig<EmpresaRequest, EmpresaEditarComando>();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿
 using Comanda.Dominio.Utils.Consultas;
 using Comanda.Dominio.Utils.Filtros.Enumeradores;
+using System.Linq.Expressions;
 
 namespace Comanda.Dominio.Genericos
 {
@@ -22,12 +23,14 @@ namespace Comanda.Dominio.Genericos
         IList<T> QueryList();
 
         Task<IQueryable<T>> QueryAsync();
-        Task<T> RecuperarAsync(int id);
+        Task<T?> RecuperarAsync(int id, CancellationToken cancellationToken);
+        Task<T?> RecuperarAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);
 
         Task<T> InserirAsync(T entidade);
 
-        Task<T> EditarAsync(T entidade);
+        Task<T> EditarAsync(T entidade, CancellationToken cancellationToken);
         Task ExcluirAsync(T entidade);
         Task<PaginacaoConsulta<T>> ListarAsync(IQueryable<T> query, int qt, int pg, string cpOrd, TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken);
+        Task<IEnumerable<T>> ListarAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);
     }
 }

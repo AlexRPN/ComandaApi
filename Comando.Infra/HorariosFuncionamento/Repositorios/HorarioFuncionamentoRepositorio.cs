@@ -3,15 +3,14 @@ using Comanda.Dominio.HorariosFuncionamento.Comando;
 using Comanda.Dominio.HorariosFuncionamento.Entidades;
 using Comanda.Dominio.HorariosFuncionamento.Repositorios.Interfaces;
 using Comanda.Infra.Data;
+using Comanda.Infra.Genericos;
 
 namespace Comanda.Infra.HorariosFuncionamento.Repositorios
 {
-    public class HorarioFuncionamentoRepositorio : IHorarioFuncionamentoRepositorio
+    public class HorarioFuncionamentoRepositorio : GenericoRepositorio<HorarioFuncionamento>, IHorarioFuncionamentoRepositorio
     {
-        private readonly AppDbContext appDbContext;
-        public HorarioFuncionamentoRepositorio(AppDbContext appDbContext)
+        public HorarioFuncionamentoRepositorio(AppDbContext appDbContext) : base(appDbContext)
         {
-            this.appDbContext = appDbContext;
         }
 
         public async Task<IEnumerable<HorarioFuncionamentoComando>> InserirAsync(IEnumerable<HorarioFuncionamentoComando> comando, CancellationToken cancellationToken)

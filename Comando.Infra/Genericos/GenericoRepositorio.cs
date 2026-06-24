@@ -1,4 +1,5 @@
 ﻿using System.Linq.Dynamic.Core;
+using System.Linq.Expressions;
 using Comanda.Dominio.Genericos;
 using Comanda.Dominio.Utils.Consultas;
 using Comanda.Dominio.Utils.Filtros.Enumeradores;
@@ -137,5 +138,26 @@ namespace Comanda.Infra.Genericos
             return resultado.AsQueryable();
         }
 
+        public async Task<T?> RecuperarAsync(int id, CancellationToken cancellationToken)
+        {
+            return await appDbContext.Set<T>().FindAsync(new object[] { id }, cancellationToken);
+        }
+
+        public async Task<T?> RecuperarAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
+        {
+            return await appDbContext.Set<T>().FirstOrDefaultAsync(predicate, cancellationToken);
+        }
+
+        public Task<T> EditarAsync(T entidade, CancellationToken cancellationToken)
+        {
+            appDbContext.Update(entidade);
+
+            return Task.FromResult(entidade);
+        }
+
+        public async Task<IEnumerable<T>> ListarAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
+        {
+            return await appDbContext.Set<T>().Where(predicate).ToListAsync(cancellationToken);
+        }
     }
 }

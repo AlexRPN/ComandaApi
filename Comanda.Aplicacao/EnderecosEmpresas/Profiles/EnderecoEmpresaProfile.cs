@@ -1,4 +1,5 @@
-﻿using Comanda.DataTransfer.Empresas.Response;
+﻿using Comanda.DataTransfer.Empresas.Request;
+using Comanda.DataTransfer.Empresas.Response;
 using Comanda.DataTransfer.EnderecosEmpresas.Request;
 using Comanda.DataTransfer.EnderecosEmpresas.Response;
 using Comanda.Dominio.Empresas.Entidades;
@@ -15,6 +16,7 @@ namespace Comanda.Aplicacao.EnderecosEmpresas.Profiles
             config.NewConfig<EnderecoEmpresaRequest, EnderecoEmpresaComando>();
             config.NewConfig<EnderecoEmpresaComando, EnderecoEmpresaResponse>();
             config.NewConfig<Empresa, EnderecoEmpresaResponse>();
+            config.NewConfig<EmpresaRequest, EnderecoEmpresaEditarComando>();
         }
     }
 }

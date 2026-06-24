@@ -10,7 +10,8 @@ namespace Comanda.Dominio.Empresas.Servicos.Interfaces
     public interface IEmpresaServico
     {
         Task<EmpresaComando> InserirAsync(EmpresaInserirComando comando, CancellationToken cancellationToken);
-        Task<Empresa> RecuperarAsync(int id, CancellationToken cancellationToken);
+        Task<Empresa> EditarAsync(EmpresaEditarComando comando, CancellationToken cancellationToken);
+        Task<Empresa> ValidarAsync(int id, CancellationToken cancellationToken);
         Task<PaginacaoConsulta<Empresa>> ListarAsync(IQueryable<Empresa> query, int qt, int pg, string cpOrd,
                                                      TipoOrdenacaoEnum tpOrd, 
                                                      CancellationToken cancellationToken);

@@ -2,15 +2,14 @@
 using Comanda.Dominio.EnderecosEmpresas.Entidades;
 using Comanda.Dominio.EnderecosEmpresas.Repositorios.Interfaces;
 using Comanda.Infra.Data;
+using Comanda.Infra.Genericos;
 
 namespace Comanda.Infra.EnderecosEmpresas.Repositorios
 {
-    public class EnderecoEmpresaRepositorio : IEnderecoEmpresaRepositorio
+    public class EnderecoEmpresaRepositorio : GenericoRepositorio<EnderecoEmpresa>, IEnderecoEmpresaRepositorio
     {
-        private readonly AppDbContext appDbContext;
-        public EnderecoEmpresaRepositorio(AppDbContext appDbContext)
+        public EnderecoEmpresaRepositorio(AppDbContext appDbContext) : base(appDbContext)
         {
-            this.appDbContext = appDbContext;
         }
 
         public async Task<EnderecoEmpresaComando> InserirAsync(EnderecoEmpresaComando comando, CancellationToken cancellationToken)
