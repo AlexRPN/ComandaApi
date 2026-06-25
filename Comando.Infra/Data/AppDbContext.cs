@@ -1,6 +1,7 @@
 ﻿using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.EnderecosEmpresas.Entidades;
 using Comanda.Dominio.HorariosFuncionamento.Entidades;
+using Comanda.Dominio.Usuarios.Entidades;
 using Microsoft.EntityFrameworkCore;
 
 namespace Comanda.Infra.Data
@@ -15,5 +16,6 @@ namespace Comanda.Infra.Data
         public DbSet<Empresa> Empresas { get; set; }
         public DbSet<EnderecoEmpresa> EnderecoEmpresas { get; set; }
         public DbSet<HorarioFuncionamento> HorariosFuncionamento { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
     }
 }

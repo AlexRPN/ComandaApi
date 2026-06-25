@@ -10,4 +10,10 @@
     <Compile Remove="Class1.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Usuarios\Comandos\" />
+    <Folder Include="Usuarios\Servicos\" />
+    <Folder Include="Usuarios\Repositorios\" />
+  </ItemGroup>
+
 </Project>

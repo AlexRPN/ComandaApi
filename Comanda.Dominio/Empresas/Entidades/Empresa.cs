@@ -1,6 +1,7 @@
 ﻿using Comanda.Dominio.Empresas.Comandos;
 using Comanda.Dominio.EnderecosEmpresas.Entidades;
 using Comanda.Dominio.HorariosFuncionamento.Entidades;
+using Comanda.Dominio.Usuarios.Entidades;
 using Comanda.Dominio.Utils.Enumeradores;
 
 namespace Comanda.Dominio.Empresas.Entidades
@@ -13,6 +14,9 @@ namespace Comanda.Dominio.Empresas.Entidades
 
         // Relacionamento 1:N com HorarioFuncionamento
         public ICollection<HorarioFuncionamento> HorariosFuncionamento { get; set; } = [];
+
+        // Relacionamento 1:N com Usuario
+        public ICollection<Usuario> Usuarios { get; set; } = [];
         #endregion
 
         public int Id { get; private set; }
