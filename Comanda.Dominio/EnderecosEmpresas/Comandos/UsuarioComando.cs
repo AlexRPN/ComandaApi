@@ -7,6 +7,7 @@ namespace Comanda.Dominio.EnderecosEmpresas.Comandos
         public int Id { get; set; }
         public int EmpresaId { get; set; }
         public string Nome { get; set; }
+        public string Cpf { get; set; }
         public string Email { get; set; }
         public byte[] SenhaHash { get; set; }
         public byte[] SenhaSalt { get; set; }

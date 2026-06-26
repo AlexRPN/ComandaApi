@@ -20,12 +20,22 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
+// Configurações da sessão
+builder.Services.AddSession(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 // Configuração do Entity Framework Core com SQL Server
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
 var app = builder.Build();
+
+// Indica que sessões serão usadas
+app.UseSession(); 
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

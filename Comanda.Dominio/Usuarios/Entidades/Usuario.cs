@@ -14,6 +14,7 @@ namespace Comanda.Dominio.Usuarios.Entidades
 
         public int Id { get; private set; }
         public string Nome { get; private set; }
+        public string Cpf { get; private set; }
         public string Email { get; private set; }
         public byte[] SenhaHash { get; private set; }
         public byte[] SenhaSalt { get; private set; }
@@ -30,6 +31,7 @@ namespace Comanda.Dominio.Usuarios.Entidades
         public Usuario(UsuarioComando comando)
         {
             SetNome(comando.Nome);
+            SetCpf(comando.Cpf);
             SetEmail(comando.Email);
             SetSenhaHash(comando.SenhaHash);
             SetSenhaSalt(comando.SenhaSalt);
@@ -37,6 +39,16 @@ namespace Comanda.Dominio.Usuarios.Entidades
             Status = comando.Status;
             DataCadastro = comando.DataCadastro;
             SetUltimoAcesso(comando.UltimoAcesso);
+        }
+
+        public void SetCpf(string cpf)
+        {
+            if (string.IsNullOrWhiteSpace(cpf))
+            {
+                throw new ArgumentException("O CPF do usuário não pode ser vazio.");
+            }
+
+            Cpf = cpf;
         }
 
         public void SetNome(string nome)
