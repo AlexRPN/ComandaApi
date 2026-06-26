@@ -3,6 +3,7 @@ using Comanda.Dominio.Usuarios.Entidades;
 using Comanda.Dominio.Usuarios.Repositorios.Interfaces;
 using Comanda.Infra.Data;
 using Comanda.Infra.Genericos;
+using Microsoft.EntityFrameworkCore;
 
 namespace Comanda.Infra.Usuarios
 {
@@ -18,6 +19,13 @@ namespace Comanda.Infra.Usuarios
 
             await appDbContext.Usuarios.AddAsync(usuario, cancellationToken);
             comando.Id = usuario.Id;
+
+            return usuario;
+        }
+
+        public async Task<Usuario> ValidarCpfAsync(string cpf, CancellationToken cancellationToken)
+        {
+            var usuario = await appDbContext.Usuarios.FirstOrDefaultAsync(u => u.Cpf == cpf, cancellationToken);
 
             return usuario;
         }

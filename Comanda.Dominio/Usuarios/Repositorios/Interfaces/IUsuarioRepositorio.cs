@@ -7,5 +7,6 @@ namespace Comanda.Dominio.Usuarios.Repositorios.Interfaces
     public interface IUsuarioRepositorio : IGenericoRepositorio<Usuario>
     {
         Task<Usuario> InserirAsync(UsuarioComando comando, CancellationToken cancellationToken);
+        Task<Usuario> ValidarCpfAsync(string cpf, CancellationToken cancellationToken);
     }
 }

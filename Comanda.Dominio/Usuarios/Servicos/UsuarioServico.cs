@@ -20,6 +20,8 @@ namespace Comanda.Dominio.Usuarios.Servicos
 
         public async Task<Usuario> InserirAsync(UsuarioInserirComando comando, CancellationToken cancellationToken)
         {
+            await ValidarAsync(comando.Cpf, cancellationToken);
+
             autenticacaoServico.CriarSenhaHash(comando.Senha, out byte[] senhaHash, out byte[] senhaSalt);
 
             var usuario = new UsuarioComando
@@ -35,6 +37,18 @@ namespace Comanda.Dominio.Usuarios.Servicos
                 DataCadastro = DateTime.UtcNow,
             };
             return await usuarioRepositorio.InserirAsync(usuario, cancellationToken);
+        }
+
+        public async Task<Usuario> ValidarCpfAsync(string cpf, CancellationToken cancellationToken)
+        {
+            var usuario = await usuarioRepositorio.ValidarCpfAsync(cpf, cancellationToken);
+
+            if(usuario != null)
+            {
+                throw new Exception("Cpf informado já está cadastrado no sistema!");
+            }
+
+            return usuario;
         }
     }
 }

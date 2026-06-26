@@ -6,5 +6,6 @@ namespace Comanda.Dominio.Usuarios.Servicos.Interfaces
     public interface IUsuarioServico
     {
         Task<Usuario> InserirAsync(UsuarioInserirComando comando, CancellationToken cancellationToken);
+        Task<Usuario> ValidarCpfAsync(string cpf, CancellationToken cancellationToken);
     }
 }
