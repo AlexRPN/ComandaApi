@@ -1,5 +1,5 @@
 ﻿using Comanda.Dominio.Empresas.Entidades;
-using Comanda.Dominio.EnderecosEmpresas.Comandos;
+using Comanda.Dominio.Usuarios.Comandos;
 using Comanda.Dominio.Utils.Enumeradores;
 
 namespace Comanda.Dominio.Usuarios.Entidades
@@ -31,6 +31,7 @@ namespace Comanda.Dominio.Usuarios.Entidades
         public Usuario(UsuarioComando comando)
         {
             SetNome(comando.Nome);
+            SetEmpresaId(comando.EmpresaId);
             SetCpf(comando.Cpf);
             SetEmail(comando.Email);
             SetSenhaHash(comando.SenhaHash);
@@ -39,6 +40,11 @@ namespace Comanda.Dominio.Usuarios.Entidades
             Status = comando.Status;
             DataCadastro = comando.DataCadastro;
             SetUltimoAcesso(comando.UltimoAcesso);
+        }
+
+        public void SetEmpresaId(int empresaId)
+        {
+            EmpresaId = empresaId;
         }
 
         public void SetCpf(string cpf)

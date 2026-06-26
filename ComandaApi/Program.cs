@@ -20,12 +20,18 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
+// Configuração de cache distribuído em memória
+builder.Services.AddDistributedMemoryCache();
+
 // Configurações da sessão
 builder.Services.AddSession(options =>
 {
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+// Adiciona o HttpContextAccessor para permitir o acesso ao HttpContext em serviços
+builder.Services.AddHttpContextAccessor();
 
 // Configuração do Entity Framework Core com SQL Server
 builder.Services.AddDbContext<AppDbContext>(options =>
