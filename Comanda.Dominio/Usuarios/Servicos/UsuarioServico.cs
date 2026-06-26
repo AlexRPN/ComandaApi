@@ -20,7 +20,7 @@ namespace Comanda.Dominio.Usuarios.Servicos
 
         public async Task<Usuario> InserirAsync(UsuarioInserirComando comando, CancellationToken cancellationToken)
         {
-            await ValidarAsync(comando.Cpf, cancellationToken);
+            await ValidarCpfAsync(comando.Cpf, cancellationToken);
 
             autenticacaoServico.CriarSenhaHash(comando.Senha, out byte[] senhaHash, out byte[] senhaSalt);
 
