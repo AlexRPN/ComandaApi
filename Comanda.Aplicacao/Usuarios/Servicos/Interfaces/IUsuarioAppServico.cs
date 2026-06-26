@@ -6,5 +6,6 @@ namespace Comanda.Aplicacao.Usuarios.Servicos.Interfaces
     public interface IUsuarioAppServico
     {
         Task<UsuarioResponse> InserirAsync(UsuarioRequest request, CancellationToken cancellationToken);
+        Task<UsuarioResponse> RecuperarPorIdAsync(int id, CancellationToken cancellationToken);
     }
 }

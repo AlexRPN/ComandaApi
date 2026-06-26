@@ -27,5 +27,19 @@ namespace ComandaApi.Controllers.Usuarios
             var response = await usuarioAppServico.InserirAsync(request, cancellationToken);
             return Ok(response);
         }
+
+        /// <summary>
+        /// Recupera um usuário pelo seu ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        [Route("recuperar/{id}")]
+        public async Task<ActionResult> RecuperarPorIdAsync(int id, CancellationToken cancellationToken)
+        {
+            var response = await usuarioAppServico.RecuperarPorIdAsync(id, cancellationToken);
+            return Ok(response);
+        }
     }
 }

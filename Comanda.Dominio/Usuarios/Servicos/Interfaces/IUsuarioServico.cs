@@ -7,5 +7,6 @@ namespace Comanda.Dominio.Usuarios.Servicos.Interfaces
     {
         Task<Usuario> InserirAsync(UsuarioInserirComando comando, CancellationToken cancellationToken);
         Task<Usuario> ValidarCpfAsync(string cpf, CancellationToken cancellationToken);
+        Task<Usuario> RecuperarPorIdAsync(int id, CancellationToken cancellationToken);
     }
 }

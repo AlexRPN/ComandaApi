@@ -23,6 +23,18 @@ namespace Comanda.Infra.Usuarios
             return usuario;
         }
 
+        public Task<Usuario> RecuperarPorIdAsync(int id, CancellationToken cancellationToken)
+        {
+            var usuario = appDbContext.Usuarios
+                .AsNoTracking()
+                .Include(e => e.Empresa)
+                .ThenInclude(e => e.EnderecoEmpresa)
+                .Include(u => u.Empresa.HorariosFuncionamento)
+                .FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
+
+            return usuario;
+        }
+
         public async Task<Usuario> ValidarCpfAsync(string cpf, CancellationToken cancellationToken)
         {
             var usuario = await appDbContext.Usuarios.FirstOrDefaultAsync(u => u.Cpf == cpf, cancellationToken);

@@ -8,5 +8,6 @@ namespace Comanda.Dominio.Usuarios.Repositorios.Interfaces
     {
         Task<Usuario> InserirAsync(UsuarioComando comando, CancellationToken cancellationToken);
         Task<Usuario> ValidarCpfAsync(string cpf, CancellationToken cancellationToken);
+        Task<Usuario> RecuperarPorIdAsync(int id, CancellationToken cancellationToken);
     }
 }

@@ -1,8 +1,13 @@
 ﻿
 using Comanda.Aplicacao.Transacoes.Interfaces;
 using Comanda.Aplicacao.Usuarios.Servicos.Interfaces;
+using Comanda.DataTransfer.Empresas.Response;
+using Comanda.DataTransfer.EnderecosEmpresas.Response;
+using Comanda.DataTransfer.HorariosFuncionamento.Response;
 using Comanda.DataTransfer.Usuarios.Request;
 using Comanda.DataTransfer.Usuarios.Response;
+using Comanda.DataTransfer.Utils.Mensagens.Response;
+using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.Empresas.Servicos.Interfaces;
 using Comanda.Dominio.Usuarios.Comandos;
 using Comanda.Dominio.Usuarios.Servicos.Interfaces;
@@ -60,6 +65,25 @@ namespace Comanda.Aplicacao.Usuarios.Servicos
 
                 logger.LogError(ex, "Erro ao inserir usuário.");
                 throw new Exception("Erro ao inserir usuário.", ex);
+            }
+        }
+
+        public async Task<UsuarioResponse> RecuperarPorIdAsync(int id, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var usuario = await usuarioServico.RecuperarPorIdAsync(id, cancellationToken);
+                var response = usuario.Adapt<UsuarioResponse>();
+
+                response.Empresa = usuario.Empresa.Adapt<EmpresaResponse>();
+                response.Empresa.Endereco = usuario.Empresa.EnderecoEmpresa.Adapt<EnderecoEmpresaResponse>();
+                response.Empresa.HorariosFuncionamento = usuario.Empresa.HorariosFuncionamento.Adapt<IEnumerable<HorarioFuncionamentoResponse>>();
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao recuperar usuário!", ex);
             }
         }
     }

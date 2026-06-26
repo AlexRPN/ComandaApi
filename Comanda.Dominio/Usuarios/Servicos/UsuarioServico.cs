@@ -39,6 +39,18 @@ namespace Comanda.Dominio.Usuarios.Servicos
             return await usuarioRepositorio.InserirAsync(usuario, cancellationToken);
         }
 
+        public async Task<Usuario> RecuperarPorIdAsync(int id, CancellationToken cancellationToken)
+        {
+            var usuario = await usuarioRepositorio.RecuperarPorIdAsync(id, cancellationToken);
+
+            if (usuario == null)
+            {
+                throw new Exception("Usuário não encontrado!");
+            }
+
+            return usuario;
+        }
+
         public async Task<Usuario> ValidarCpfAsync(string cpf, CancellationToken cancellationToken)
         {
             var usuario = await usuarioRepositorio.ValidarCpfAsync(cpf, cancellationToken);
