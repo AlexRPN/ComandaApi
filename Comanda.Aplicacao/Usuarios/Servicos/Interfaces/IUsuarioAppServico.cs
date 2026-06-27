@@ -1,11 +1,13 @@
 ﻿using Comanda.DataTransfer.Usuarios.Request;
 using Comanda.DataTransfer.Usuarios.Response;
+using Comanda.Dominio.Utils.Consultas;
 
 namespace Comanda.Aplicacao.Usuarios.Servicos.Interfaces
 {
     public interface IUsuarioAppServico
     {
-        Task<UsuarioResponse> InserirAsync(UsuarioRequest request, CancellationToken cancellationToken);
+        Task<string> InserirAsync(UsuarioRequest request, CancellationToken cancellationToken);
         Task<UsuarioResponse> RecuperarPorIdAsync(int id, CancellationToken cancellationToken);
+        Task<PaginacaoConsulta<UsuarioResponse>> ListarPaginadoAsync(UsuarioListarRequest request, CancellationToken cancellationToken);
     }
 }

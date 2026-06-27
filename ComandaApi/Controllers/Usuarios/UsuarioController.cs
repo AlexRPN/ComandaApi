@@ -41,5 +41,19 @@ namespace ComandaApi.Controllers.Usuarios
             var response = await usuarioAppServico.RecuperarPorIdAsync(id, cancellationToken);
             return Ok(response);
         }
+
+        /// <summary>
+        /// Lista usuários de forma paginada com base nos filtros fornecidos.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("listar")]
+        public async Task<ActionResult> ListarPaginadoAsync([FromBody] UsuarioListarRequest request, CancellationToken cancellationToken)
+        {
+            var response = await usuarioAppServico.ListarPaginadoAsync(request, cancellationToken);
+            return Ok(response);
+        }
     }
 }

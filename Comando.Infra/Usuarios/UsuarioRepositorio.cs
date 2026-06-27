@@ -1,6 +1,9 @@
 ﻿using Comanda.Dominio.Usuarios.Comandos;
 using Comanda.Dominio.Usuarios.Entidades;
+using Comanda.Dominio.Usuarios.Repositorios.Filtros;
 using Comanda.Dominio.Usuarios.Repositorios.Interfaces;
+using Comanda.Dominio.Utils.Consultas;
+using Comanda.Dominio.Utils.Filtros.Enumeradores;
 using Comanda.Infra.Data;
 using Comanda.Infra.Genericos;
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +43,33 @@ namespace Comanda.Infra.Usuarios
             var usuario = await appDbContext.Usuarios.FirstOrDefaultAsync(u => u.Cpf == cpf, cancellationToken);
 
             return usuario;
+        }
+
+        public async Task<IQueryable<Usuario>> FiltrarAsync(UsuarioListarFiltro comando, CancellationToken cancellationToken)
+        {
+            IQueryable<Usuario> query = appDbContext.Usuarios
+                    .AsNoTracking()
+                    .Include(e => e.Empresa)
+                    .ThenInclude(e => e.EnderecoEmpresa)
+                    .Include(u => u.Empresa.HorariosFuncionamento)
+                    .AsQueryable();
+
+            if (comando.Id.HasValue)
+            {
+                query = query.Where(u => u.Id == comando.Id.Value);
+            }
+
+            if (!string.IsNullOrEmpty(comando.Cpf))
+            {
+                query = query.Where(u => u.Cpf == comando.Cpf);
+            }
+
+            return query;
+        }
+
+        public async Task<PaginacaoConsulta<Usuario>> ListarPaginadoAsync(IQueryable<Usuario> query, int qt, int pg, string cpOrd, TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken)
+        {
+            return await base.ListarAsync(query, qt, pg, cpOrd, tpOrd, cancellationToken);
         }
     }
 }

@@ -14,6 +14,5 @@ namespace Comanda.DataTransfer.Usuarios.Response
         public DateTime DataCadastro { get; private set; }
         public DateTime UltimoAcesso { get; private set; }
         public EmpresaResponse Empresa { get; set; }
-        public string Mensagem { get; set; }
     }
 }

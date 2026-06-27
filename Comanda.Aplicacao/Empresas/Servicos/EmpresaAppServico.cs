@@ -40,7 +40,7 @@ namespace Comanda.Aplicacao.Empresas.Servicos
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<EmpresaResponse> InserirAsync(EmpresaRequest request, CancellationToken cancellationToken)
+        public async Task<string> InserirAsync(EmpresaRequest request, CancellationToken cancellationToken)
         {
             try
             {
@@ -74,13 +74,9 @@ namespace Comanda.Aplicacao.Empresas.Servicos
                 var horariosInseridos = await horarioFuncionamentoServico.InserirAsync(horariosFuncionamento, cancellationToken);
 
                 logger.LogInformation("Cadastro da empresa {RazaoSocial} concluído com sucesso: {EmpresaId}", empresa.RazaoSocial, empresa.Id);
-                var empresaResponse = empresa.Adapt<EmpresaResponse>();
 
-                empresaResponse.Endereco = enderecoComando.Adapt<EnderecoEmpresaResponse>();
-                empresaResponse.HorariosFuncionamento = horariosInseridos.Adapt<IEnumerable<HorarioFuncionamentoResponse>>();
-
-                empresaResponse.Mensagem = "Empresa cadastrada com sucesso!";
-                return empresaResponse;
+                var mensagem = $"Empresa {empresa.RazaoSocial} cadastrada com sucesso!";
+                return mensagem;
             }
             catch (Exception ex)
             {
@@ -88,7 +84,7 @@ namespace Comanda.Aplicacao.Empresas.Servicos
             }
         }
 
-        public async Task<EmpresaResponse> EditarAsync(EmpresaRequest request, CancellationToken cancellationToken)
+        public async Task<string> EditarAsync(EmpresaRequest request, CancellationToken cancellationToken)
         {
             EmpresaEditarComando comando = request.Adapt<EmpresaEditarComando>();
 
@@ -114,13 +110,9 @@ namespace Comanda.Aplicacao.Empresas.Servicos
                 await unitOfWork.CommitAsync(cancellationToken);
                 await unitOfWork.CommitTransactionAsync(cancellationToken);
 
-                var empresaResponse = empresa.Adapt<EmpresaResponse>();
+                var mensagem = $"Dados da empresa {empresa.RazaoSocial} atualizados com sucesso!";
 
-                empresaResponse.Endereco = enderecoEmpresa.Adapt<EnderecoEmpresaResponse>();
-                empresaResponse.HorariosFuncionamento = horariosFuncionamento.Adapt<IEnumerable<HorarioFuncionamentoResponse>>();
-                empresaResponse.Mensagem = "Dados da empresa atualizados com sucesso!";
-
-                return empresaResponse;
+                return mensagem;
             }
             catch
             {

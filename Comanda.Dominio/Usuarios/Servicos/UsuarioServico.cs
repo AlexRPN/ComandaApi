@@ -1,9 +1,12 @@
 ﻿using Comanda.Dominio.Usuarios.Comandos;
 using Comanda.Dominio.Usuarios.Entidades;
+using Comanda.Dominio.Usuarios.Repositorios.Filtros;
 using Comanda.Dominio.Usuarios.Repositorios.Interfaces;
 using Comanda.Dominio.Usuarios.Servicos.Interfaces;
 using Comanda.Dominio.Utils.Autenticacoes.Servicos.Interfaces;
+using Comanda.Dominio.Utils.Consultas;
 using Comanda.Dominio.Utils.Enumeradores;
+using Comanda.Dominio.Utils.Filtros.Enumeradores;
 
 namespace Comanda.Dominio.Usuarios.Servicos
 {
@@ -37,6 +40,16 @@ namespace Comanda.Dominio.Usuarios.Servicos
                 DataCadastro = DateTime.UtcNow,
             };
             return await usuarioRepositorio.InserirAsync(usuario, cancellationToken);
+        }
+
+        public async Task<IQueryable<Usuario>> FiltrarAsync(UsuarioListarFiltro comando, CancellationToken cancellationToken)
+        {
+            return await usuarioRepositorio.FiltrarAsync(comando, cancellationToken);
+        }
+
+        public Task<PaginacaoConsulta<Usuario>> ListarPaginadoAsync(IQueryable<Usuario> query, int qt, int pg, string cpOrd, TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken)
+        {
+            return usuarioRepositorio.ListarPaginadoAsync(query, qt, pg, cpOrd, tpOrd, cancellationToken);
         }
 
         public async Task<Usuario> RecuperarPorIdAsync(int id, CancellationToken cancellationToken)

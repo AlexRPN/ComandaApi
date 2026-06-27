@@ -20,6 +20,5 @@ namespace Comanda.DataTransfer.Empresas.Response
         public DateTime DataAlteracao { get; set; }
         public EnderecoEmpresaResponse Endereco { get; set; }
         public IEnumerable<HorarioFuncionamentoResponse> HorariosFuncionamento { get; set; }
-        public string Mensagem { get; set; }
     }
 }

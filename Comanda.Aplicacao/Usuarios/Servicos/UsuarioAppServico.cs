@@ -10,7 +10,10 @@ using Comanda.DataTransfer.Utils.Mensagens.Response;
 using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.Empresas.Servicos.Interfaces;
 using Comanda.Dominio.Usuarios.Comandos;
+using Comanda.Dominio.Usuarios.Entidades;
+using Comanda.Dominio.Usuarios.Repositorios.Filtros;
 using Comanda.Dominio.Usuarios.Servicos.Interfaces;
+using Comanda.Dominio.Utils.Consultas;
 using Comanda.Dominio.Utils.Enumeradores;
 using Mapster;
 using Microsoft.Extensions.Logging;
@@ -34,10 +37,9 @@ namespace Comanda.Aplicacao.Usuarios.Servicos
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<UsuarioResponse> InserirAsync(UsuarioRequest request, CancellationToken cancellationToken)
+        public async Task<string> InserirAsync(UsuarioRequest request, CancellationToken cancellationToken)
         {
             UsuarioInserirComando comando = request.Adapt<UsuarioInserirComando>();
-            UsuarioResponse response = new UsuarioResponse();
             try
             {
                 await unitOfWork.BeginTransactionAsync(cancellationToken);
@@ -52,12 +54,12 @@ namespace Comanda.Aplicacao.Usuarios.Servicos
 
                 await usuarioServico.InserirAsync(comando, cancellationToken);
 
-                response.Mensagem = $"Usuário {comando.Nome} inserido com sucesso.";
+                var mensagem = $"Usuário {comando.Nome} inserido com sucesso.";
 
                 await unitOfWork.CommitAsync(cancellationToken);
                 await unitOfWork.CommitTransactionAsync(cancellationToken);
 
-                return response;
+                return mensagem;
             }
             catch (Exception ex)
             {
@@ -66,6 +68,19 @@ namespace Comanda.Aplicacao.Usuarios.Servicos
                 logger.LogError(ex, "Erro ao inserir usuário.");
                 throw new Exception("Erro ao inserir usuário.", ex);
             }
+        }
+
+        public async Task<PaginacaoConsulta<UsuarioResponse>> ListarPaginadoAsync(UsuarioListarRequest request, CancellationToken cancellationToken)
+        {
+            UsuarioListarFiltro filtro = request.Adapt<UsuarioListarFiltro>();
+
+            IQueryable<Usuario> query = await usuarioServico.FiltrarAsync(filtro, cancellationToken);
+
+            PaginacaoConsulta<Usuario> usuarios = await usuarioServico.ListarPaginadoAsync(query, request.Qt, request.Pg, request.CpOrd, request.TpOrd, cancellationToken);
+
+            PaginacaoConsulta<UsuarioResponse> response = usuarios.Adapt<PaginacaoConsulta<UsuarioResponse>>();
+
+            return response;
         }
 
         public async Task<UsuarioResponse> RecuperarPorIdAsync(int id, CancellationToken cancellationToken)
