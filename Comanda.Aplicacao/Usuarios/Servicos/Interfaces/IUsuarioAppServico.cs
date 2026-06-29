@@ -9,5 +9,6 @@ namespace Comanda.Aplicacao.Usuarios.Servicos.Interfaces
         Task<string> InserirAsync(UsuarioRequest request, CancellationToken cancellationToken);
         Task<UsuarioResponse> RecuperarPorIdAsync(int id, CancellationToken cancellationToken);
         Task<PaginacaoConsulta<UsuarioResponse>> ListarPaginadoAsync(UsuarioListarRequest request, CancellationToken cancellationToken);
+        Task<string> EditarAsync(UsuarioEditarRequest request, CancellationToken cancellationToken);
     }
 }

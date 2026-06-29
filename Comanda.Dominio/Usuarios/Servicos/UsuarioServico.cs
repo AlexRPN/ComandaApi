@@ -75,5 +75,25 @@ namespace Comanda.Dominio.Usuarios.Servicos
 
             return usuario;
         }
+
+        public async Task<Usuario> EditarAsync(UsuarioEditarComando comando, CancellationToken cancellationToken)
+        {
+            Usuario usuario = await usuarioRepositorio.RecuperarAsync(comando.Id, cancellationToken);
+
+            if(usuario == null)
+            {
+                throw new Exception("Usuário não encontrado!");
+            }
+
+            usuario.SetEmpresaId(comando.EmpresaId);
+            usuario.SetNome(comando.Nome);
+            usuario.SetCpf(comando.Cpf);
+            usuario.SetEmail(comando.Email);
+            usuario.SetPerfil(comando.Perfil);
+
+            await usuarioRepositorio.EditarAsync(usuario, cancellationToken);
+
+            return usuario;
+        }
     }
 }

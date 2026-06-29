@@ -19,6 +19,7 @@ namespace Comanda.Aplicacao.Usuarios.Profiles
                 .Map(dest => dest.Endereco, src => src.Empresa.EnderecoEmpresa)
                 .Map(dest => dest.HorariosFuncionamento, src => src.Empresa.HorariosFuncionamento);
             config.NewConfig<UsuarioListarRequest, UsuarioListarFiltro>();
+            config.NewConfig<UsuarioEditarRequest, UsuarioEditarComando>();
         }
     }
 }

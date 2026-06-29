@@ -55,5 +55,19 @@ namespace ComandaApi.Controllers.Usuarios
             var response = await usuarioAppServico.ListarPaginadoAsync(request, cancellationToken);
             return Ok(response);
         }
+
+        /// <summary>
+        /// Edita um usuário existente no sistema.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("editar")]
+        public async Task<ActionResult> EditarAsync([FromBody] UsuarioEditarRequest request, CancellationToken cancellationToken)
+        {
+            var response = await usuarioAppServico.EditarAsync(request, cancellationToken);
+            return Ok(response);
+        }
     }
 }

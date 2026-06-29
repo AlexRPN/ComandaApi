@@ -70,6 +70,34 @@ namespace Comanda.Aplicacao.Usuarios.Servicos
             }
         }
 
+        public async Task<string> EditarAsync(UsuarioEditarRequest request, CancellationToken cancellationToken)
+        {
+            UsuarioEditarComando comando = request.Adapt<UsuarioEditarComando>();
+
+            try
+            {
+                await unitOfWork.BeginTransactionAsync(cancellationToken);
+                logger.LogInformation("Iniciando edição de cadastro do usuário {Nome}", request.Nome);
+
+                await usuarioServico.RecuperarPorIdAsync(request.Id, cancellationToken);
+
+                await usuarioServico.EditarAsync(comando, cancellationToken);
+
+                await unitOfWork.CommitAsync(cancellationToken);
+                await unitOfWork.CommitTransactionAsync(cancellationToken);
+
+                var mensagem = $"Dados do usuário {request.Nome} atualizados com sucesso!";
+
+                return mensagem;
+
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Erro ao editar usuário {Nome}", request.Nome);
+                throw new Exception("Erro ao editar usuário!", ex);
+            }
+        }
+
         public async Task<PaginacaoConsulta<UsuarioResponse>> ListarPaginadoAsync(UsuarioListarRequest request, CancellationToken cancellationToken)
         {
             UsuarioListarFiltro filtro = request.Adapt<UsuarioListarFiltro>();

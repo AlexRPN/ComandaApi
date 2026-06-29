@@ -14,5 +14,6 @@ namespace Comanda.Dominio.Usuarios.Servicos.Interfaces
         Task<IQueryable<Usuario>> FiltrarAsync(UsuarioListarFiltro comando, CancellationToken cancellationToken);
         Task<PaginacaoConsulta<Usuario>> ListarPaginadoAsync(IQueryable<Usuario> query, int qt, int pg, string cpOrd,   
                                                              TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken);
+        Task<Usuario> EditarAsync(UsuarioEditarComando comando, CancellationToken cancellationToken);
     }
 }
