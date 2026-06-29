@@ -1,5 +1,7 @@
 ﻿using Comanda.Aplicacao.Usuarios.Servicos.Interfaces;
 using Comanda.DataTransfer.Usuarios.Request;
+using Comanda.DataTransfer.Utils.Status.Request;
+using Comanda.Dominio.Utils.Enumeradores;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComandaApi.Controllers.Usuarios
@@ -67,6 +69,21 @@ namespace ComandaApi.Controllers.Usuarios
         public async Task<ActionResult> EditarAsync([FromBody] UsuarioEditarRequest request, CancellationToken cancellationToken)
         {
             var response = await usuarioAppServico.EditarAsync(request, cancellationToken);
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// Altera o status de um usuário (ativo/inativo).
+        /// </summary>
+        /// <param name="id">ID do usuário</param>
+        /// <param name="status">Novo status do usuário</param>
+        /// <param name="cancellationToken">Token de cancelamento</param>
+        /// <returns></returns>
+        [HttpPatch]
+        [Route("alterar-status")]
+        public async Task<ActionResult> AlterarStatusAsync([FromBody] AlterarStatusRequest request, CancellationToken cancellationToken)
+        {
+            var response = await usuarioAppServico.AlterarStatusAsync(request.Id, request.Status, cancellationToken);
             return Ok(response);
         }
     }

@@ -37,9 +37,14 @@ namespace Comanda.Dominio.Usuarios.Entidades
             SetSenhaHash(comando.SenhaHash);
             SetSenhaSalt(comando.SenhaSalt);
             SetPerfil(comando.Perfil);
-            Status = comando.Status;
+            SetStatus(comando.Status);
             DataCadastro = comando.DataCadastro;
             SetUltimoAcesso(comando.UltimoAcesso);
+        }
+
+        public void SetStatus(AtivoInativoEnum status)
+        {
+            Status = status;
         }
 
         public void SetEmpresaId(int empresaId)

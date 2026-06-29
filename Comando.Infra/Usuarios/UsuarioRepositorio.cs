@@ -3,6 +3,7 @@ using Comanda.Dominio.Usuarios.Entidades;
 using Comanda.Dominio.Usuarios.Repositorios.Filtros;
 using Comanda.Dominio.Usuarios.Repositorios.Interfaces;
 using Comanda.Dominio.Utils.Consultas;
+using Comanda.Dominio.Utils.Enumeradores;
 using Comanda.Dominio.Utils.Filtros.Enumeradores;
 using Comanda.Infra.Data;
 using Comanda.Infra.Genericos;

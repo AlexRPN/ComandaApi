@@ -95,5 +95,21 @@ namespace Comanda.Dominio.Usuarios.Servicos
 
             return usuario;
         }
+
+        public async Task<Usuario> AlterarStatusAsync(int id, AtivoInativoEnum status, CancellationToken cancellationToken)
+        {
+            Usuario usuario = await usuarioRepositorio.RecuperarPorIdAsync(id, cancellationToken);
+
+            if (usuario == null)
+            {
+                throw new Exception("Usuário não encontrado!");
+            }
+
+            usuario.SetStatus(status);
+
+            await usuarioRepositorio.EditarAsync(usuario, cancellationToken);
+
+            return usuario;
+        }
     }
 }

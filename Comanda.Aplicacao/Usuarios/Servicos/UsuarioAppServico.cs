@@ -129,5 +129,27 @@ namespace Comanda.Aplicacao.Usuarios.Servicos
                 throw new Exception("Erro ao recuperar usuário!", ex);
             }
         }
+
+        public async Task<string> AlterarStatusAsync(int id, AtivoInativoEnum status, CancellationToken cancellationToken)
+        {
+            try
+            {
+                await unitOfWork.BeginTransactionAsync(cancellationToken);
+
+                var statusAlterado = await usuarioServico.AlterarStatusAsync(id, status, cancellationToken);
+
+                await unitOfWork.CommitAsync(cancellationToken);
+                await unitOfWork.CommitTransactionAsync(cancellationToken);
+
+                var mensagem = $"Status do usuário {statusAlterado.Nome} alterado com sucesso!";
+                return mensagem;
+            }
+            catch (Exception ex)
+            {
+                await unitOfWork.RollbackTransactionAsync(cancellationToken);
+                logger.LogError(ex, "Erro ao alterar status do usuário {Id}", id);
+                throw new Exception("Erro ao alterar status do usuário!", ex);
+            }
+        }
     }
 }

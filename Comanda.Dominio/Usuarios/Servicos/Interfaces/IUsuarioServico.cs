@@ -2,6 +2,7 @@
 using Comanda.Dominio.Usuarios.Entidades;
 using Comanda.Dominio.Usuarios.Repositorios.Filtros;
 using Comanda.Dominio.Utils.Consultas;
+using Comanda.Dominio.Utils.Enumeradores;
 using Comanda.Dominio.Utils.Filtros.Enumeradores;
 
 namespace Comanda.Dominio.Usuarios.Servicos.Interfaces
@@ -15,5 +16,6 @@ namespace Comanda.Dominio.Usuarios.Servicos.Interfaces
         Task<PaginacaoConsulta<Usuario>> ListarPaginadoAsync(IQueryable<Usuario> query, int qt, int pg, string cpOrd,   
                                                              TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken);
         Task<Usuario> EditarAsync(UsuarioEditarComando comando, CancellationToken cancellationToken);
+        Task<Usuario> AlterarStatusAsync(int id, AtivoInativoEnum status, CancellationToken cancellationToken);
     }
 }

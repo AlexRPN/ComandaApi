@@ -1,6 +1,7 @@
 ﻿using Comanda.DataTransfer.Usuarios.Request;
 using Comanda.DataTransfer.Usuarios.Response;
 using Comanda.Dominio.Utils.Consultas;
+using Comanda.Dominio.Utils.Enumeradores;
 
 namespace Comanda.Aplicacao.Usuarios.Servicos.Interfaces
 {
@@ -10,5 +11,6 @@ namespace Comanda.Aplicacao.Usuarios.Servicos.Interfaces
         Task<UsuarioResponse> RecuperarPorIdAsync(int id, CancellationToken cancellationToken);
         Task<PaginacaoConsulta<UsuarioResponse>> ListarPaginadoAsync(UsuarioListarRequest request, CancellationToken cancellationToken);
         Task<string> EditarAsync(UsuarioEditarRequest request, CancellationToken cancellationToken);
+        Task<string> AlterarStatusAsync(int id, AtivoInativoEnum status, CancellationToken cancellationToken);
     }
 }

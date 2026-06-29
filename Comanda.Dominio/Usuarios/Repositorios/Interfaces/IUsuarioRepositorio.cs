@@ -1,9 +1,9 @@
-﻿using Comanda.Dominio.Empresas.Entidades;
-using Comanda.Dominio.Genericos;
+﻿using Comanda.Dominio.Genericos;
 using Comanda.Dominio.Usuarios.Comandos;
 using Comanda.Dominio.Usuarios.Entidades;
 using Comanda.Dominio.Usuarios.Repositorios.Filtros;
 using Comanda.Dominio.Utils.Consultas;
+using Comanda.Dominio.Utils.Enumeradores;
 using Comanda.Dominio.Utils.Filtros.Enumeradores;
 
 namespace Comanda.Dominio.Usuarios.Repositorios.Interfaces
