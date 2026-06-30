@@ -21,4 +21,10 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Clientes\Repositorios\Interfaces\" />
+    <Folder Include="Clientes\Repositorios\Filtros\" />
+    <Folder Include="Clientes\Servicos\Interfaces\" />
+  </ItemGroup>
+
 </Project>

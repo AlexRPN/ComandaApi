@@ -1,4 +1,5 @@
-﻿using Comanda.Dominio.Empresas.Comandos;
+﻿using Comanda.Dominio.Clientes.Entidades;
+using Comanda.Dominio.Empresas.Comandos;
 using Comanda.Dominio.EnderecosEmpresas.Entidades;
 using Comanda.Dominio.HorariosFuncionamento.Entidades;
 using Comanda.Dominio.Usuarios.Entidades;
@@ -17,6 +18,9 @@ namespace Comanda.Dominio.Empresas.Entidades
 
         // Relacionamento 1:N com Usuario
         public ICollection<Usuario> Usuarios { get; set; } = [];
+
+        // Relacionamento 1:N com Cliente
+        public ICollection<Cliente> Clientes { get; set; } = [];
         #endregion
 
         public int Id { get; private set; }

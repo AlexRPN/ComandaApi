@@ -1,4 +1,5 @@
-﻿using Comanda.Dominio.Empresas.Entidades;
+﻿using Comanda.Dominio.Clientes.Entidades;
+using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.EnderecosEmpresas.Entidades;
 using Comanda.Dominio.HorariosFuncionamento.Entidades;
 using Comanda.Dominio.Usuarios.Entidades;
@@ -17,5 +18,6 @@ namespace Comanda.Infra.Data
         public DbSet<EnderecoEmpresa> EnderecoEmpresas { get; set; }
         public DbSet<HorarioFuncionamento> HorariosFuncionamento { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
     }
 }
