@@ -1,5 +1,6 @@
 ﻿using Comanda.Dominio.Clientes.Comandos;
 using Comanda.Dominio.Empresas.Entidades;
+using Comanda.Dominio.EnderecoClientes.Entidades;
 using Comanda.Dominio.Utils.Enumeradores;
 
 namespace Comanda.Dominio.Clientes.Entidades
@@ -10,6 +11,8 @@ namespace Comanda.Dominio.Clientes.Entidades
         // Relacionamento 1:N com Empresa
         public int EmpresaId { get; private set; }
         public Empresa Empresa { get; private set; }
+        // Relacionamento 1:1 com EnderecoCliente
+        public EnderecoCliente EnderecoCliente { get; private set; }
         #endregion
 
         public int Id { get; private set; }

@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Comanda.Dominio\Comanda.Dominio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Clientes\Response\" />
+  </ItemGroup>
+
 </Project>
