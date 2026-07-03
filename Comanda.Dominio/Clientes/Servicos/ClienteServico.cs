@@ -1,8 +1,11 @@
 ﻿using Comanda.Dominio.Clientes.Comandos;
 using Comanda.Dominio.Clientes.Entidades;
+using Comanda.Dominio.Clientes.Repositorios.Filtros;
 using Comanda.Dominio.Clientes.Repositorios.Interfaces;
 using Comanda.Dominio.Clientes.Servicos.Interfaces;
+using Comanda.Dominio.Utils.Consultas;
 using Comanda.Dominio.Utils.Enumeradores;
+using Comanda.Dominio.Utils.Filtros.Enumeradores;
 
 namespace Comanda.Dominio.Clientes.Servicos
 {
@@ -52,6 +55,16 @@ namespace Comanda.Dominio.Clientes.Servicos
             }
 
             return cliente;
+        }
+
+        public async Task<PaginacaoConsulta<Cliente>> ListarPaginadoAsync(IQueryable<Cliente> query, int qt, int pg, string cpOrd, TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken)
+        {
+            return await clienteRepositorio.ListarPaginadoAsync(query, qt, pg, cpOrd, tpOrd, cancellationToken);
+        }
+
+        public async Task<IQueryable<Cliente>> FiltrarAsync(ClienteListarFiltro filtro, CancellationToken cancellationToken)
+        {
+            return await clienteRepositorio.FiltrarAsync(filtro, cancellationToken);
         }
     }
 }

@@ -1,12 +1,15 @@
 ﻿using Comanda.Aplicacao.Clientes.Servicos.Interfaces;
 using Comanda.Aplicacao.Transacoes.Interfaces;
 using Comanda.DataTransfer.Clientes.Request;
+using Comanda.DataTransfer.Clientes.Response;
 using Comanda.Dominio.Clientes.Comandos;
 using Comanda.Dominio.Clientes.Entidades;
+using Comanda.Dominio.Clientes.Repositorios.Filtros;
 using Comanda.Dominio.Clientes.Servicos.Interfaces;
 using Comanda.Dominio.Empresas.Servicos.Interfaces;
 using Comanda.Dominio.EnderecoClientes.Comandos;
 using Comanda.Dominio.EnderecoClientes.Servicos.Interfaces;
+using Comanda.Dominio.Utils.Consultas;
 using Mapster;
 using Microsoft.Extensions.Logging;
 
@@ -71,6 +74,17 @@ namespace Comanda.Aplicacao.Clientes.Servicos
                 logger.LogError(ex, "Erro ao inserir cliente.");
                 throw new Exception("Erro ao inserir cliente.", ex);
             }
+        }
+
+        public async Task<PaginacaoConsulta<ClienteResponse>> ListarAsync(ClienteListarRequest request, CancellationToken cancellationToken)
+        {
+            ClienteListarFiltro filtro = request.Adapt<ClienteListarFiltro>();
+            IQueryable<Cliente> query = await clienteServico.FiltrarAsync(filtro, cancellationToken);
+
+            PaginacaoConsulta<Cliente> clientes = await clienteServico.ListarPaginadoAsync(query, request.Qt, request.Pg, request.CpOrd, request.TpOrd, cancellationToken);
+
+            PaginacaoConsulta<ClienteResponse> response = clientes.Adapt<PaginacaoConsulta<ClienteResponse>>();
+            return response;
         }
     }
 }

@@ -70,7 +70,7 @@ namespace Comanda.Infra.Usuarios
 
         public async Task<PaginacaoConsulta<Usuario>> ListarPaginadoAsync(IQueryable<Usuario> query, int qt, int pg, string cpOrd, TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken)
         {
-            return await base.ListarAsync(query, qt, pg, cpOrd, tpOrd, cancellationToken);
+            return await base.ListarPaginadoAsync(query, qt, pg, cpOrd, tpOrd, cancellationToken);
         }
     }
 }

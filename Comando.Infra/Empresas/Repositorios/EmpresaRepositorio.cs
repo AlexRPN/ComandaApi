@@ -71,7 +71,7 @@ namespace Comanda.Infra.Empresas.Repositorios
                                                             TipoOrdenacaoEnum tpOrd, 
                                                             CancellationToken cancellationToken)
         {
-            return await base.ListarAsync(query, qt, pg, cpOrd, tpOrd, cancellationToken);
+            return await base.ListarPaginadoAsync(query, qt, pg, cpOrd, tpOrd, cancellationToken);
         }
     }
 }

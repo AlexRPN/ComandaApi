@@ -102,7 +102,7 @@ namespace Comanda.Infra.Genericos
             return entidade;
         }
 
-        public async Task<PaginacaoConsulta<T>> ListarAsync(IQueryable<T> query, int qt, int pg, string cpOrd, TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken)
+        public async Task<PaginacaoConsulta<T>> ListarPaginadoAsync(IQueryable<T> query, int qt, int pg, string cpOrd, TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken)
         {
             try
             {

@@ -27,5 +27,19 @@ namespace ComandaApi.Controllers.Clientes
             var response = await clienteAppServico.InserirAsync(request, cancellationToken);
             return Ok(response);
         }
+
+        /// <summary>
+        /// Lista os clientes cadastrados no sistema com base nos filtros fornecidos.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("listar")]
+        public async Task<ActionResult> ListarAsync([FromBody] ClienteListarRequest request, CancellationToken cancellationToken)
+        {
+            var response = await clienteAppServico.ListarAsync(request, cancellationToken);
+            return Ok(response);
+        }
     }
 }

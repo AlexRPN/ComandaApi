@@ -30,7 +30,7 @@ namespace Comanda.Dominio.Genericos
 
         Task<T> EditarAsync(T entidade, CancellationToken cancellationToken);
         Task ExcluirAsync(T entidade);
-        Task<PaginacaoConsulta<T>> ListarAsync(IQueryable<T> query, int qt, int pg, string cpOrd, TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken);
+        Task<PaginacaoConsulta<T>> ListarPaginadoAsync(IQueryable<T> query, int qt, int pg, string cpOrd, TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken);
         Task<IEnumerable<T>> ListarAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);
     }
 }
