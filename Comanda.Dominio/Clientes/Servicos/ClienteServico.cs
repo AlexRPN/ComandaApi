@@ -3,6 +3,7 @@ using Comanda.Dominio.Clientes.Entidades;
 using Comanda.Dominio.Clientes.Repositorios.Filtros;
 using Comanda.Dominio.Clientes.Repositorios.Interfaces;
 using Comanda.Dominio.Clientes.Servicos.Interfaces;
+using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.Utils.Consultas;
 using Comanda.Dominio.Utils.Enumeradores;
 using Comanda.Dominio.Utils.Filtros.Enumeradores;
@@ -65,6 +66,26 @@ namespace Comanda.Dominio.Clientes.Servicos
         public async Task<IQueryable<Cliente>> FiltrarAsync(ClienteListarFiltro filtro, CancellationToken cancellationToken)
         {
             return await clienteRepositorio.FiltrarAsync(filtro, cancellationToken);
+        }
+
+        public async Task<Cliente> EditarAsync(ClienteEditarComando comando, CancellationToken cancellationToken)
+        {
+            Cliente? cliente = await clienteRepositorio.RecuperarAsync(x => x.EmpresaId == comando.EmpresaId &&
+                                                                       x.Id == comando.Id, cancellationToken);
+
+            if (cliente is null)
+            {
+                throw new Exception("Cliente não encontrado!");
+            }
+
+            cliente.SetEmpresaId(comando.EmpresaId);
+            cliente.SetNome(comando.Nome);
+            cliente.SetTelefone(comando.Telefone);
+            cliente.SetDataAlteracao(DateTime.Now);
+
+            await clienteRepositorio.EditarAsync(cliente, cancellationToken);
+
+            return cliente;
         }
     }
 }

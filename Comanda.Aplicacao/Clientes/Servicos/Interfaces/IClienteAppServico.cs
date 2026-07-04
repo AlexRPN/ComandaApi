@@ -7,6 +7,7 @@ namespace Comanda.Aplicacao.Clientes.Servicos.Interfaces
     public interface IClienteAppServico
     {
         Task<string> InserirAsync(ClienteRequest request, CancellationToken cancellationToken);
+        Task<string> EditarAsync(ClienteEditarRequest request, CancellationToken cancellationToken);
         Task<PaginacaoConsulta<ClienteResponse>> ListarAsync(ClienteListarRequest request, CancellationToken cancellationToken);
     }
 }

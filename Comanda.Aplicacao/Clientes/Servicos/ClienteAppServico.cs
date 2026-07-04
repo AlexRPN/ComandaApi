@@ -8,6 +8,7 @@ using Comanda.Dominio.Clientes.Repositorios.Filtros;
 using Comanda.Dominio.Clientes.Servicos.Interfaces;
 using Comanda.Dominio.Empresas.Servicos.Interfaces;
 using Comanda.Dominio.EnderecoClientes.Comandos;
+using Comanda.Dominio.EnderecoClientes.Entidades;
 using Comanda.Dominio.EnderecoClientes.Servicos.Interfaces;
 using Comanda.Dominio.Utils.Consultas;
 using Mapster;
@@ -73,6 +74,36 @@ namespace Comanda.Aplicacao.Clientes.Servicos
                 await unitOfWork.RollbackTransactionAsync(cancellationToken);
                 logger.LogError(ex, "Erro ao inserir cliente.");
                 throw new Exception("Erro ao inserir cliente.", ex);
+            }
+        }
+
+        public async Task<string> EditarAsync(ClienteEditarRequest request, CancellationToken cancellationToken)
+        {
+            ClienteEditarComando clienteComando = request.Adapt<ClienteEditarComando>();
+            EnderecoClienteEditarComando endereco = request.Endereco.Adapt<EnderecoClienteEditarComando>();
+
+            try
+            {
+                await unitOfWork.BeginTransactionAsync(cancellationToken);
+
+                logger.LogInformation("Iniciando atualização do cliente: {Nome}", request.Nome);
+                Cliente cliente = await clienteServico.EditarAsync(clienteComando, cancellationToken);
+
+                endereco.ClienteId = request.Id;
+                EnderecoCliente enderereco = await enderecoClienteServico.EditarAsync(endereco, cancellationToken);
+
+                await unitOfWork.CommitAsync(cancellationToken);
+                await unitOfWork.CommitTransactionAsync(cancellationToken);
+
+                var mensagem = $"Dados do cliente {cliente.Nome} atualizados com sucesso!";
+
+                return mensagem;
+
+            }
+            catch (Exception ex)
+            {
+                await unitOfWork.RollbackTransactionAsync(cancellationToken);
+                throw new Exception("Erro ao atualizar cadastro do cliente!", ex);
             }
         }
 

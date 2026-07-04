@@ -41,5 +41,19 @@ namespace ComandaApi.Controllers.Clientes
             var response = await clienteAppServico.ListarAsync(request, cancellationToken);
             return Ok(response);
         }
+
+        /// <summary>
+        /// Edita os dados do cliente.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("editar")]
+        public async Task<ActionResult> EditarAsync([FromBody] ClienteEditarRequest request, CancellationToken cancellationToken)
+        {
+            var response = await clienteAppServico.EditarAsync(request, cancellationToken);
+            return Ok(response);
+        }
     }
 }

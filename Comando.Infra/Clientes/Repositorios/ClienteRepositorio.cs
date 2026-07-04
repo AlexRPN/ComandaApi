@@ -2,11 +2,9 @@
 using Comanda.Dominio.Clientes.Entidades;
 using Comanda.Dominio.Clientes.Repositorios.Filtros;
 using Comanda.Dominio.Clientes.Repositorios.Interfaces;
-using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Infra.Data;
 using Comanda.Infra.Genericos;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Comanda.Infra.Clientes.Repositorios
 {
