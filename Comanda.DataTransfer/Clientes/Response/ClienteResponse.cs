@@ -1,4 +1,5 @@
-﻿using Comanda.Dominio.Utils.Enumeradores;
+﻿using Comanda.DataTransfer.EnderecoClientes.Response;
+using Comanda.Dominio.Utils.Enumeradores;
 
 namespace Comanda.DataTransfer.Clientes.Response
 {
@@ -12,5 +13,6 @@ namespace Comanda.DataTransfer.Clientes.Response
         public DateTime DataCadastro { get; private set; }
         public DateTime DataAlteracao { get; private set; }
         public AtivoInativoEnum? Status { get; set; }
+        public EnderecoClienteResponse Endereco { get; set; }
     }
 }

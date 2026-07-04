@@ -2,6 +2,7 @@
 using Comanda.Aplicacao.Transacoes.Interfaces;
 using Comanda.DataTransfer.Clientes.Request;
 using Comanda.DataTransfer.Clientes.Response;
+using Comanda.DataTransfer.EnderecoClientes.Response;
 using Comanda.Dominio.Clientes.Comandos;
 using Comanda.Dominio.Clientes.Entidades;
 using Comanda.Dominio.Clientes.Repositorios.Filtros;
@@ -116,6 +117,24 @@ namespace Comanda.Aplicacao.Clientes.Servicos
 
             PaginacaoConsulta<ClienteResponse> response = clientes.Adapt<PaginacaoConsulta<ClienteResponse>>();
             return response;
+        }
+
+        public async Task<ClienteResponse> RecuperarAsync(int id, CancellationToken cancellationToken)
+        {
+            try
+            {
+                Cliente cliente = await clienteServico.RecuperarAsync(id, cancellationToken);
+
+                var clienteResponse = cliente.Adapt<ClienteResponse>();
+                clienteResponse.Endereco = cliente.EnderecoCliente.Adapt<EnderecoClienteResponse>();
+
+                return clienteResponse;
+            }
+            catch (Exception ex)
+            {
+                logger.LogInformation("Cliente não encontrado!");
+                throw new ArgumentException("Cliente não encontrado!", ex);
+            }
         }
     }
 }

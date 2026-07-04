@@ -9,5 +9,6 @@ namespace Comanda.Dominio.Clientes.Repositorios.Interfaces
     {
         Task<Cliente> InserirAsync(ClienteComando comando, CancellationToken cancellationToken);
         Task<IQueryable<Cliente>> FiltrarAsync(ClienteListarFiltro filtro, CancellationToken cancellationToken);
+        Task<Cliente> RecuperarPorIdAsync(int id, CancellationToken cancellationToken);
     }
 }

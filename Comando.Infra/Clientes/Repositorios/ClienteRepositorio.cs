@@ -52,5 +52,15 @@ namespace Comanda.Infra.Clientes.Repositorios
 
             return cliente;
         }
+
+        public async Task<Cliente> RecuperarPorIdAsync(int id, CancellationToken cancellationToken)
+        {
+            var cliente = await appDbContext.Clientes
+                                .AsNoTracking()
+                                .Include(e => e.EnderecoCliente)
+                                .FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
+
+            return cliente;
+        }
     }
 }

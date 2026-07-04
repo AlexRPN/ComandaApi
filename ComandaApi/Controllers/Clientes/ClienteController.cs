@@ -55,5 +55,19 @@ namespace ComandaApi.Controllers.Clientes
             var response = await clienteAppServico.EditarAsync(request, cancellationToken);
             return Ok(response);
         }
+
+        /// <summary>
+        /// Recupera um cliente pelo seu id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("recuperar/{id}")]
+        public async Task<ActionResult> RecuperarAsync(int id, CancellationToken cancellationToken)
+        {
+            var response = await clienteAppServico.RecuperarAsync(id, cancellationToken);
+            return Ok(response);
+        }
     }
 }

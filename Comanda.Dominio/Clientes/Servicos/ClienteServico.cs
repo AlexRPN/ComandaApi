@@ -3,7 +3,6 @@ using Comanda.Dominio.Clientes.Entidades;
 using Comanda.Dominio.Clientes.Repositorios.Filtros;
 using Comanda.Dominio.Clientes.Repositorios.Interfaces;
 using Comanda.Dominio.Clientes.Servicos.Interfaces;
-using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.Utils.Consultas;
 using Comanda.Dominio.Utils.Enumeradores;
 using Comanda.Dominio.Utils.Filtros.Enumeradores;
@@ -48,7 +47,7 @@ namespace Comanda.Dominio.Clientes.Servicos
 
         public async Task<Cliente> RecuperarAsync(int id, CancellationToken cancellationToken)
         {
-            var cliente = await clienteRepositorio.RecuperarAsync(id, cancellationToken);
+            var cliente = await clienteRepositorio.RecuperarPorIdAsync(id, cancellationToken);
 
             if(cliente == null)
             {
