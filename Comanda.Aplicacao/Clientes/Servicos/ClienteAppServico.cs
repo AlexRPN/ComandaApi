@@ -11,7 +11,9 @@ using Comanda.Dominio.Empresas.Servicos.Interfaces;
 using Comanda.Dominio.EnderecoClientes.Comandos;
 using Comanda.Dominio.EnderecoClientes.Entidades;
 using Comanda.Dominio.EnderecoClientes.Servicos.Interfaces;
+using Comanda.Dominio.Usuarios.Servicos;
 using Comanda.Dominio.Utils.Consultas;
+using Comanda.Dominio.Utils.Enumeradores;
 using Mapster;
 using Microsoft.Extensions.Logging;
 
@@ -134,6 +136,28 @@ namespace Comanda.Aplicacao.Clientes.Servicos
             {
                 logger.LogInformation("Cliente não encontrado!");
                 throw new ArgumentException("Cliente não encontrado!", ex);
+            }
+        }
+
+        public async Task<string> AlterarStatusAsync(int id, AtivoInativoEnum status, CancellationToken cancellationToken)
+        {
+            try
+            {
+                await unitOfWork.BeginTransactionAsync(cancellationToken);
+
+                var statusAlterado = await clienteServico.AlterarStatusAsync(id, status, cancellationToken);
+
+                await unitOfWork.CommitAsync(cancellationToken);
+                await unitOfWork.CommitTransactionAsync(cancellationToken);
+
+                var mensagem = $"Status do cliente {statusAlterado.Nome} alterado com sucesso!";
+                return mensagem;
+            }
+            catch (Exception ex)
+            {
+                await unitOfWork.RollbackTransactionAsync(cancellationToken);
+                logger.LogError(ex, "Erro ao alterar status do cliente {Id}", id);
+                throw new Exception("Erro ao alterar status do cliente!", ex);
             }
         }
     }

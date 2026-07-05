@@ -86,5 +86,21 @@ namespace Comanda.Dominio.Clientes.Servicos
 
             return cliente;
         }
+
+        public async Task<Cliente> AlterarStatusAsync(int id, AtivoInativoEnum status, CancellationToken cancellationToken)
+        {
+            Cliente cliente = await RecuperarAsync(id, cancellationToken);
+
+            if(cliente is null)
+            {
+                throw new Exception("Cliente não encontrado!");
+            }
+
+            cliente.SetStatus(status);
+
+            await clienteRepositorio.EditarAsync(cliente, cancellationToken);
+
+            return cliente;
+        }
     }
 }

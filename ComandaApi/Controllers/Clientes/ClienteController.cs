@@ -1,5 +1,7 @@
 ﻿using Comanda.Aplicacao.Clientes.Servicos.Interfaces;
 using Comanda.DataTransfer.Clientes.Request;
+using Comanda.DataTransfer.Utils.Status.Request;
+using Comanda.Dominio.Utils.Enumeradores;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComandaApi.Controllers.Clientes
@@ -67,6 +69,21 @@ namespace ComandaApi.Controllers.Clientes
         public async Task<ActionResult> RecuperarAsync(int id, CancellationToken cancellationToken)
         {
             var response = await clienteAppServico.RecuperarAsync(id, cancellationToken);
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// Altera o status do cliente
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="status"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPatch]
+        [Route("alterar-status")]
+        public async Task<ActionResult> AlterarStatus([FromBody] AlterarStatusRequest request, CancellationToken cancellationToken)
+        {
+            var response = await clienteAppServico.AlterarStatusAsync(request.Id, request.Status, cancellationToken);
             return Ok(response);
         }
     }
