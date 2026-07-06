@@ -1,7 +1,9 @@
-﻿using Comanda.Dominio.Clientes.Entidades;
+﻿using Comanda.Dominio.Categorias.Entidades;
+using Comanda.Dominio.Clientes.Entidades;
 using Comanda.Dominio.Empresas.Comandos;
 using Comanda.Dominio.EnderecosEmpresas.Entidades;
 using Comanda.Dominio.HorariosFuncionamento.Entidades;
+using Comanda.Dominio.Produtos.Entidades;
 using Comanda.Dominio.Usuarios.Entidades;
 using Comanda.Dominio.Utils.Enumeradores;
 
@@ -21,6 +23,12 @@ namespace Comanda.Dominio.Empresas.Entidades
 
         // Relacionamento 1:N com Cliente
         public ICollection<Cliente> Clientes { get; set; } = [];
+
+        // Relacionamento 1:N com Categoria
+        public ICollection<Categoria> Categorias { get; set; } = [];
+
+        // Relacionamento 1:N com Produto
+        public ICollection<Produto> Produtos { get; set; } = [];
         #endregion
 
         public int Id { get; private set; }

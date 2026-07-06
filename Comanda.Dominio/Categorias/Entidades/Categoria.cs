@@ -1,5 +1,6 @@
 ﻿using Comanda.Dominio.Categorias.Comandos;
 using Comanda.Dominio.Empresas.Entidades;
+using Comanda.Dominio.Produtos.Entidades;
 using Comanda.Dominio.Utils.Enumeradores;
 
 namespace Comanda.Dominio.Categorias.Entidades
@@ -10,6 +11,9 @@ namespace Comanda.Dominio.Categorias.Entidades
         // Relacionamento 1:N com Empresa
         public int EmpresaId { get; private set; }
         public Empresa Empresa { get; private set; }
+
+        // Relacionamento 1:N com Produto
+        public ICollection<Produto> Produtos { get; private set; } = [];
         #endregion
 
         public int Id { get; private set; }

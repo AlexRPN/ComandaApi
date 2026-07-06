@@ -4,6 +4,7 @@ using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.EnderecoClientes.Entidades;
 using Comanda.Dominio.EnderecosEmpresas.Entidades;
 using Comanda.Dominio.HorariosFuncionamento.Entidades;
+using Comanda.Dominio.Produtos.Entidades;
 using Comanda.Dominio.Usuarios.Entidades;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,13 @@ namespace Comanda.Infra.Data
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<Empresa> Empresas { get; set; }
         public DbSet<EnderecoEmpresa> EnderecoEmpresas { get; set; }
         public DbSet<HorarioFuncionamento> HorariosFuncionamento { get; set; }
@@ -23,5 +31,6 @@ namespace Comanda.Infra.Data
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<EnderecoCliente> EnderecoClientes { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
     }
 }
