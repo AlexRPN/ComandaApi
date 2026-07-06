@@ -22,7 +22,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Adicionais\Entidades\" />
+    <Folder Include="Adicionais\Comandos\" />
     <Folder Include="EnderecoClientes\Repositorios\Filtros\" />
+    <Folder Include="GrupoAdicionais\Entidades\" />
+    <Folder Include="GrupoAdicionais\Comandos\" />
+    <Folder Include="Produtos\Entidades\" />
+    <Folder Include="Produtos\Comandos\" />
   </ItemGroup>
 
 </Project>

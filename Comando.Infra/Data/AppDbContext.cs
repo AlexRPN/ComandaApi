@@ -1,4 +1,5 @@
-﻿using Comanda.Dominio.Clientes.Entidades;
+﻿using Comanda.Dominio.Categorias.Entidades;
+using Comanda.Dominio.Clientes.Entidades;
 using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.EnderecoClientes.Entidades;
 using Comanda.Dominio.EnderecosEmpresas.Entidades;
@@ -21,5 +22,6 @@ namespace Comanda.Infra.Data
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<EnderecoCliente> EnderecoClientes { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
     }
 }
