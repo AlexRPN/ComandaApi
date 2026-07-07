@@ -1,6 +1,7 @@
 ﻿using Comanda.Dominio.Categorias.Entidades;
 using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.GrupoAdicionais.Entidades;
+using Comanda.Dominio.ImagensProdutos.Entidades;
 using Comanda.Dominio.Produtos.Comandos;
 using Comanda.Dominio.Utils.Enumeradores;
 using System.Collections;
@@ -18,7 +19,11 @@ namespace Comanda.Dominio.Produtos.Entidades
         public int CategoriaId { get; private set; }
         public Categoria Categoria { get; private set; }
 
+        // Relacionamento 1:N com GrupoAdicional
         public ICollection<GrupoAdicional> GrupoAdicional { get; set; } = [];
+
+        // Relacionamento 1:N com ImagemProduto
+        public ICollection<ImagemProduto> ImagemProduto { get; set; } = [];
         #endregion
 
         public int Id { get; private set; }

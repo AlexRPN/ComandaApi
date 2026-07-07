@@ -6,6 +6,7 @@ using Comanda.Dominio.EnderecoClientes.Entidades;
 using Comanda.Dominio.EnderecosEmpresas.Entidades;
 using Comanda.Dominio.GrupoAdicionais.Entidades;
 using Comanda.Dominio.HorariosFuncionamento.Entidades;
+using Comanda.Dominio.ImagensProdutos.Entidades;
 using Comanda.Dominio.Produtos.Entidades;
 using Comanda.Dominio.Usuarios.Entidades;
 using Microsoft.EntityFrameworkCore;
@@ -36,5 +37,6 @@ namespace Comanda.Infra.Data
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<GrupoAdicional> GrupoAdicionais { get; set; }
         public DbSet<Adicional> Adicionais { get; set; }
+        public DbSet<ImagemProduto> ImagensProdutos { get; set; }
     }
 }
