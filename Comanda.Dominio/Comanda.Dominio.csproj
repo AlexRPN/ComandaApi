@@ -22,8 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Adicionais\Entidades\" />
-    <Folder Include="Adicionais\Comandos\" />
     <Folder Include="EnderecoClientes\Repositorios\Filtros\" />
   </ItemGroup>
 

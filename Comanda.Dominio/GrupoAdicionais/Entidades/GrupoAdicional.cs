@@ -1,4 +1,5 @@
-﻿using Comanda.Dominio.GrupoAdicionais.Comandos;
+﻿using Comanda.Dominio.Adicionais.Entidades;
+using Comanda.Dominio.GrupoAdicionais.Comandos;
 using Comanda.Dominio.Produtos.Entidades;
 
 namespace Comanda.Dominio.GrupoAdicionais.Entidades
@@ -9,6 +10,9 @@ namespace Comanda.Dominio.GrupoAdicionais.Entidades
         // Relacionamento 1xN com Produto
         public int ProdutoId { get; private set; }
         public Produto Produto { get; private set; }
+
+        // Relacionamento 1xN com Adicional
+        public ICollection<Adicional> Adicionais { get; private set; }
         #endregion
 
         public int Id { get; private set; }

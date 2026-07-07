@@ -1,4 +1,5 @@
-﻿using Comanda.Dominio.Categorias.Entidades;
+﻿using Comanda.Dominio.Adicionais.Entidades;
+using Comanda.Dominio.Categorias.Entidades;
 using Comanda.Dominio.Clientes.Entidades;
 using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.EnderecoClientes.Entidades;
@@ -34,5 +35,6 @@ namespace Comanda.Infra.Data
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<GrupoAdicional> GrupoAdicionais { get; set; }
+        public DbSet<Adicional> Adicionais { get; set; }
     }
 }
