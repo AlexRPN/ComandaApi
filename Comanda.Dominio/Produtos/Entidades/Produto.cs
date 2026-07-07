@@ -1,7 +1,9 @@
 ﻿using Comanda.Dominio.Categorias.Entidades;
 using Comanda.Dominio.Empresas.Entidades;
+using Comanda.Dominio.GrupoAdicionais.Entidades;
 using Comanda.Dominio.Produtos.Comandos;
 using Comanda.Dominio.Utils.Enumeradores;
+using System.Collections;
 
 namespace Comanda.Dominio.Produtos.Entidades
 {
@@ -15,6 +17,8 @@ namespace Comanda.Dominio.Produtos.Entidades
         // Relacionamento 1:N com Categoria
         public int CategoriaId { get; private set; }
         public Categoria Categoria { get; private set; }
+
+        public ICollection<GrupoAdicional> GrupoAdicional { get; set; } = [];
         #endregion
 
         public int Id { get; private set; }

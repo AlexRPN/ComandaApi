@@ -4,6 +4,7 @@ using Comanda.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Comanda.Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260707021539_CriaTabelaGrupoAdicional")]
+    partial class CriaTabelaGrupoAdicional
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -270,7 +273,7 @@ namespace Comanda.Infra.Migrations
 
                     b.HasIndex("ProdutoId");
 
-                    b.ToTable("GrupoAdicionais");
+                    b.ToTable("Adicionais");
                 });
 
             modelBuilder.Entity("Comanda.Dominio.HorariosFuncionamento.Entidades.HorarioFuncionamento", b =>
