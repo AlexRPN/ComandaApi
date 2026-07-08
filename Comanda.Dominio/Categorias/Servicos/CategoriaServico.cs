@@ -1,9 +1,12 @@
 ﻿using Comanda.Dominio.Categorias.Comandos;
 using Comanda.Dominio.Categorias.Entidades;
+using Comanda.Dominio.Categorias.Repositorios.Filtros;
 using Comanda.Dominio.Categorias.Repositorios.Interfaces;
 using Comanda.Dominio.Categorias.Servicos.Interfaces;
 using Comanda.Dominio.Empresas.Repositorios.Interfaces;
+using Comanda.Dominio.Utils.Consultas;
 using Comanda.Dominio.Utils.Enumeradores;
+using Comanda.Dominio.Utils.Filtros.Enumeradores;
 
 namespace Comanda.Dominio.Categorias.Servicos
 {
@@ -62,6 +65,17 @@ namespace Comanda.Dominio.Categorias.Servicos
             }
             
             return categoria;
+        }
+
+        public async Task<IQueryable<Categoria>> FiltrarAsync(CategoriaListarFiltro filtro, CancellationToken cancellationToken)
+        {
+            return await categoriaRepositorio.FiltrarAsync(filtro, cancellationToken);
+        }
+
+        public async Task<PaginacaoConsulta<Categoria>> ListarPaginadoAsync(IQueryable<Categoria> query, int qt, int pg, string cpOrd,   
+                                                                            TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken)
+        {
+            return await categoriaRepositorio.ListarPaginadoAsync(query, qt, pg, cpOrd, tpOrd, cancellationToken);
         }
     }
 }

@@ -4,7 +4,9 @@ using Comanda.DataTransfer.Categorias.Request;
 using Comanda.DataTransfer.Categorias.Response;
 using Comanda.Dominio.Categorias.Comandos;
 using Comanda.Dominio.Categorias.Entidades;
+using Comanda.Dominio.Categorias.Repositorios.Filtros;
 using Comanda.Dominio.Categorias.Servicos.Interfaces;
+using Comanda.Dominio.Utils.Consultas;
 using Mapster;
 using Microsoft.Extensions.Logging;
 
@@ -86,6 +88,19 @@ namespace Comanda.Aplicacao.Categorias.Servicos
 
             var response = categoria.Adapt<CategoriaResponse>();
             response.Mensagem = $"Categoria {categoria.Nome} recuperada com sucesso!";
+
+            return response;
+        }
+
+        public async Task<PaginacaoConsulta<CategoriaListarResponse>> ListarPaginadoAsync(CategoriaListarRequest request, CancellationToken cancellationToken)
+        {
+            CategoriaListarFiltro filtro = request.Adapt<CategoriaListarFiltro>();
+
+            IQueryable<Categoria> query = await categoriaServico.FiltrarAsync(filtro, cancellationToken);
+
+            PaginacaoConsulta<Categoria> categorias = await categoriaServico.ListarPaginadoAsync(query, request.Qt, request.Pg, request.CpOrd, request.TpOrd, cancellationToken);
+
+            PaginacaoConsulta<CategoriaListarResponse> response = categorias.Adapt<PaginacaoConsulta<CategoriaListarResponse>>();
 
             return response;
         }

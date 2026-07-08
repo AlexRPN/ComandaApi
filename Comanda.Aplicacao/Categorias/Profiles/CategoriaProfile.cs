@@ -2,6 +2,7 @@
 using Comanda.DataTransfer.Categorias.Response;
 using Comanda.Dominio.Categorias.Comandos;
 using Comanda.Dominio.Categorias.Entidades;
+using Comanda.Dominio.Categorias.Repositorios.Filtros;
 using Mapster;
 
 namespace Comanda.Aplicacao.Categorias.Profiles
@@ -13,6 +14,8 @@ namespace Comanda.Aplicacao.Categorias.Profiles
             config.NewConfig<CategoriaRequest, CategoriaComando>();
             config.NewConfig<Categoria, CategoriaResponse>();
             config.NewConfig<CategoriaEditarRequest, CategoriaEditarComando>();
+            config.NewConfig<CategoriaListarRequest, CategoriaListarFiltro>();
+            config.NewConfig<Categoria, CategoriaListarResponse>();
         }
     }
 }

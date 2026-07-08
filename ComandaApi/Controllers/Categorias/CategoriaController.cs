@@ -55,5 +55,19 @@ namespace ComandaApi.Controllers.Categorias
             var response = await categoriaAppServico.RecuperarPorIdAsync(id, cancellationToken);
             return Ok(response);
         }
+
+        /// <summary>
+        /// Lista categorias com paginação
+        /// </summary>
+        /// <param name="filtro"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("listar")]
+        public async Task<ActionResult> ListarAsync([FromBody] CategoriaListarRequest filtro, CancellationToken cancellationToken)
+        {
+            var response = await categoriaAppServico.ListarPaginadoAsync(filtro, cancellationToken);
+            return Ok(response);
+        }
     }
 }
