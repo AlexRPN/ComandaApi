@@ -3,8 +3,8 @@ using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.GrupoAdicionais.Entidades;
 using Comanda.Dominio.ImagensProdutos.Entidades;
 using Comanda.Dominio.Produtos.Comandos;
+using Comanda.Dominio.ProdutosVariacoes.Entidades;
 using Comanda.Dominio.Utils.Enumeradores;
-using System.Collections;
 
 namespace Comanda.Dominio.Produtos.Entidades
 {
@@ -24,12 +24,14 @@ namespace Comanda.Dominio.Produtos.Entidades
 
         // Relacionamento 1:N com ImagemProduto
         public ICollection<ImagemProduto> ImagemProduto { get; set; } = [];
+
+        // Relacionamento N:N com ProdutoVariacao
+        public ICollection<ProdutoVariacao> ProdutoVariacao { get; set; } = [];
         #endregion
 
         public int Id { get; private set; }
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
-        public decimal Preco { get; private set; }
         public int TempoPreparo { get; private set; }
         public AtivoInativoEnum Status { get; private set; }
         public DateTime DataCadastro { get; private set; }
@@ -46,7 +48,6 @@ namespace Comanda.Dominio.Produtos.Entidades
             SetCategoriaId(comando.CategoriaId);
             SetNome(comando.Nome);
             SetDescricao(comando.Descricao);
-            SetPreco(comando.Preco);
             SetTempoPreparo(comando.TempoPreparo);
             SetStatus(comando.Status);
             SetDataCadastro(comando.DataCadastro);
@@ -81,16 +82,6 @@ namespace Comanda.Dominio.Produtos.Entidades
             }
 
             Descricao = descricao;
-        }
-
-        public void SetPreco(decimal preco)
-        {
-            if(preco < 0)
-            {
-                throw new ArgumentOutOfRangeException("O valor do produto não pode ser menor que zero!");
-            }
-
-            Preco = preco;
         }
 
         public void SetTempoPreparo(int tempoPreparo)
