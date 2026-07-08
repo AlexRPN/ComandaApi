@@ -12,6 +12,7 @@ namespace Comanda.Aplicacao.Categorias.Profiles
         {
             config.NewConfig<CategoriaRequest, CategoriaComando>();
             config.NewConfig<Categoria, CategoriaResponse>();
+            config.NewConfig<CategoriaEditarRequest, CategoriaEditarComando>();
         }
     }
 }

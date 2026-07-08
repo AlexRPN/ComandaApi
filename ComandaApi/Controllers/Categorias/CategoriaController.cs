@@ -27,5 +27,19 @@ namespace ComandaApi.Controllers.Categorias
             var response = await categoriaAppServico.InserirAsync(request, cancellationToken);
             return Ok(response);
         }
+
+        /// <summary>
+        /// Edita uma categoria existente
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("editar")]
+        public async Task<ActionResult> EditarAsync([FromBody] CategoriaEditarRequest request, CancellationToken cancellationToken)
+        {
+            var response = await categoriaAppServico.EditarAsync(request, cancellationToken);
+            return Ok(response);
+        }
     }
 }

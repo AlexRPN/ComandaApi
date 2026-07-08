@@ -34,5 +34,22 @@ namespace Comanda.Dominio.Categorias.Servicos
 
             return await categoriaRepositorio.InserirAsync(categoria, cancellationToken);
         }
+
+        public async Task<Categoria> EditarAsync(CategoriaEditarComando comando, CancellationToken cancellationToken)
+        {
+            Categoria? categoria = await categoriaRepositorio.RecuperarAsync(x => x.Id == comando.Id && 
+                                                                             x.EmpresaId == comando.EmpresaId, cancellationToken);
+
+            if(categoria == null)
+            {
+                throw new ArgumentNullException("Categoria não encontrada!");
+            }
+
+            categoria.SetNome(comando.Nome);
+            categoria.SetDescricao(comando.Descricao);
+            categoria.SetDataAlteracao(DateTime.UtcNow);
+
+            return await categoriaRepositorio.EditarAsync(categoria, cancellationToken);
+        }
     }
 }
