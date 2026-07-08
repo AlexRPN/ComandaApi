@@ -1,0 +1,38 @@
+﻿using Comanda.Dominio.Categorias.Comandos;
+using Comanda.Dominio.Categorias.Entidades;
+using Comanda.Dominio.Categorias.Repositorios.Interfaces;
+using Comanda.Dominio.Categorias.Servicos.Interfaces;
+using Comanda.Dominio.Empresas.Repositorios.Interfaces;
+using Comanda.Dominio.Utils.Enumeradores;
+
+namespace Comanda.Dominio.Categorias.Servicos
+{
+    public class CategoriaServico : ICategoriaServico
+    {
+        private readonly ICategoriaRepositorio categoriaRepositorio;
+        private readonly IEmpresaRepositorio empresaRepositorio;
+        public CategoriaServico(ICategoriaRepositorio categoriaRepositorio, 
+                                IEmpresaRepositorio empresaRepositorio)
+        {
+            this.categoriaRepositorio = categoriaRepositorio;
+            this.empresaRepositorio = empresaRepositorio;
+        }
+
+        public async Task<Categoria> InserirAsync(CategoriaComando comando, CancellationToken cancellationToken)
+        {
+            var empresaValida = await empresaRepositorio.RecuperarAsync(comando.EmpresaId, cancellationToken);
+
+            var categoria = new CategoriaComando
+            {
+                EmpresaId = empresaValida.Id,
+                Nome = comando.Nome,
+                Descricao = comando.Descricao,
+                Status = AtivoInativoEnum.Ativo,
+                DataCadastro = DateTime.UtcNow,
+                DataAlteracao = DateTime.UtcNow
+            };
+
+            return await categoriaRepositorio.InserirAsync(categoria, cancellationToken);
+        }
+    }
+}

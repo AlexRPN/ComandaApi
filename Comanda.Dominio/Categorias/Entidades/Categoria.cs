@@ -20,6 +20,8 @@ namespace Comanda.Dominio.Categorias.Entidades
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public AtivoInativoEnum Status { get; private set; }
+        public DateTime DataCadastro { get; private set; }
+        public DateTime DataAlteracao { get; private set; }
 
         private Categoria()
         {
@@ -32,6 +34,8 @@ namespace Comanda.Dominio.Categorias.Entidades
             SetNome(comando.Nome);
             SetDescricao(comando.Descricao);
             SetStatus(comando.Status);
+            SetDataCadastro(comando.DataCadastro);
+            SetDataAlteracao(comando.DataAlteracao);
         }
 
         public void SetEmpresaId(int empresaId)
@@ -62,6 +66,26 @@ namespace Comanda.Dominio.Categorias.Entidades
         public void SetStatus(AtivoInativoEnum status)
         {
             Status = status;
+        }
+
+        public void SetDataCadastro(DateTime dataCadastro)
+        {
+            if(dataCadastro < DateTime.Now)
+            {
+                throw new ArgumentException("A data de cadastro não pode ser menor que a data atual!");
+            }
+
+            DataCadastro = dataCadastro;
+        }
+
+        public void SetDataAlteracao(DateTime dataAlteracao)
+        {
+            if(dataAlteracao < DateTime.Now)
+            {
+                throw new ArgumentException("A data de alteração não pode ser menor que a data atual!");
+            }
+
+            DataAlteracao = dataAlteracao;
         }
     }
 }

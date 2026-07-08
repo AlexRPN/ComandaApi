@@ -1,7 +1,6 @@
 ﻿using Comanda.Aplicacao.Clientes.Servicos.Interfaces;
 using Comanda.DataTransfer.Clientes.Request;
 using Comanda.DataTransfer.Utils.Status.Request;
-using Comanda.Dominio.Utils.Enumeradores;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComandaApi.Controllers.Clientes

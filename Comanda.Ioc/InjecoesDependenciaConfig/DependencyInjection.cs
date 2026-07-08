@@ -1,10 +1,15 @@
-﻿using Comanda.Aplicacao.Clientes.Servicos;
+﻿using Comanda.Aplicacao.Categorias.Servicos;
+using Comanda.Aplicacao.Categorias.Servicos.Interfaces;
+using Comanda.Aplicacao.Clientes.Servicos;
 using Comanda.Aplicacao.Clientes.Servicos.Interfaces;
 using Comanda.Aplicacao.Empresas.Servicos;
 using Comanda.Aplicacao.Empresas.Servicos.Interfaces;
 using Comanda.Aplicacao.Transacoes.Interfaces;
 using Comanda.Aplicacao.Usuarios.Servicos;
 using Comanda.Aplicacao.Usuarios.Servicos.Interfaces;
+using Comanda.Dominio.Categorias.Repositorios.Interfaces;
+using Comanda.Dominio.Categorias.Servicos;
+using Comanda.Dominio.Categorias.Servicos.Interfaces;
 using Comanda.Dominio.Clientes.Repositorios.Interfaces;
 using Comanda.Dominio.Clientes.Servicos;
 using Comanda.Dominio.Clientes.Servicos.Interfaces;
@@ -25,6 +30,7 @@ using Comanda.Dominio.Usuarios.Servicos;
 using Comanda.Dominio.Usuarios.Servicos.Interfaces;
 using Comanda.Dominio.Utils.Autenticacoes.Servicos;
 using Comanda.Dominio.Utils.Autenticacoes.Servicos.Interfaces;
+using Comanda.Infra.Categorias.Repositorios;
 using Comanda.Infra.Clientes.Repositorios;
 using Comanda.Infra.Data;
 using Comanda.Infra.Empresas.Repositorios;
@@ -55,6 +61,7 @@ namespace Comanda.Ioc.InjecoesDependenciaConfig
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
             services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
             services.AddScoped<IEnderecoClienteRepositorio, EnderecoClienteRepositorio>();
+            services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
 
             // Serviços
             services.AddScoped<IAutenticacaoServico, AutenticacaoServico>();
@@ -64,12 +71,14 @@ namespace Comanda.Ioc.InjecoesDependenciaConfig
             services.AddScoped<IUsuarioServico, UsuarioServico>();
             services.AddScoped<IClienteServico, ClienteServico>();
             services.AddScoped<IEnderecoClienteServico, EnderecoClienteServico>();
+            services.AddScoped<ICategoriaServico, CategoriaServico>();
 
             // Aplicação
             services.AddScoped<IEmpresaAppServico, EmpresaAppServico>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUsuarioAppServico, UsuarioAppServico>();
             services.AddScoped<IClienteAppServico, ClienteAppServico>();
+            services.AddScoped<ICategoriaAppServico, CategoriaAppServico>();
 
             return services;
         }
