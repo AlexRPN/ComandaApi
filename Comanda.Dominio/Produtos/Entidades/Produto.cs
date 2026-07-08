@@ -34,6 +34,7 @@ namespace Comanda.Dominio.Produtos.Entidades
         public string Descricao { get; private set; }
         public int TempoPreparo { get; private set; }
         public AtivoInativoEnum Status { get; private set; }
+        public SituacaoProdutoEnum SituacaoProduto { get; private set; }
         public DateTime DataCadastro { get; private set; }
         public DateTime DataAlteracao { get; private set; }
 
@@ -50,8 +51,14 @@ namespace Comanda.Dominio.Produtos.Entidades
             SetDescricao(comando.Descricao);
             SetTempoPreparo(comando.TempoPreparo);
             SetStatus(comando.Status);
+            SetSituacaoProduto(comando.SituacaoProduto);
             SetDataCadastro(comando.DataCadastro);
             SetDataAlteracao(comando.DataAlteracao);
+        }
+
+        public void SetSituacaoProduto(SituacaoProdutoEnum situacaoProduto)
+        {
+            SituacaoProduto = situacaoProduto;
         }
 
         public void SetEmpresaId(int empresaId)
