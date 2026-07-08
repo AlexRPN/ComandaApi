@@ -3,6 +3,7 @@ using Comanda.Aplicacao.Transacoes.Interfaces;
 using Comanda.DataTransfer.Categorias.Request;
 using Comanda.DataTransfer.Categorias.Response;
 using Comanda.Dominio.Categorias.Comandos;
+using Comanda.Dominio.Categorias.Entidades;
 using Comanda.Dominio.Categorias.Servicos.Interfaces;
 using Mapster;
 using Microsoft.Extensions.Logging;
@@ -77,6 +78,16 @@ namespace Comanda.Aplicacao.Categorias.Servicos
                 logger.LogError(ex, "Erro ao editar categoria: {Mensagem}", ex.Message);
                 throw new Exception($"Erro ao editar categoria: {ex.Message}", ex);
             }
+        }
+
+        public async Task<CategoriaResponse> RecuperarPorIdAsync(int id, CancellationToken cancellationToken)
+        {
+            Categoria categoria = await categoriaServico.RecuperarPorIdAsync(id, cancellationToken);
+
+            var response = categoria.Adapt<CategoriaResponse>();
+            response.Mensagem = $"Categoria {categoria.Nome} recuperada com sucesso!";
+
+            return response;
         }
     }
 }

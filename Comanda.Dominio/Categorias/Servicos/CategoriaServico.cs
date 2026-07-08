@@ -51,5 +51,17 @@ namespace Comanda.Dominio.Categorias.Servicos
 
             return await categoriaRepositorio.EditarAsync(categoria, cancellationToken);
         }
+
+        public async Task<Categoria> RecuperarPorIdAsync(int id, CancellationToken cancellationToken)
+        {
+            Categoria? categoria = await categoriaRepositorio.RecuperarAsync(x => x.Id == id, cancellationToken);
+
+            if(categoria == null)
+            {
+                throw new ArgumentNullException("Categoria não encontrada!");
+            }
+            
+            return categoria;
+        }
     }
 }

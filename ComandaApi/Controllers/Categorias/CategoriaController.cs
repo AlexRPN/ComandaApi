@@ -41,5 +41,19 @@ namespace ComandaApi.Controllers.Categorias
             var response = await categoriaAppServico.EditarAsync(request, cancellationToken);
             return Ok(response);
         }
+
+        /// <summary>
+        /// Recupera uma categoria por ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("recuperar/{id}")]
+        public async Task<ActionResult> RecuperarPorIdAsync(int id, CancellationToken cancellationToken)
+        {
+            var response = await categoriaAppServico.RecuperarPorIdAsync(id, cancellationToken);
+            return Ok(response);
+        }
     }
 }

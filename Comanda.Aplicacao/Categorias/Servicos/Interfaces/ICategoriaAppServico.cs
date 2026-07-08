@@ -7,5 +7,6 @@ namespace Comanda.Aplicacao.Categorias.Servicos.Interfaces
     {
         Task<CategoriaResponse> InserirAsync(CategoriaRequest request, CancellationToken cancellationToken);
         Task<CategoriaResponse> EditarAsync(CategoriaEditarRequest request, CancellationToken cancellationToken);
+        Task<CategoriaResponse> RecuperarPorIdAsync(int id, CancellationToken cancellationToken);
     }
 }
