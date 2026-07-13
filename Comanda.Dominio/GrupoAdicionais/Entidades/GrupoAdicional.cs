@@ -1,18 +1,23 @@
 ﻿using Comanda.Dominio.Adicionais.Entidades;
+using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.GrupoAdicionais.Comandos;
 using Comanda.Dominio.Produtos.Entidades;
+using Comanda.Dominio.ProdutosGruposAdicionais.Entidades;
 
 namespace Comanda.Dominio.GrupoAdicionais.Entidades
 {
     public class GrupoAdicional
     {
         #region Navegação com os relacionamentos
-        // Relacionamento 1xN com Produto
-        public int ProdutoId { get; private set; }
-        public Produto Produto { get; private set; }
+        // Relacionamento 1xN com Empresa
+        public int EmpresaId { get; private set; }
+        public Empresa Empresa { get; private set; }
 
         // Relacionamento 1xN com Adicional
         public ICollection<Adicional> Adicionais { get; private set; }
+
+        // Tabela intermediária para o relacionamento N:N entre Produto e GrupoAdicional
+        public ICollection<ProdutoGrupoAdicional> ProdutosGruposAdicionais { get; private set; } = [];
         #endregion
 
         public int Id { get; private set; }
@@ -25,13 +30,13 @@ namespace Comanda.Dominio.GrupoAdicionais.Entidades
 
         public GrupoAdicional(GrupoAdicionalComando comando)
         {
-            SetProdutoId(comando.ProdutoId);
+            SetEmpresaId(comando.EmpresaId);
             SetNome(comando.Nome);
         }
 
-        public void SetProdutoId(int produtoId)
+        public void SetEmpresaId(int empresaId)
         {
-            ProdutoId = produtoId;
+            EmpresaId = empresaId;
         }
 
         public void SetNome(string nome)

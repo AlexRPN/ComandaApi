@@ -92,34 +92,34 @@ namespace Comanda.Aplicacao.Produtos.Servicos
                 //await imagemProdutoServico.InserirAsync(imagens, cancellationToken);
                 #endregion
 
-                logger.LogInformation("Iniciando inserção de grupo adicional de produtos.");
-                foreach (var grupo in gruposAdicionais)
-                {
-                    grupo.ProdutoId = produtoInserido.Id;
-                }
-                var grupoAdicionalInserido = await grupoAdicionalServico.InserirAsync(gruposAdicionais, cancellationToken);
+                //logger.LogInformation("Iniciando inserção de grupo adicional de produtos.");
+                //foreach (var grupo in gruposAdicionais)
+                //{
+                //    grupo.ProdutoId = produtoInserido.Id;
+                //}
+                //var grupoAdicionalInserido = await grupoAdicionalServico.InserirAsync(gruposAdicionais, cancellationToken);
 
-                await unitOfWork.CommitAsync(cancellationToken);
+                //await unitOfWork.CommitAsync(cancellationToken);
 
-                if (grupoAdicionalInserido != null && grupoAdicionalInserido.Any())
-                {
-                    logger.LogInformation("Iniciando inserção de adicionais de produtos.");
+                //if (grupoAdicionalInserido != null && grupoAdicionalInserido.Any())
+                //{
+                //    logger.LogInformation("Iniciando inserção de adicionais de produtos.");
 
-                    for (int i = 0; i < grupoAdicionalInserido.Count; i++)
-                    {
-                        var grupoInserido = grupoAdicionalInserido[i];
-                        var grupoRequest = request.GruposAdicionais[i];
+                //    for (int i = 0; i < grupoAdicionalInserido.Count; i++)
+                //    {
+                //        var grupoInserido = grupoAdicionalInserido[i];
+                //        var grupoRequest = request.GruposAdicionais[i];
 
-                        List<AdicionalComando> adicionaisDoGrupo = grupoRequest.Adicionais.Adapt<List<AdicionalComando>>();
+                //        List<AdicionalComando> adicionaisDoGrupo = grupoRequest.Adicionais.Adapt<List<AdicionalComando>>();
 
-                        foreach (var adicional in adicionaisDoGrupo)
-                        {
-                            adicional.GrupoAdicionalId = grupoInserido.Id;
-                        }
+                //        foreach (var adicional in adicionaisDoGrupo)
+                //        {
+                //            adicional.GrupoAdicionalId = grupoInserido.Id;
+                //        }
 
-                        await adicionalServico.InserirAsync(adicionaisDoGrupo, cancellationToken);
-                    }
-                }
+                //        await adicionalServico.InserirAsync(adicionaisDoGrupo, cancellationToken);
+                //    }
+                //}
 
                 await unitOfWork.CommitAsync(cancellationToken);
                 await unitOfWork.CommitTransactionAsync(cancellationToken);
@@ -130,7 +130,7 @@ namespace Comanda.Aplicacao.Produtos.Servicos
                 //response.ImagensProdutos = imagens.Adapt<List<ImagemProdutoResponse>>() ?? [];
                 response.ProdutoVariacao = produtoVariacoes.Adapt<List<ProdutoVariacaoResponse>>() ?? [];
                 response.GrupoAdicional = gruposAdicionais.Adapt<List<GrupoAdicionalResponse>>() ?? [];
-                response.GrupoAdicional = grupoAdicionalInserido.Adapt<List<GrupoAdicionalResponse>>() ?? [];
+                //response.GrupoAdicional = grupoAdicionalInserido.Adapt<List<GrupoAdicionalResponse>>() ?? [];
 
                 response.Mensagem = $"Produto {produtoInserido.Nome} inserido com sucesso.";
 

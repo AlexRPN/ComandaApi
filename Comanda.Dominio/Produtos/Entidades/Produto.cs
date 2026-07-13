@@ -3,6 +3,7 @@ using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.GrupoAdicionais.Entidades;
 using Comanda.Dominio.ImagensProdutos.Entidades;
 using Comanda.Dominio.Produtos.Comandos;
+using Comanda.Dominio.ProdutosGruposAdicionais.Entidades;
 using Comanda.Dominio.ProdutosVariacoes.Entidades;
 using Comanda.Dominio.Utils.Enumeradores;
 
@@ -27,6 +28,9 @@ namespace Comanda.Dominio.Produtos.Entidades
 
         // Relacionamento 0:N com ProdutoVariacao
         public ICollection<ProdutoVariacao> ProdutoVariacao { get; set; } = [];
+
+        // Tabela intermediária para o relacionamento N:N entre Produto e GrupoAdicional
+        public ICollection<ProdutoGrupoAdicional> ProdutosGruposAdicionais { get; private set; } = [];
         #endregion
 
         public int Id { get; private set; }

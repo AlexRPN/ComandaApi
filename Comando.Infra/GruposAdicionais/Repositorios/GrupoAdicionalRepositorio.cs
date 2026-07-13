@@ -16,7 +16,7 @@ namespace Comanda.Infra.GruposAdicionais.Repositorios
         {
             var grupoAdicionais = comandos.Select(comandos => new GrupoAdicional(comandos)).ToList();
 
-            await appDbContext.GrupoAdicionais.AddRangeAsync(grupoAdicionais, cancellationToken);
+            await appDbContext.GruposAdicionais.AddRangeAsync(grupoAdicionais, cancellationToken);
 
             return grupoAdicionais;
         }
