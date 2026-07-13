@@ -130,7 +130,7 @@ namespace Comanda.Aplicacao.Produtos.Servicos
                 //response.ImagensProdutos = imagens.Adapt<List<ImagemProdutoResponse>>() ?? [];
                 response.ProdutoVariacao = produtoVariacoes.Adapt<List<ProdutoVariacaoResponse>>() ?? [];
                 response.GrupoAdicional = gruposAdicionais.Adapt<List<GrupoAdicionalResponse>>() ?? [];
-                response.GrupoAdicional.FirstOrDefault()?.Adicionais = adicionais.Adapt<List<AdicionalResponse>>() ?? [];
+                response.GrupoAdicional = grupoAdicionalInserido.Adapt<List<GrupoAdicionalResponse>>() ?? [];
 
                 response.Mensagem = $"Produto {produtoInserido.Nome} inserido com sucesso.";
 
