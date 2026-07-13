@@ -1,7 +1,6 @@
 ﻿using Comanda.Aplicacao.Usuarios.Servicos.Interfaces;
 using Comanda.DataTransfer.Usuarios.Request;
 using Comanda.DataTransfer.Utils.Status.Request;
-using Comanda.Dominio.Utils.Enumeradores;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComandaApi.Controllers.Usuarios

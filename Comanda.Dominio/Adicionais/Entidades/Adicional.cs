@@ -21,7 +21,7 @@ namespace Comanda.Dominio.Adicionais.Entidades
 
         private Adicional()
         {
-            
+
         }
 
         public Adicional(AdicionalComando comando)
@@ -41,7 +41,7 @@ namespace Comanda.Dominio.Adicionais.Entidades
 
         public void SetNome(string nome)
         {
-            if(string.IsNullOrWhiteSpace(nome))
+            if (string.IsNullOrWhiteSpace(nome))
                 throw new ArgumentException("Nome do adicional não pode ser vazio.");
 
             Nome = nome;
@@ -49,7 +49,7 @@ namespace Comanda.Dominio.Adicionais.Entidades
 
         public void SetValor(decimal valor)
         {
-            if(valor < 0)
+            if (valor < 0)
                 throw new ArgumentException("Valor do adicional não pode ser negativo.");
 
             Valor = valor;

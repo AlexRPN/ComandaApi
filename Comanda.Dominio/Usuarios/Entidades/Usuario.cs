@@ -25,7 +25,7 @@ namespace Comanda.Dominio.Usuarios.Entidades
 
         private Usuario()
         {
-            
+
         }
 
         public Usuario(UsuarioComando comando)
@@ -64,7 +64,7 @@ namespace Comanda.Dominio.Usuarios.Entidades
 
         public void SetNome(string nome)
         {
-            if(string.IsNullOrWhiteSpace(nome))
+            if (string.IsNullOrWhiteSpace(nome))
             {
                 throw new ArgumentException("O nome do usuário não pode ser vazio.");
             }

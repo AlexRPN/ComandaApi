@@ -1,7 +1,6 @@
 ﻿
 using Comanda.Dominio.EnderecosEmpresas.Comandos;
 using Comanda.Dominio.HorariosFuncionamento.Comando;
-using Comanda.Dominio.Utils.Enumeradores;
 
 namespace Comanda.Dominio.Empresas.Comandos
 {

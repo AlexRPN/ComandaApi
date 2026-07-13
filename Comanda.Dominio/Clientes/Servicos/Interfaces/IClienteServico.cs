@@ -12,7 +12,7 @@ namespace Comanda.Dominio.Clientes.Servicos.Interfaces
         Task<Cliente> InserirAsync(ClienteComando comando, CancellationToken cancellationToken);
         Task<Cliente> EditarAsync(ClienteEditarComando comando, CancellationToken cancellationToken);
         Task<Cliente> RecuperarAsync(int id, CancellationToken cancellationToken);
-        Task<IQueryable<Cliente>> FiltrarAsync(ClienteListarFiltro filtro,  CancellationToken cancellationToken);
+        Task<IQueryable<Cliente>> FiltrarAsync(ClienteListarFiltro filtro, CancellationToken cancellationToken);
         Task<PaginacaoConsulta<Cliente>> ListarPaginadoAsync(IQueryable<Cliente> query, int qt, int pg, string cpOrd,
                                                              TipoOrdenacaoEnum tpOrd,
                                                              CancellationToken cancellationToken);

@@ -1,10 +1,10 @@
-﻿using System.Linq.Dynamic.Core;
-using System.Linq.Expressions;
-using Comanda.Dominio.Genericos;
+﻿using Comanda.Dominio.Genericos;
 using Comanda.Dominio.Utils.Consultas;
 using Comanda.Dominio.Utils.Filtros.Enumeradores;
 using Comanda.Infra.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Dynamic.Core;
+using System.Linq.Expressions;
 
 namespace Comanda.Infra.Genericos
 {
@@ -146,6 +146,11 @@ namespace Comanda.Infra.Genericos
         public async Task<T?> RecuperarAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
         {
             return await appDbContext.Set<T>().FirstOrDefaultAsync(predicate, cancellationToken);
+        }
+
+        public async Task<bool> ValidarAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
+        {
+            return await appDbContext.Set<T>().AnyAsync(predicate, cancellationToken);
         }
 
         public Task<T> EditarAsync(T entidade, CancellationToken cancellationToken)

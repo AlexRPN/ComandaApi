@@ -22,7 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Arquivos\Servicos\Interfaces\" />
     <Folder Include="EnderecoClientes\Repositorios\Filtros\" />
+    <Folder Include="GrupoAdicionais\Repositorios\Filtros\" />
+    <Folder Include="ImagensProdutos\Repositorios\Filtros\" />
+    <Folder Include="ProdutosVariacoes\Repositorios\Filtros\" />
   </ItemGroup>
 
 </Project>

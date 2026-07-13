@@ -20,22 +20,22 @@ namespace Comanda.Infra.Categorias.Repositorios
                                                       .AsNoTracking()
                                                       .AsQueryable();
 
-            if(filtro.Id.HasValue)
+            if (filtro.Id.HasValue)
             {
                 query = query.Where(c => c.Id == filtro.Id.Value);
             }
 
-            if(filtro.EmpresaId.HasValue)
+            if (filtro.EmpresaId.HasValue)
             {
                 query = query.Where(c => c.EmpresaId == filtro.EmpresaId.Value);
             }
 
-            if(!string.IsNullOrWhiteSpace(filtro.Nome))
+            if (!string.IsNullOrWhiteSpace(filtro.Nome))
             {
                 query = query.Where(c => c.Nome.Contains(filtro.Nome));
             }
 
-            if(filtro.DataCadastro.HasValue)
+            if (filtro.DataCadastro.HasValue)
             {
                 query = query.Where(c => c.DataCadastro.Date == filtro.DataCadastro.Value.Date);
             }

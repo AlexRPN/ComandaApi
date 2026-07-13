@@ -1,5 +1,4 @@
-﻿using Comanda.DataTransfer.Clientes.Request;
-using Comanda.DataTransfer.EnderecoClientes.Request;
+﻿using Comanda.DataTransfer.EnderecoClientes.Request;
 using Comanda.Dominio.EnderecoClientes.Comandos;
 using Mapster;
 

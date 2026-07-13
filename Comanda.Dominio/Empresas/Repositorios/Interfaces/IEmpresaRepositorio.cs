@@ -12,8 +12,8 @@ namespace Comanda.Dominio.Empresas.Repositorios.Interfaces
         Task<EmpresaComando> InserirAsync(EmpresaComando comando, CancellationToken cancellationToken);
         Task<Empresa> RecuperarAsync(int id, CancellationToken cancellationToken);
         Task<IQueryable<Empresa>> FiltrarAsync(EmpresaListarFiltro comando, CancellationToken cancellationToken);
-        Task<PaginacaoConsulta<Empresa>> ListarAsync(IQueryable<Empresa> query, int qt, int pg, string cpOrd, 
-                                                     TipoOrdenacaoEnum tpOrd, 
+        Task<PaginacaoConsulta<Empresa>> ListarAsync(IQueryable<Empresa> query, int qt, int pg, string cpOrd,
+                                                     TipoOrdenacaoEnum tpOrd,
                                                      CancellationToken cancellationToken);
     }
 }

@@ -25,7 +25,7 @@ namespace Comanda.Dominio.Categorias.Entidades
 
         private Categoria()
         {
-            
+
         }
 
         public Categoria(CategoriaComando comando)
@@ -45,7 +45,7 @@ namespace Comanda.Dominio.Categorias.Entidades
 
         public void SetNome(string nome)
         {
-            if(string.IsNullOrWhiteSpace(nome))
+            if (string.IsNullOrWhiteSpace(nome))
             {
                 throw new ArgumentNullException("O nome da categoria não pode ser nulo ou vazio!");
             }
@@ -70,7 +70,7 @@ namespace Comanda.Dominio.Categorias.Entidades
 
         public void SetDataCadastro(DateTime dataCadastro)
         {
-            if(dataCadastro < DateTime.Now)
+            if (dataCadastro < DateTime.Now)
             {
                 throw new ArgumentException("A data de cadastro não pode ser menor que a data atual!");
             }
@@ -80,7 +80,7 @@ namespace Comanda.Dominio.Categorias.Entidades
 
         public void SetDataAlteracao(DateTime dataAlteracao)
         {
-            if(dataAlteracao < DateTime.Now)
+            if (dataAlteracao < DateTime.Now)
             {
                 throw new ArgumentException("A data de alteração não pode ser menor que a data atual!");
             }

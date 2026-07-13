@@ -19,13 +19,13 @@ namespace Comanda.Dominio.Produtos.Entidades
         public int CategoriaId { get; private set; }
         public Categoria Categoria { get; private set; }
 
-        // Relacionamento 1:N com GrupoAdicional
+        // Relacionamento 0:N com GrupoAdicional
         public ICollection<GrupoAdicional> GrupoAdicional { get; set; } = [];
 
-        // Relacionamento 1:N com ImagemProduto
+        // Relacionamento 0:N com ImagemProduto
         public ICollection<ImagemProduto> ImagemProduto { get; set; } = [];
 
-        // Relacionamento N:N com ProdutoVariacao
+        // Relacionamento 0:N com ProdutoVariacao
         public ICollection<ProdutoVariacao> ProdutoVariacao { get; set; } = [];
         #endregion
 
@@ -40,7 +40,7 @@ namespace Comanda.Dominio.Produtos.Entidades
 
         private Produto()
         {
-            
+
         }
 
         public Produto(ProdutoComando comando)
@@ -73,7 +73,7 @@ namespace Comanda.Dominio.Produtos.Entidades
 
         public void SetNome(string nome)
         {
-            if(string.IsNullOrWhiteSpace(nome))
+            if (string.IsNullOrWhiteSpace(nome))
             {
                 throw new ArgumentNullException("O nome do produto não pode ser nulo ou vazio!");
             }
@@ -103,7 +103,7 @@ namespace Comanda.Dominio.Produtos.Entidades
 
         public void SetDataCadastro(DateTime dataCadastro)
         {
-            if(dataCadastro < DateTime.Now)
+            if (dataCadastro < DateTime.Now)
             {
                 throw new Exception("A data de cadastro não pode ser anterior a data atual!");
             }

@@ -13,7 +13,7 @@ namespace Comanda.Dominio.Empresas.Servicos.Interfaces
         Task<Empresa> EditarAsync(EmpresaEditarComando comando, CancellationToken cancellationToken);
         Task<Empresa> ValidarAsync(int id, CancellationToken cancellationToken);
         Task<PaginacaoConsulta<Empresa>> ListarAsync(IQueryable<Empresa> query, int qt, int pg, string cpOrd,
-                                                     TipoOrdenacaoEnum tpOrd, 
+                                                     TipoOrdenacaoEnum tpOrd,
                                                      CancellationToken cancellationToken);
         Task<IQueryable<Empresa>> FiltrarAsync(EmpresaListarFiltro comando, CancellationToken cancellationToken);
     }

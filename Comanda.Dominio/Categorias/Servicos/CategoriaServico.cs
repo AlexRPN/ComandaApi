@@ -14,7 +14,7 @@ namespace Comanda.Dominio.Categorias.Servicos
     {
         private readonly ICategoriaRepositorio categoriaRepositorio;
         private readonly IEmpresaRepositorio empresaRepositorio;
-        public CategoriaServico(ICategoriaRepositorio categoriaRepositorio, 
+        public CategoriaServico(ICategoriaRepositorio categoriaRepositorio,
                                 IEmpresaRepositorio empresaRepositorio)
         {
             this.categoriaRepositorio = categoriaRepositorio;
@@ -40,10 +40,10 @@ namespace Comanda.Dominio.Categorias.Servicos
 
         public async Task<Categoria> EditarAsync(CategoriaEditarComando comando, CancellationToken cancellationToken)
         {
-            Categoria? categoria = await categoriaRepositorio.RecuperarAsync(x => x.Id == comando.Id && 
+            Categoria? categoria = await categoriaRepositorio.RecuperarAsync(x => x.Id == comando.Id &&
                                                                              x.EmpresaId == comando.EmpresaId, cancellationToken);
 
-            if(categoria == null)
+            if (categoria == null)
             {
                 throw new ArgumentNullException("Categoria não encontrada!");
             }
@@ -59,11 +59,11 @@ namespace Comanda.Dominio.Categorias.Servicos
         {
             Categoria? categoria = await categoriaRepositorio.RecuperarAsync(x => x.Id == id, cancellationToken);
 
-            if(categoria == null)
+            if (categoria == null)
             {
                 throw new ArgumentNullException("Categoria não encontrada!");
             }
-            
+
             return categoria;
         }
 
@@ -72,7 +72,7 @@ namespace Comanda.Dominio.Categorias.Servicos
             return await categoriaRepositorio.FiltrarAsync(filtro, cancellationToken);
         }
 
-        public async Task<PaginacaoConsulta<Categoria>> ListarPaginadoAsync(IQueryable<Categoria> query, int qt, int pg, string cpOrd,   
+        public async Task<PaginacaoConsulta<Categoria>> ListarPaginadoAsync(IQueryable<Categoria> query, int qt, int pg, string cpOrd,
                                                                             TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken)
         {
             return await categoriaRepositorio.ListarPaginadoAsync(query, qt, pg, cpOrd, tpOrd, cancellationToken);

@@ -20,7 +20,7 @@ namespace Comanda.Dominio.GrupoAdicionais.Entidades
 
         private GrupoAdicional()
         {
-            
+
         }
 
         public GrupoAdicional(GrupoAdicionalComando comando)
@@ -36,7 +36,7 @@ namespace Comanda.Dominio.GrupoAdicionais.Entidades
 
         public void SetNome(string nome)
         {
-            if(string.IsNullOrWhiteSpace(nome))
+            if (string.IsNullOrWhiteSpace(nome))
             {
                 throw new ArgumentNullException("O Adicional não pode ser nulo ou vazio!");
             }

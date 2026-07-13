@@ -14,7 +14,7 @@ namespace Comanda.Dominio.Usuarios.Servicos
     {
         private readonly IUsuarioRepositorio usuarioRepositorio;
         private readonly IAutenticacaoServico autenticacaoServico;
-        public UsuarioServico(IUsuarioRepositorio usuarioRepositorio, 
+        public UsuarioServico(IUsuarioRepositorio usuarioRepositorio,
                               IAutenticacaoServico autenticacaoServico)
         {
             this.usuarioRepositorio = usuarioRepositorio;
@@ -68,7 +68,7 @@ namespace Comanda.Dominio.Usuarios.Servicos
         {
             var usuario = await usuarioRepositorio.ValidarCpfAsync(cpf, cancellationToken);
 
-            if(usuario != null)
+            if (usuario != null)
             {
                 throw new Exception("Cpf informado já está cadastrado no sistema!");
             }
@@ -80,7 +80,7 @@ namespace Comanda.Dominio.Usuarios.Servicos
         {
             Usuario usuario = await usuarioRepositorio.RecuperarAsync(comando.Id, cancellationToken);
 
-            if(usuario == null)
+            if (usuario == null)
             {
                 throw new Exception("Usuário não encontrado!");
             }

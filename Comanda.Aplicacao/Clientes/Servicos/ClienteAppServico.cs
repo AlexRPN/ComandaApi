@@ -11,7 +11,6 @@ using Comanda.Dominio.Empresas.Servicos.Interfaces;
 using Comanda.Dominio.EnderecoClientes.Comandos;
 using Comanda.Dominio.EnderecoClientes.Entidades;
 using Comanda.Dominio.EnderecoClientes.Servicos.Interfaces;
-using Comanda.Dominio.Usuarios.Servicos;
 using Comanda.Dominio.Utils.Consultas;
 using Comanda.Dominio.Utils.Enumeradores;
 using Mapster;
@@ -29,7 +28,7 @@ namespace Comanda.Aplicacao.Clientes.Servicos
         public ClienteAppServico(IClienteServico clienteServico,
                                  IEnderecoClienteServico enderecoClienteServico,
                                  IEmpresaServico empresaServico,
-                                 ILogger<ClienteAppServico> logger, 
+                                 ILogger<ClienteAppServico> logger,
                                  IUnitOfWork unitOfWork)
         {
             this.clienteServico = clienteServico;

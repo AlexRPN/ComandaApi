@@ -23,7 +23,7 @@ namespace Comanda.Dominio.EnderecoClientes.Entidades
 
         private EnderecoCliente()
         {
-            
+
         }
 
         public EnderecoCliente(EnderecoClienteComando comando)
@@ -46,7 +46,7 @@ namespace Comanda.Dominio.EnderecoClientes.Entidades
 
         public void SetCep(string cep)
         {
-            if(string.IsNullOrWhiteSpace(cep))
+            if (string.IsNullOrWhiteSpace(cep))
             {
                 throw new ArgumentException("O CEP do endereço do cliente não pode ser nulo ou vazio.");
             }
@@ -61,7 +61,7 @@ namespace Comanda.Dominio.EnderecoClientes.Entidades
 
         public void SetLogradouro(string logradouro)
         {
-            if(string.IsNullOrWhiteSpace(logradouro))
+            if (string.IsNullOrWhiteSpace(logradouro))
             {
                 throw new ArgumentException("O logradouro do endereço do cliente não pode ser nulo ou vazio.");
             }
@@ -81,7 +81,7 @@ namespace Comanda.Dominio.EnderecoClientes.Entidades
 
         public void SetBairro(string bairro)
         {
-            if(string.IsNullOrWhiteSpace(bairro))
+            if (string.IsNullOrWhiteSpace(bairro))
             {
                 throw new ArgumentException("O bairro do endereço do cliente não pode ser nulo ou vazio.");
             }
@@ -91,7 +91,7 @@ namespace Comanda.Dominio.EnderecoClientes.Entidades
 
         public void SetCidade(string cidade)
         {
-            if(string.IsNullOrWhiteSpace(cidade))
+            if (string.IsNullOrWhiteSpace(cidade))
             {
                 throw new ArgumentException("A cidade do endereço do cliente não pode ser nula ou vazia.");
             }
@@ -101,7 +101,7 @@ namespace Comanda.Dominio.EnderecoClientes.Entidades
 
         public void SetEstado(string estado)
         {
-            if(string.IsNullOrWhiteSpace(estado))
+            if (string.IsNullOrWhiteSpace(estado))
             {
                 throw new ArgumentException("O estado do endereço do cliente não pode ser nulo ou vazio.");
             }

@@ -22,7 +22,7 @@ namespace Comanda.Dominio.ProdutosVariacoes.Entidades
 
         private ProdutoVariacao()
         {
-            
+
         }
 
         public ProdutoVariacao(ProdutoVariacaoComando comando)
@@ -43,7 +43,7 @@ namespace Comanda.Dominio.ProdutosVariacoes.Entidades
 
         public void SetDescricao(string descricao)
         {
-            if(string.IsNullOrWhiteSpace(descricao))
+            if (string.IsNullOrWhiteSpace(descricao))
             {
                 throw new ArgumentException("Descrição não pode ser nula ou vazia.");
             }
@@ -53,7 +53,7 @@ namespace Comanda.Dominio.ProdutosVariacoes.Entidades
 
         public void SetPreco(decimal preco)
         {
-            if(preco < 0)
+            if (preco < 0)
             {
                 throw new ArgumentException("Preço não pode ser negativo.");
             }
@@ -73,7 +73,7 @@ namespace Comanda.Dominio.ProdutosVariacoes.Entidades
 
         public void SetDataCadastro(DateTime dataCadastro)
         {
-            if(dataCadastro < DateTime.Now)
+            if (dataCadastro < DateTime.Now)
             {
                 throw new ArgumentException("Data de cadastro não pode ser anterior à data atual.");
             }
@@ -83,7 +83,7 @@ namespace Comanda.Dominio.ProdutosVariacoes.Entidades
 
         public void SetDataAlteracao(DateTime dataAlteracao)
         {
-            if(dataAlteracao < DataCadastro)
+            if (dataAlteracao < DataCadastro)
             {
                 throw new ArgumentException("Data de alteração não pode ser anterior à data de cadastro.");
             }

@@ -17,8 +17,8 @@ namespace Comanda.Aplicacao.Categorias.Servicos
         private readonly ICategoriaServico categoriaServico;
         private readonly ILogger<CategoriaAppServico> logger;
         private readonly IUnitOfWork unitOfWork;
-        public CategoriaAppServico(ICategoriaServico categoriaServico, 
-                                   ILogger<CategoriaAppServico> logger, 
+        public CategoriaAppServico(ICategoriaServico categoriaServico,
+                                   ILogger<CategoriaAppServico> logger,
                                    IUnitOfWork unitOfWork)
         {
             this.categoriaServico = categoriaServico;

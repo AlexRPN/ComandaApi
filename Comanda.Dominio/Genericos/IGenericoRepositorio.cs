@@ -32,5 +32,6 @@ namespace Comanda.Dominio.Genericos
         Task ExcluirAsync(T entidade);
         Task<PaginacaoConsulta<T>> ListarPaginadoAsync(IQueryable<T> query, int qt, int pg, string cpOrd, TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken);
         Task<IEnumerable<T>> ListarAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);
+        Task<bool> ValidarAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);
     }
 }

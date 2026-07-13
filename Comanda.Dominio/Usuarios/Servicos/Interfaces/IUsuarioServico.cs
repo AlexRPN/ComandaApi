@@ -13,7 +13,7 @@ namespace Comanda.Dominio.Usuarios.Servicos.Interfaces
         Task<Usuario> ValidarCpfAsync(string cpf, CancellationToken cancellationToken);
         Task<Usuario> RecuperarPorIdAsync(int id, CancellationToken cancellationToken);
         Task<IQueryable<Usuario>> FiltrarAsync(UsuarioListarFiltro comando, CancellationToken cancellationToken);
-        Task<PaginacaoConsulta<Usuario>> ListarPaginadoAsync(IQueryable<Usuario> query, int qt, int pg, string cpOrd,   
+        Task<PaginacaoConsulta<Usuario>> ListarPaginadoAsync(IQueryable<Usuario> query, int qt, int pg, string cpOrd,
                                                              TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken);
         Task<Usuario> EditarAsync(UsuarioEditarComando comando, CancellationToken cancellationToken);
         Task<Usuario> AlterarStatusAsync(int id, AtivoInativoEnum status, CancellationToken cancellationToken);

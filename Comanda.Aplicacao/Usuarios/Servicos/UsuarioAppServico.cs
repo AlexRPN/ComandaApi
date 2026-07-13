@@ -6,8 +6,6 @@ using Comanda.DataTransfer.EnderecosEmpresas.Response;
 using Comanda.DataTransfer.HorariosFuncionamento.Response;
 using Comanda.DataTransfer.Usuarios.Request;
 using Comanda.DataTransfer.Usuarios.Response;
-using Comanda.DataTransfer.Utils.Mensagens.Response;
-using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.Empresas.Servicos.Interfaces;
 using Comanda.Dominio.Usuarios.Comandos;
 using Comanda.Dominio.Usuarios.Entidades;
@@ -26,9 +24,9 @@ namespace Comanda.Aplicacao.Usuarios.Servicos
         private readonly IEmpresaServico empresaServico;
         private readonly ILogger<UsuarioAppServico> logger;
         private readonly IUnitOfWork unitOfWork;
-        public UsuarioAppServico(IUsuarioServico usuarioServico, 
-                                 IEmpresaServico empresaServico, 
-                                 ILogger<UsuarioAppServico> logger, 
+        public UsuarioAppServico(IUsuarioServico usuarioServico,
+                                 IEmpresaServico empresaServico,
+                                 ILogger<UsuarioAppServico> logger,
                                  IUnitOfWork unitOfWork)
         {
             this.usuarioServico = usuarioServico;
@@ -47,7 +45,7 @@ namespace Comanda.Aplicacao.Usuarios.Servicos
                 logger.LogInformation("Iniciando inserção de usuário.");
                 var empresaValida = await empresaServico.ValidarAsync(comando.EmpresaId, cancellationToken);
 
-                if(empresaValida == null || (empresaValida.Status == AtivoInativoEnum.Inativo))
+                if (empresaValida == null || (empresaValida.Status == AtivoInativoEnum.Inativo))
                 {
                     throw new Exception("Empresa inválida ou inativa.");
                 }

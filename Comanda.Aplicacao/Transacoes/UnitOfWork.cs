@@ -19,7 +19,7 @@ public class UnitOfWork : IUnitOfWork
 
     public async Task BeginTransactionAsync(CancellationToken cancellationToken)
     {
-        transaction =await appDbContext.Database.BeginTransactionAsync(cancellationToken);
+        transaction = await appDbContext.Database.BeginTransactionAsync(cancellationToken);
     }
 
     public async Task CommitTransactionAsync(CancellationToken cancellationToken)

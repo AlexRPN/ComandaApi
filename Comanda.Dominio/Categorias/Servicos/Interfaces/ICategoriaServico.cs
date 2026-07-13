@@ -12,7 +12,7 @@ namespace Comanda.Dominio.Categorias.Servicos.Interfaces
         Task<Categoria> EditarAsync(CategoriaEditarComando comando, CancellationToken cancellationToken);
         Task<Categoria> RecuperarPorIdAsync(int id, CancellationToken cancellationToken);
         Task<IQueryable<Categoria>> FiltrarAsync(CategoriaListarFiltro filtro, CancellationToken cancellationToken);
-        Task<PaginacaoConsulta<Categoria>> ListarPaginadoAsync(IQueryable<Categoria> query, int qt, int pg, string cpOrd,   
+        Task<PaginacaoConsulta<Categoria>> ListarPaginadoAsync(IQueryable<Categoria> query, int qt, int pg, string cpOrd,
                                                                TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken);
     }
 }

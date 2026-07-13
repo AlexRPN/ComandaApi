@@ -97,7 +97,7 @@ namespace Comanda.Aplicacao.Empresas.Servicos
                 await unitOfWork.BeginTransactionAsync(cancellationToken);
 
                 logger.LogInformation("Iniciando atualização de empresa: {NomeFantasia}", request.NomeFantasia);
-                Empresa empresa = await empresaServico.EditarAsync( comando, cancellationToken);
+                Empresa empresa = await empresaServico.EditarAsync(comando, cancellationToken);
 
                 logger.LogInformation("Iniciando atualização de endereço para empresa: {NomeFantasia}", empresa.NomeFantasia);
                 enderecoComando.EmpresaId = empresa.Id;

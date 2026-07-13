@@ -25,7 +25,7 @@ namespace Comanda.Dominio.Clientes.Entidades
 
         private Cliente()
         {
-            
+
         }
 
         public Cliente(ClienteComando comando)
@@ -46,7 +46,7 @@ namespace Comanda.Dominio.Clientes.Entidades
 
         public void SetNome(string nome)
         {
-            if(string.IsNullOrWhiteSpace(nome))
+            if (string.IsNullOrWhiteSpace(nome))
             {
                 throw new ArgumentException("O nome do cliente não pode ser nulo ou vazio.");
             }
@@ -56,12 +56,12 @@ namespace Comanda.Dominio.Clientes.Entidades
 
         public void SetTelefone(string telefone)
         {
-            if(string.IsNullOrWhiteSpace(telefone))
+            if (string.IsNullOrWhiteSpace(telefone))
             {
                 throw new ArgumentException("O telefone do cliente não pode ser nulo ou vazio.");
             }
 
-            if(telefone.Length > 15)
+            if (telefone.Length > 15)
             {
                 throw new ArgumentException("O telefone do cliente não pode ter mais de 15 caracteres.");
             }

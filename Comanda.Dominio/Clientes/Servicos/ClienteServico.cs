@@ -49,7 +49,7 @@ namespace Comanda.Dominio.Clientes.Servicos
         {
             var cliente = await clienteRepositorio.RecuperarPorIdAsync(id, cancellationToken);
 
-            if(cliente == null)
+            if (cliente == null)
             {
                 throw new Exception("Cliente não encontrado.");
             }
@@ -91,7 +91,7 @@ namespace Comanda.Dominio.Clientes.Servicos
         {
             Cliente cliente = await RecuperarAsync(id, cancellationToken);
 
-            if(cliente is null)
+            if (cliente is null)
             {
                 throw new Exception("Cliente não encontrado!");
             }

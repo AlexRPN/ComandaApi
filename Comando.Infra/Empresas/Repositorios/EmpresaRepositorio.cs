@@ -67,8 +67,8 @@ namespace Comanda.Infra.Empresas.Repositorios
             return empresa;
         }
 
-        public async Task<PaginacaoConsulta<Empresa>> ListarAsync(IQueryable<Empresa> query, int qt, int pg, string cpOrd,    
-                                                            TipoOrdenacaoEnum tpOrd, 
+        public async Task<PaginacaoConsulta<Empresa>> ListarAsync(IQueryable<Empresa> query, int qt, int pg, string cpOrd,
+                                                            TipoOrdenacaoEnum tpOrd,
                                                             CancellationToken cancellationToken)
         {
             return await base.ListarPaginadoAsync(query, qt, pg, cpOrd, tpOrd, cancellationToken);

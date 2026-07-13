@@ -19,16 +19,16 @@ namespace Comanda.Dominio.ImagensProdutos.Entidades
 
         private ImagemProduto()
         {
-            
+
         }
 
         public ImagemProduto(ImagemProdutoComando comando)
         {
-           SetProdutoId(comando.ProdutoId);
-           SetCaminhoArquivo(comando.CaminhoArquivo);
-           SetUrlImagem(comando.UrlImagem);
-           SetDataCadastro(comando.DataCadastro);
-           SetDataAlteracao(comando.DataAlteracao);
+            SetProdutoId(comando.ProdutoId);
+            SetCaminhoArquivo(comando.CaminhoArquivo);
+            SetUrlImagem(comando.UrlImagem);
+            SetDataCadastro(comando.DataCadastro);
+            SetDataAlteracao(comando.DataAlteracao);
         }
 
         public void SetProdutoId(int produtoId)

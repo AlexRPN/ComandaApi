@@ -34,17 +34,17 @@ namespace Comanda.Dominio.Empresas.Servicos
             };
 
             return await empresaRepositorio.InserirAsync(empresa, cancellationToken);
-        }        
+        }
 
         public async Task<IQueryable<Empresa>> FiltrarAsync(EmpresaListarFiltro comando, CancellationToken cancellationToken)
         {
-            return await empresaRepositorio.FiltrarAsync(comando, cancellationToken); 
+            return await empresaRepositorio.FiltrarAsync(comando, cancellationToken);
         }
 
         public async Task<Empresa> ValidarAsync(int id, CancellationToken cancellationToken)
         {
-            var empresa = await empresaRepositorio.RecuperarAsync(x => x.Id == id && 
-                                                                  x.Status == AtivoInativoEnum.Ativo, 
+            var empresa = await empresaRepositorio.RecuperarAsync(x => x.Id == id &&
+                                                                  x.Status == AtivoInativoEnum.Ativo,
                                                                   cancellationToken);
 
             if (empresa == null)
@@ -53,8 +53,8 @@ namespace Comanda.Dominio.Empresas.Servicos
             return empresa;
         }
 
-        public async Task<PaginacaoConsulta<Empresa>> ListarAsync(IQueryable<Empresa> query, int qt, int pg, string cpOrd, 
-                                                            TipoOrdenacaoEnum tpOrd, 
+        public async Task<PaginacaoConsulta<Empresa>> ListarAsync(IQueryable<Empresa> query, int qt, int pg, string cpOrd,
+                                                            TipoOrdenacaoEnum tpOrd,
                                                             CancellationToken cancellationToken)
         {
             return await empresaRepositorio.ListarAsync(query, qt, pg, cpOrd, tpOrd, cancellationToken);
