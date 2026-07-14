@@ -20,9 +20,6 @@ namespace Comanda.Dominio.Produtos.Entidades
         public int CategoriaId { get; private set; }
         public Categoria Categoria { get; private set; }
 
-        // Relacionamento 0:N com GrupoAdicional
-        public ICollection<GrupoAdicional> GrupoAdicional { get; set; } = [];
-
         // Relacionamento 0:N com ImagemProduto
         public ICollection<ImagemProduto> ImagemProduto { get; set; } = [];
 

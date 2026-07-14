@@ -17,5 +17,17 @@ namespace Comanda.Dominio.GrupoAdicionais.Servicos
         {
             return await grupoAdicionalRepositorio.InserirAsync(comandos, cancellationToken);
         }
+
+        public Task<GrupoAdicional> RecuperarAsync(int empresaId, int grupoAdicionalId, CancellationToken cancellationToken)
+        {
+            var grupoAdicional = grupoAdicionalRepositorio.RecuperarAsync(x => x.EmpresaId == empresaId && x.Id == grupoAdicionalId, cancellationToken);
+
+            if (grupoAdicional is null)
+            {
+                throw new Exception($"Grupo adicional {grupoAdicionalId} não encontrado para esta empresa!");
+            }
+
+            return grupoAdicional;
+        }
     }
 }

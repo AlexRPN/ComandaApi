@@ -39,6 +39,9 @@ using Comanda.Dominio.ImagensProdutos.Servicos.Interfaces;
 using Comanda.Dominio.Produtos.Repositorios.Interfaces;
 using Comanda.Dominio.Produtos.Servicos;
 using Comanda.Dominio.Produtos.Servicos.Interfaces;
+using Comanda.Dominio.ProdutosGruposAdicionais.Repositorios.Interfaces;
+using Comanda.Dominio.ProdutosGruposAdicionais.Servicos;
+using Comanda.Dominio.ProdutosGruposAdicionais.Servicos.Interfaces;
 using Comanda.Dominio.ProdutosVariacoes.Repositorios.Interfaces;
 using Comanda.Dominio.ProdutosVariacoes.Services;
 using Comanda.Dominio.ProdutosVariacoes.Services.Interfaces;
@@ -60,6 +63,7 @@ using Comanda.Infra.GruposAdicionais.Repositorios;
 using Comanda.Infra.HorariosFuncionamento.Repositorios;
 using Comanda.Infra.ImagensProdutos.Repositorios;
 using Comanda.Infra.Produtos.Repositorios;
+using Comanda.Infra.ProdutosGruposAdicionais.Repositorios;
 using Comanda.Infra.ProdutosVariacoes.Repositorios;
 using Comanda.Infra.Usuarios;
 using Microsoft.EntityFrameworkCore;
@@ -95,6 +99,7 @@ namespace Comanda.Ioc.InjecoesDependenciaConfig
             services.AddScoped<IProdutoVariacaoRepositorio, ProdutoVariacaoRepositorio>();
             services.AddScoped<IImagemProdutoRepositorio, ImagemProdutoRepositorio>();
             services.AddScoped<IAdicionalRepositorio, AdicionalRepositorio>();
+            services.AddScoped<IProdutoGrupoAdicionalRepositorio, ProdutoGrupoAdicionalRepositorio>();
 
             // Serviços
             services.AddScoped<IAutenticacaoServico, AutenticacaoServico>();
@@ -110,6 +115,7 @@ namespace Comanda.Ioc.InjecoesDependenciaConfig
             services.AddScoped<IProdutoVariacaoServico, ProdutoVariacaoServico>();
             services.AddScoped<IImagemProdutoServico, ImagemProdutoServico>();
             services.AddScoped<IAdicionalServico, AdicionalServico>();
+            services.AddScoped<IProdutoGrupoAdicionalServico, ProdutoGrupoAdicionalServico>();
 
             // Aplicação
             services.AddScoped<IEmpresaAppServico, EmpresaAppServico>();

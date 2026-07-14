@@ -13,6 +13,9 @@ using Comanda.Dominio.ImagensProdutos.Servicos.Interfaces;
 using Comanda.Dominio.Produtos.Comandos;
 using Comanda.Dominio.Produtos.Repositorios.Filtros;
 using Comanda.Dominio.Produtos.Servicos.Interfaces;
+using Comanda.Dominio.ProdutosGruposAdicionais.Comandos;
+using Comanda.Dominio.ProdutosGruposAdicionais.Servicos;
+using Comanda.Dominio.ProdutosGruposAdicionais.Servicos.Interfaces;
 using Comanda.Dominio.ProdutosVariacoes.Comandos;
 using Comanda.Dominio.ProdutosVariacoes.Services.Interfaces;
 using Mapster;
@@ -27,6 +30,7 @@ namespace Comanda.Aplicacao.Produtos.Servicos
         private readonly IImagemProdutoServico imagemProdutoServico;
         private readonly IGrupoAdicionalServico grupoAdicionalServico;
         private readonly IAdicionalServico adicionalServico;
+        private readonly IProdutoGrupoAdicionalServico produtoGrupoAdicionalServico;
         private readonly ILogger<ProdutoAppServico> logger;
         private readonly IUnitOfWork unitOfWork;
 
@@ -35,6 +39,7 @@ namespace Comanda.Aplicacao.Produtos.Servicos
                                  IImagemProdutoServico imagemProdutoServico,
                                  IGrupoAdicionalServico grupoAdicionalServico,
                                  IAdicionalServico adicionalServico,
+                                 IProdutoGrupoAdicionalServico produtoGrupoAdicionalServico,
                                  ILogger<ProdutoAppServico> logger,
                                  IUnitOfWork unitOfWork)
         {
@@ -43,6 +48,7 @@ namespace Comanda.Aplicacao.Produtos.Servicos
             this.imagemProdutoServico = imagemProdutoServico;
             this.grupoAdicionalServico = grupoAdicionalServico;
             this.adicionalServico = adicionalServico;
+            this.produtoGrupoAdicionalServico = produtoGrupoAdicionalServico;
             this.logger = logger;
             this.unitOfWork = unitOfWork;
         }
@@ -51,24 +57,27 @@ namespace Comanda.Aplicacao.Produtos.Servicos
         {
             ProdutoComando produtoComando = request.Adapt<ProdutoComando>();
             List<ProdutoVariacaoComando> produtoVariacoes = request.ProdutoVariacao.Adapt<List<ProdutoVariacaoComando>>();
-            //List<ImagemProdutoComando>? imagens = request.Imagens.Adapt<List<ImagemProdutoComando>>();
-            List<GrupoAdicionalComando>? gruposAdicionais = request.GruposAdicionais.Adapt<List<GrupoAdicionalComando>>();
 
             try
             {
                 await unitOfWork.BeginTransactionAsync(cancellationToken);
 
-                logger.LogInformation("Iniciando inserção de produtos.");
+                logger.LogInformation("Iniciando inserção do produto.");
+
                 var produtoInserido = await produtoServico.InserirAsync(produtoComando, cancellationToken);
 
-                if (produtoInserido == null)
+                if (produtoInserido is null)
                 {
                     throw new Exception("Erro ao inserir produto.");
                 }
 
+                // Implementar a lógica para salvar as imagens do produto quando o serviço de imagens estiver pronto
+
+                // Necessário para obter o Id gerado
                 await unitOfWork.CommitAsync(cancellationToken);
 
-                logger.LogInformation("Iniciando inserção de variações de produtos.");
+                logger.LogInformation("Iniciando inserção das variações do produto.");
+
                 foreach (var variacao in produtoVariacoes)
                 {
                     variacao.ProdutoId = produtoInserido.Id;
@@ -76,62 +85,31 @@ namespace Comanda.Aplicacao.Produtos.Servicos
 
                 await produtoVariacaoServico.InserirAsync(produtoVariacoes, cancellationToken);
 
-                #region Implementar a lógica de upload de imagens e inserção no banco de dados quando o serviço de upload estiver disponível.
-                //logger.LogInformation("Iniciando inserção de imagens de produtos.");
-                //foreach (var arquivo in request.Imagens)
-                //{
-                //    string caminho = await uploadService.UploadAsync(arquivo);
+                if (request.GruposAdicionaisIds is not null && request.GruposAdicionaisIds.Any())
+                {
+                    logger.LogInformation("Iniciando vínculo dos grupos adicionais ao produto.");
 
-                //    imagens.Add(new ImagemProdutoComando
-                //    {
-                //        ProdutoId = produtoInserido.Id,
-                //        CaminhoArquivo = caminho,
-                //        UrlImagem = caminho
-                //    });
-                //}
-                //await imagemProdutoServico.InserirAsync(imagens, cancellationToken);
-                #endregion
+                    foreach (int grupoAdicionalId in request.GruposAdicionaisIds)
+                    {
+                        var grupo = await grupoAdicionalServico.RecuperarAsync(request.EmpresaId, grupoAdicionalId, cancellationToken);
 
-                //logger.LogInformation("Iniciando inserção de grupo adicional de produtos.");
-                //foreach (var grupo in gruposAdicionais)
-                //{
-                //    grupo.ProdutoId = produtoInserido.Id;
-                //}
-                //var grupoAdicionalInserido = await grupoAdicionalServico.InserirAsync(gruposAdicionais, cancellationToken);
+                        ProdutoGrupoAdicionalComando comando = new()
+                        {
+                            ProdutoId = produtoInserido.Id,
+                            GrupoAdicionalId = grupo.Id
+                        };
 
-                //await unitOfWork.CommitAsync(cancellationToken);
-
-                //if (grupoAdicionalInserido != null && grupoAdicionalInserido.Any())
-                //{
-                //    logger.LogInformation("Iniciando inserção de adicionais de produtos.");
-
-                //    for (int i = 0; i < grupoAdicionalInserido.Count; i++)
-                //    {
-                //        var grupoInserido = grupoAdicionalInserido[i];
-                //        var grupoRequest = request.GruposAdicionais[i];
-
-                //        List<AdicionalComando> adicionaisDoGrupo = grupoRequest.Adicionais.Adapt<List<AdicionalComando>>();
-
-                //        foreach (var adicional in adicionaisDoGrupo)
-                //        {
-                //            adicional.GrupoAdicionalId = grupoInserido.Id;
-                //        }
-
-                //        await adicionalServico.InserirAsync(adicionaisDoGrupo, cancellationToken);
-                //    }
-                //}
+                        await produtoGrupoAdicionalServico.InserirAsync(comando, cancellationToken);
+                    }
+                }
 
                 await unitOfWork.CommitAsync(cancellationToken);
                 await unitOfWork.CommitTransactionAsync(cancellationToken);
 
-                logger.LogInformation("Inserção de produtos concluída com sucesso!");
+                logger.LogInformation("Inserção do produto concluída com sucesso.");
 
                 ProdutoResponse response = produtoInserido.Adapt<ProdutoResponse>();
-                //response.ImagensProdutos = imagens.Adapt<List<ImagemProdutoResponse>>() ?? [];
-                response.ProdutoVariacao = produtoVariacoes.Adapt<List<ProdutoVariacaoResponse>>() ?? [];
-                response.GrupoAdicional = gruposAdicionais.Adapt<List<GrupoAdicionalResponse>>() ?? [];
-                //response.GrupoAdicional = grupoAdicionalInserido.Adapt<List<GrupoAdicionalResponse>>() ?? [];
-
+                response.ProdutoVariacao = produtoVariacoes.Adapt<List<ProdutoVariacaoResponse>>();
                 response.Mensagem = $"Produto {produtoInserido.Nome} inserido com sucesso.";
 
                 return response;
@@ -139,8 +117,10 @@ namespace Comanda.Aplicacao.Produtos.Servicos
             catch (Exception ex)
             {
                 logger.LogError(ex, "Erro ao inserir produto.");
+
                 await unitOfWork.RollbackTransactionAsync(cancellationToken);
-                throw new Exception($"Erro ao inserir produto: {ex.Message}");
+
+                throw new Exception($"Erro ao inserir produto: {ex.Message}", ex);
             }
         }
 
