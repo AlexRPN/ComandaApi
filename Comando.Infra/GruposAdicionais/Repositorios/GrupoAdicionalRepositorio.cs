@@ -1,5 +1,4 @@
-﻿using Comanda.Dominio.GrupoAdicionais.Comandos;
-using Comanda.Dominio.GrupoAdicionais.Entidades;
+﻿using Comanda.Dominio.GrupoAdicionais.Entidades;
 using Comanda.Dominio.GrupoAdicionais.Repositorios.Interfaces;
 using Comanda.Infra.Data;
 using Comanda.Infra.Genericos;
@@ -12,13 +11,11 @@ namespace Comanda.Infra.GruposAdicionais.Repositorios
         {
         }
 
-        public async Task<List<GrupoAdicional>> InserirAsync(List<GrupoAdicionalComando> comandos, CancellationToken cancellationToken)
+        public async Task<List<GrupoAdicional>> InserirAsync(List<GrupoAdicional> gruposAdicionais, CancellationToken cancellationToken)
         {
-            var grupoAdicionais = comandos.Select(comandos => new GrupoAdicional(comandos)).ToList();
+            await appDbContext.GruposAdicionais.AddRangeAsync(gruposAdicionais, cancellationToken);
 
-            await appDbContext.GruposAdicionais.AddRangeAsync(grupoAdicionais, cancellationToken);
-
-            return grupoAdicionais;
+            return gruposAdicionais;
         }
     }
 }

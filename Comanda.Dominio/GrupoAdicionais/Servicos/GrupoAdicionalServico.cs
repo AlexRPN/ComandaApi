@@ -15,7 +15,16 @@ namespace Comanda.Dominio.GrupoAdicionais.Servicos
 
         public async Task<List<GrupoAdicional>> InserirAsync(List<GrupoAdicionalComando> comandos, CancellationToken cancellationToken)
         {
-            return await grupoAdicionalRepositorio.InserirAsync(comandos, cancellationToken);
+            var gruposAdicionais = new List<GrupoAdicional>();
+
+            foreach (var comando in comandos)
+            {
+                var grupoAdicional = new GrupoAdicional(comando);
+
+                gruposAdicionais.Add(grupoAdicional);
+            }
+
+            return await grupoAdicionalRepositorio.InserirAsync(gruposAdicionais, cancellationToken);
         }
 
         public Task<GrupoAdicional> RecuperarAsync(int empresaId, int grupoAdicionalId, CancellationToken cancellationToken)

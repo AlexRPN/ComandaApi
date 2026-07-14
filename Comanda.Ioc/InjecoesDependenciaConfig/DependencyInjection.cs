@@ -4,6 +4,8 @@ using Comanda.Aplicacao.Clientes.Servicos;
 using Comanda.Aplicacao.Clientes.Servicos.Interfaces;
 using Comanda.Aplicacao.Empresas.Servicos;
 using Comanda.Aplicacao.Empresas.Servicos.Interfaces;
+using Comanda.Aplicacao.GruposAdicionais.Servicos;
+using Comanda.Aplicacao.GruposAdicionais.Servicos.Interfaces;
 using Comanda.Aplicacao.Produtos.Servicos;
 using Comanda.Aplicacao.Produtos.Servicos.Interfaces;
 using Comanda.Aplicacao.Transacoes.Interfaces;
@@ -124,6 +126,7 @@ namespace Comanda.Ioc.InjecoesDependenciaConfig
             services.AddScoped<IClienteAppServico, ClienteAppServico>();
             services.AddScoped<ICategoriaAppServico, CategoriaAppServico>();
             services.AddScoped<IProdutoAppServico, ProdutoAppServico>();
+            services.AddScoped<IGrupoAdicionalAppServico, GrupoAdicionalAppServico>();
 
             return services;
         }
