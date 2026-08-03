@@ -1,5 +1,6 @@
 ﻿using Comanda.Aplicacao.Categorias.Servicos.Interfaces;
 using Comanda.DataTransfer.Categorias.Request;
+using Comanda.DataTransfer.Utils.Status.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComandaApi.Controllers.Categorias
@@ -64,9 +65,23 @@ namespace ComandaApi.Controllers.Categorias
         /// <returns></returns>
         [HttpGet]
         [Route("listar")]
-        public async Task<ActionResult> ListarAsync([FromBody] CategoriaListarRequest filtro, CancellationToken cancellationToken)
+        public async Task<ActionResult> ListarAsync([FromQuery] CategoriaListarRequest filtro, CancellationToken cancellationToken)
         {
             var response = await categoriaAppServico.ListarPaginadoAsync(filtro, cancellationToken);
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// Altera o status de uma categoria (Ativo/Inativo)
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPatch]
+        [Route("alterar-status")]
+        public async Task<ActionResult> AlterarStatusAsync([FromBody] AlterarStatusRequest request, CancellationToken cancellationToken)
+        {
+            var response = await categoriaAppServico.AlterarStatusAsync(request, cancellationToken);
             return Ok(response);
         }
     }

@@ -2,11 +2,14 @@
 using Comanda.Aplicacao.Transacoes.Interfaces;
 using Comanda.DataTransfer.Categorias.Request;
 using Comanda.DataTransfer.Categorias.Response;
+using Comanda.DataTransfer.Utils.Status.Request;
 using Comanda.Dominio.Categorias.Comandos;
 using Comanda.Dominio.Categorias.Entidades;
 using Comanda.Dominio.Categorias.Repositorios.Filtros;
 using Comanda.Dominio.Categorias.Servicos.Interfaces;
+using Comanda.Dominio.Clientes.Servicos;
 using Comanda.Dominio.Utils.Consultas;
+using Comanda.Dominio.Utils.Enumeradores;
 using Mapster;
 using Microsoft.Extensions.Logging;
 
@@ -103,6 +106,27 @@ namespace Comanda.Aplicacao.Categorias.Servicos
             PaginacaoConsulta<CategoriaListarResponse> response = categorias.Adapt<PaginacaoConsulta<CategoriaListarResponse>>();
 
             return response;
+        }
+
+        public async Task<string> AlterarStatusAsync(AlterarStatusRequest request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                await unitOfWork.BeginTransactionAsync(cancellationToken);
+
+                var statusAlterado = await categoriaServico.AlterarStatusAsync(request.Id, request.Status, cancellationToken);
+
+                await unitOfWork.CommitAsync(cancellationToken);
+                await unitOfWork.CommitTransactionAsync(cancellationToken);
+
+                return statusAlterado;
+            }
+            catch (Exception ex)
+            {
+                await unitOfWork.RollbackTransactionAsync(cancellationToken);
+                logger.LogError(ex, "Erro ao alterar status da categoria {Id}", request.Id);
+                throw new Exception("Erro ao alterar status da categoria!", ex);
+            }
         }
     }
 }

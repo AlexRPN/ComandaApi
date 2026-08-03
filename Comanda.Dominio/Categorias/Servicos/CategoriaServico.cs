@@ -12,6 +12,7 @@ namespace Comanda.Dominio.Categorias.Servicos
 {
     public class CategoriaServico : ICategoriaServico
     {
+        private const string CATEGORIA_ALTERADA_SUCESSO = "Categoria alterada com sucesso!";
         private readonly ICategoriaRepositorio categoriaRepositorio;
         private readonly IEmpresaRepositorio empresaRepositorio;
         public CategoriaServico(ICategoriaRepositorio categoriaRepositorio,
@@ -76,6 +77,19 @@ namespace Comanda.Dominio.Categorias.Servicos
                                                                             TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken)
         {
             return await categoriaRepositorio.ListarPaginadoAsync(query, qt, pg, cpOrd, tpOrd, cancellationToken);
+        }
+
+        public async Task<string> AlterarStatusAsync(int id, AtivoInativoEnum status, CancellationToken cancellationToken)
+        {
+            Categoria categoria = await categoriaRepositorio.RecuperarAsync(x => x.Id == id, cancellationToken);
+
+            if (categoria == null)
+            {
+                throw new Exception("Categoria não encontrada!");
+            }
+
+            categoria.SetStatus(status);
+            return CATEGORIA_ALTERADA_SUCESSO;
         }
     }
 }
