@@ -35,6 +35,11 @@ namespace Comanda.Infra.Categorias.Repositorios
                 query = query.Where(c => c.Nome.Contains(filtro.Nome));
             }
 
+            if (!string.IsNullOrWhiteSpace(filtro.Descricao))
+            {
+                query = query.Where(c => c.Descricao.Contains(filtro.Descricao));
+            }
+
             if (filtro.DataCadastro.HasValue)
             {
                 query = query.Where(c => c.DataCadastro.Date == filtro.DataCadastro.Value.Date);

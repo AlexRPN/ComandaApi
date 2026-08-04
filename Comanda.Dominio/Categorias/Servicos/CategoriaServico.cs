@@ -12,7 +12,7 @@ namespace Comanda.Dominio.Categorias.Servicos
 {
     public class CategoriaServico : ICategoriaServico
     {
-        private const string CATEGORIA_ALTERADA_SUCESSO = "Categoria alterada com sucesso!";
+        private const string CATEGORIA_ALTERADA_SUCESSO = "Status alterado com sucesso!";
         private readonly ICategoriaRepositorio categoriaRepositorio;
         private readonly IEmpresaRepositorio empresaRepositorio;
         public CategoriaServico(ICategoriaRepositorio categoriaRepositorio,
