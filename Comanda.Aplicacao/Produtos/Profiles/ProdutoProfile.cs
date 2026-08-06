@@ -11,7 +11,7 @@ namespace Comanda.Aplicacao.Produtos.Profiles
     {
         public void Register(TypeAdapterConfig config)
         {
-            config.NewConfig<ProdutoFiltroRequest, ProdutoListarFiltro>();
+            config.NewConfig<ProdutoListarRequest, ProdutoListarFiltro>();
             config.NewConfig<Produto, ProdutoComando>();
             config.NewConfig<Produto, ProdutoListarResponse>();
             config.NewConfig<ProdutoRequest, Produto>()

@@ -11,6 +11,7 @@ using Comanda.Dominio.GrupoAdicionais.Comandos;
 using Comanda.Dominio.GrupoAdicionais.Servicos.Interfaces;
 using Comanda.Dominio.ImagensProdutos.Servicos.Interfaces;
 using Comanda.Dominio.Produtos.Comandos;
+using Comanda.Dominio.Produtos.Entidades;
 using Comanda.Dominio.Produtos.Repositorios.Filtros;
 using Comanda.Dominio.Produtos.Servicos.Interfaces;
 using Comanda.Dominio.ProdutosGruposAdicionais.Comandos;
@@ -18,6 +19,7 @@ using Comanda.Dominio.ProdutosGruposAdicionais.Servicos;
 using Comanda.Dominio.ProdutosGruposAdicionais.Servicos.Interfaces;
 using Comanda.Dominio.ProdutosVariacoes.Comandos;
 using Comanda.Dominio.ProdutosVariacoes.Services.Interfaces;
+using Comanda.Dominio.Utils.Consultas;
 using Mapster;
 using Microsoft.Extensions.Logging;
 
@@ -124,13 +126,21 @@ namespace Comanda.Aplicacao.Produtos.Servicos
             }
         }
 
-        public async Task<IEnumerable<ProdutoListarResponse>> ListarAsync(ProdutoFiltroRequest request, CancellationToken cancellationToken)
+        public async Task<PaginacaoConsulta<ProdutoListarResponse>> ListarPaginadoAsync(ProdutoListarRequest request, CancellationToken cancellationToken)
         {
             ProdutoListarFiltro filtro = request.Adapt<ProdutoListarFiltro>();
 
-            var produtos = await produtoServico.ListarAsync(filtro, cancellationToken);
+            IQueryable<Produto> query = await produtoServico.FiltrarAsync(filtro, cancellationToken);
 
-            ProdutoListarResponse[] response = produtos.Adapt<ProdutoListarResponse[]>();
+            PaginacaoConsulta<Produto> produtos = await produtoServico.ListarPaginadoAsync(query, 
+                                                                                           request.Qt, 
+                                                                                           request.Pg, 
+                                                                                           request.CpOrd, 
+                                                                                           request.TpOrd, 
+                                                                                           cancellationToken);
+
+            PaginacaoConsulta<ProdutoListarResponse> response = produtos.Adapt<PaginacaoConsulta<ProdutoListarResponse>>();
+
             return response;
         }
     }
