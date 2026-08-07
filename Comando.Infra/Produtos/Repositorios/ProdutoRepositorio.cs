@@ -26,8 +26,10 @@ namespace Comanda.Infra.Produtos.Repositorios
         public Task<IQueryable<Produto>> FiltrarAsync(ProdutoListarFiltro filtro, CancellationToken cancellationToken)
         {
             IQueryable<Produto> query = appDbContext.Produtos
-                                                    .AsNoTracking()
-                                                    .AsQueryable();
+                .Include(x => x.ProdutoVariacao)
+                .Include(x => x.ImagemProduto)
+                .AsNoTracking()
+                .AsQueryable();
 
             if (filtro.Id.HasValue)
             {

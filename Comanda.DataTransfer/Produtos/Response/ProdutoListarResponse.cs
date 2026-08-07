@@ -1,4 +1,7 @@
-﻿using Comanda.Dominio.Utils.Enumeradores;
+﻿using Comanda.DataTransfer.GruposAdicionais.Response;
+using Comanda.DataTransfer.ImagensProdutos.Response;
+using Comanda.DataTransfer.ProdutosVariacoes.Response;
+using Comanda.Dominio.Utils.Enumeradores;
 
 namespace Comanda.DataTransfer.Produtos.Response
 {
@@ -13,6 +16,7 @@ namespace Comanda.DataTransfer.Produtos.Response
         public AtivoInativoEnum Status { get; set; }
         public SituacaoProdutoEnum SituacaoProduto { get; set; }
         public DateTime DataCadastro { get; set; }
-        public DateTime DataAlteracao { get; set; }
+        public List<ProdutoVariacaoResponse> ProdutoVariacao { get; set; }
+        public List<ImagemProdutoResponse> ImagensProdutos { get; set; }
     }
 }

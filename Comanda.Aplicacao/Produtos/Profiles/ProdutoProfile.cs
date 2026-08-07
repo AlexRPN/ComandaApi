@@ -13,7 +13,9 @@ namespace Comanda.Aplicacao.Produtos.Profiles
         {
             config.NewConfig<ProdutoListarRequest, ProdutoListarFiltro>();
             config.NewConfig<Produto, ProdutoComando>();
-            config.NewConfig<Produto, ProdutoListarResponse>();
+            config.NewConfig<Produto, ProdutoListarResponse>()
+                .Map(dest => dest.ProdutoVariacao, src => src.ProdutoVariacao)
+                .Map(dest => dest.ImagensProdutos, src => src.ImagemProduto);
             config.NewConfig<ProdutoRequest, Produto>()
                 .Map(dest => dest.ProdutoVariacao, src => src.ProdutoVariacao);
         }
