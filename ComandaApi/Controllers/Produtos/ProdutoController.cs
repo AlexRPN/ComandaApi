@@ -37,7 +37,7 @@ namespace ComandaApi.Controllers.Produtos
         /// <returns></returns>
         [HttpGet]
         [Route("listar")]
-        public async Task<IActionResult> ListarPaginadoAsync([FromBody] ProdutoListarRequest request, 
+        public async Task<IActionResult> ListarPaginadoAsync([FromQuery] ProdutoListarRequest request, 
                                                                         CancellationToken cancellationToken)
         {
             var produtos = await produtoAppServico.ListarPaginadoAsync(request, cancellationToken);
