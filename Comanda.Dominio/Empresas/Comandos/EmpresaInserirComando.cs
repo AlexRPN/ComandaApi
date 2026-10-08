@@ -12,7 +12,7 @@ namespace Comanda.Dominio.Empresas.Comandos
         public string Email { get; set; }
         public string Logo { get; set; }
         public string BannerPrincipal { get; set; }
-        public AtivoInativoEnum Status { get; set; } = AtivoInativoEnum.Ativo;
+        public StatusEnum Status { get; set; } = StatusEnum.Ativo;
         public DateTime DataCadastro { get; set; } = DateTime.UtcNow;
     }
 }

@@ -31,7 +31,7 @@ namespace Comanda.Dominio.Categorias.Servicos
                 EmpresaId = empresaValida.Id,
                 Nome = comando.Nome,
                 Descricao = comando.Descricao,
-                Status = AtivoInativoEnum.Ativo,
+                Status = StatusEnum.Ativo,
                 DataCadastro = DateTime.UtcNow,
                 DataAlteracao = DateTime.UtcNow
             };
@@ -79,7 +79,7 @@ namespace Comanda.Dominio.Categorias.Servicos
             return await categoriaRepositorio.ListarPaginadoAsync(query, qt, pg, cpOrd, tpOrd, cancellationToken);
         }
 
-        public async Task<string> AlterarStatusAsync(int id, AtivoInativoEnum status, CancellationToken cancellationToken)
+        public async Task<string> AlterarStatusAsync(int id, StatusEnum status, CancellationToken cancellationToken)
         {
             Categoria categoria = await categoriaRepositorio.RecuperarAsync(x => x.Id == id, cancellationToken);
 

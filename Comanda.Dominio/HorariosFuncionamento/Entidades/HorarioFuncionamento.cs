@@ -17,7 +17,7 @@ namespace Comanda.Dominio.HorariosFuncionamento.Entidades
         public DiaSemanaEnum DiaSemana { get; private set; }
         public DateTime HoraAbertura { get; private set; }
         public DateTime HoraFechamento { get; private set; }
-        public AtivoInativoEnum Status { get; private set; }
+        public StatusEnum Status { get; private set; }
 
         private HorarioFuncionamento()
         {

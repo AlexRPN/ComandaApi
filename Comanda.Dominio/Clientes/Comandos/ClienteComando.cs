@@ -11,6 +11,6 @@ namespace Comanda.Dominio.Clientes.Comandos
         public int PontosFidelidade { get; set; }
         public DateTime DataCadastro { get; set; }
         public DateTime DataAlteracao { get; set; }
-        public AtivoInativoEnum Status { get; set; }
+        public StatusEnum Status { get; set; }
     }
 }

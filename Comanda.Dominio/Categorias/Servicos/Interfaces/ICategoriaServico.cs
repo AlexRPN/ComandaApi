@@ -15,6 +15,6 @@ namespace Comanda.Dominio.Categorias.Servicos.Interfaces
         Task<IQueryable<Categoria>> FiltrarAsync(CategoriaListarFiltro filtro, CancellationToken cancellationToken);
         Task<PaginacaoConsulta<Categoria>> ListarPaginadoAsync(IQueryable<Categoria> query, int qt, int pg, string cpOrd,
                                                                TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken);
-        Task<string> AlterarStatusAsync(int id, AtivoInativoEnum status, CancellationToken cancellationToken);
+        Task<string> AlterarStatusAsync(int id, StatusEnum status, CancellationToken cancellationToken);
     }
 }

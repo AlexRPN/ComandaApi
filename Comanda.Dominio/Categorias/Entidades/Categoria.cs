@@ -19,7 +19,7 @@ namespace Comanda.Dominio.Categorias.Entidades
         public int Id { get; private set; }
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
-        public AtivoInativoEnum Status { get; private set; }
+        public StatusEnum Status { get; private set; }
         public DateTime DataCadastro { get; private set; }
         public DateTime DataAlteracao { get; private set; }
 
@@ -63,7 +63,7 @@ namespace Comanda.Dominio.Categorias.Entidades
             Descricao = descricao;
         }
 
-        public void SetStatus(AtivoInativoEnum status)
+        public void SetStatus(StatusEnum status)
         {
             Status = status;
         }

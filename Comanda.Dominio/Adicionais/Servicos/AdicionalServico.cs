@@ -25,7 +25,7 @@ namespace Comanda.Dominio.Adicionais.Servicos
                     GrupoAdicionalId = item.GrupoAdicionalId,
                     Nome = item.Nome,
                     Valor = item.Valor,
-                    Status = AtivoInativoEnum.Ativo,
+                    Status = StatusEnum.Ativo,
                     DataCadastro = DateTime.UtcNow,
                     DataAlteracao = DateTime.UtcNow
                 });

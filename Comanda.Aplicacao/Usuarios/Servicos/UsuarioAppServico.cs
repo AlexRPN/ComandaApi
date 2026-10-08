@@ -45,7 +45,7 @@ namespace Comanda.Aplicacao.Usuarios.Servicos
                 logger.LogInformation("Iniciando inserção de usuário.");
                 var empresaValida = await empresaServico.ValidarAsync(comando.EmpresaId, cancellationToken);
 
-                if (empresaValida == null || (empresaValida.Status == AtivoInativoEnum.Inativo))
+                if (empresaValida == null || (empresaValida.Status == StatusEnum.Inativo))
                 {
                     throw new Exception("Empresa inválida ou inativa.");
                 }
@@ -128,7 +128,7 @@ namespace Comanda.Aplicacao.Usuarios.Servicos
             }
         }
 
-        public async Task<string> AlterarStatusAsync(int id, AtivoInativoEnum status, CancellationToken cancellationToken)
+        public async Task<string> AlterarStatusAsync(int id, StatusEnum status, CancellationToken cancellationToken)
         {
             try
             {

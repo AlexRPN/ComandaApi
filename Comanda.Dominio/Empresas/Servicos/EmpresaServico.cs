@@ -29,7 +29,7 @@ namespace Comanda.Dominio.Empresas.Servicos
                 Email = comando.Email,
                 Logo = comando.Logo,
                 BannerPrincipal = comando.BannerPrincipal,
-                Status = AtivoInativoEnum.Ativo,
+                Status = StatusEnum.Ativo,
                 DataCadastro = DateTime.UtcNow
             };
 
@@ -44,7 +44,7 @@ namespace Comanda.Dominio.Empresas.Servicos
         public async Task<Empresa> ValidarAsync(int id, CancellationToken cancellationToken)
         {
             var empresa = await empresaRepositorio.RecuperarAsync(x => x.Id == id &&
-                                                                  x.Status == AtivoInativoEnum.Ativo,
+                                                                  x.Status == StatusEnum.Ativo,
                                                                   cancellationToken);
 
             if (empresa == null)

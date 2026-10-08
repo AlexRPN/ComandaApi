@@ -28,7 +28,7 @@ namespace Comanda.Dominio.Clientes.Servicos
                 Telefone = comando.Telefone,
                 PontosFidelidade = comando.PontosFidelidade,
                 DataCadastro = DateTime.UtcNow,
-                Status = AtivoInativoEnum.Ativo
+                Status = StatusEnum.Ativo
             };
 
             return await clienteRepositorio.InserirAsync(cliente, cancellationToken);
@@ -87,7 +87,7 @@ namespace Comanda.Dominio.Clientes.Servicos
             return cliente;
         }
 
-        public async Task<Cliente> AlterarStatusAsync(int id, AtivoInativoEnum status, CancellationToken cancellationToken)
+        public async Task<Cliente> AlterarStatusAsync(int id, StatusEnum status, CancellationToken cancellationToken)
         {
             Cliente cliente = await RecuperarAsync(id, cancellationToken);
 

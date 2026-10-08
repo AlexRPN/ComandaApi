@@ -16,6 +16,6 @@ namespace Comanda.Dominio.Clientes.Servicos.Interfaces
         Task<PaginacaoConsulta<Cliente>> ListarPaginadoAsync(IQueryable<Cliente> query, int qt, int pg, string cpOrd,
                                                              TipoOrdenacaoEnum tpOrd,
                                                              CancellationToken cancellationToken);
-        Task<Cliente> AlterarStatusAsync(int id, AtivoInativoEnum status, CancellationToken cancellationToken);
+        Task<Cliente> AlterarStatusAsync(int id, StatusEnum status, CancellationToken cancellationToken);
     }
 }

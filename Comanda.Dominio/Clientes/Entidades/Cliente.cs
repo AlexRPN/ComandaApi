@@ -21,7 +21,7 @@ namespace Comanda.Dominio.Clientes.Entidades
         public int PontosFidelidade { get; private set; }
         public DateTime DataCadastro { get; private set; }
         public DateTime DataAlteracao { get; private set; }
-        public AtivoInativoEnum Status { get; private set; }
+        public StatusEnum Status { get; private set; }
 
         private Cliente()
         {
@@ -84,7 +84,7 @@ namespace Comanda.Dominio.Clientes.Entidades
             DataAlteracao = dataAlteracao;
         }
 
-        public void SetStatus(AtivoInativoEnum status)
+        public void SetStatus(StatusEnum status)
         {
             Status = status;
         }

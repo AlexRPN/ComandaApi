@@ -40,7 +40,7 @@ namespace Comanda.Dominio.Empresas.Entidades
         public string Email { get; private set; }
         public string Logo { get; private set; }
         public string BannerPrincipal { get; private set; }
-        public AtivoInativoEnum Status { get; private set; }
+        public StatusEnum Status { get; private set; }
         public DateTime DataCadastro { get; private set; }
         public DateTime DataAlteracao { get; private set; }
 

@@ -9,11 +9,9 @@ namespace Comanda.Dominio.Usuarios.Comandos
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public string Email { get; set; }
-        public byte[] SenhaHash { get; set; }
-        public byte[] SenhaSalt { get; set; }
         public PerfilEnum Perfil { get; set; }
-        public AtivoInativoEnum Status { get; set; }
+        public StatusEnum Status { get; set; }
         public DateTime DataCadastro { get; set; }
-        public DateTime UltimoAcesso { get; set; }
+        public DateTime DataAlteracao { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace Comanda.Dominio.ProdutosVariacoes.Comandos
         public decimal Preco { get; set; }
         // Controla a ordem de exibição das opções do produto.
         public int Ordem { get; set; }
-        public AtivoInativoEnum Status { get; set; }
+        public StatusEnum Status { get; set; }
         public DateTime DataCadastro { get; set; }
         public DateTime DataAlteracao { get; set; }
     }

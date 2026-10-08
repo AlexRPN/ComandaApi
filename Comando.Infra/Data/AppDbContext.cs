@@ -11,6 +11,7 @@ using Comanda.Dominio.Produtos.Entidades;
 using Comanda.Dominio.ProdutosGruposAdicionais.Entidades;
 using Comanda.Dominio.ProdutosVariacoes.Entidades;
 using Comanda.Dominio.Usuarios.Entidades;
+using Comanda.Dominio.UsuariosCredenciais.Entidades;
 using Microsoft.EntityFrameworkCore;
 
 namespace Comanda.Infra.Data
@@ -42,5 +43,6 @@ namespace Comanda.Infra.Data
         public DbSet<ImagemProduto> ImagensProdutos { get; set; }
         public DbSet<ProdutoVariacao> ProdutosVariacoes { get; set; }
         public DbSet<ProdutoGrupoAdicional> ProdutosGruposAdicionais { get; set; }
+        public DbSet<UsuarioCredencial> UsuariosCredenciais { get; set; }
     }
 }

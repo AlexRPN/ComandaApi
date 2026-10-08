@@ -26,6 +26,8 @@
     <Folder Include="EnderecoClientes\Repositorios\Filtros\" />
     <Folder Include="GrupoAdicionais\Repositorios\Filtros\" />
     <Folder Include="ImagensProdutos\Repositorios\Filtros\" />
+    <Folder Include="UsuariosCredenciais\Servicos\" />
+    <Folder Include="UsuariosCredenciais\Repositorios\" />
     <Folder Include="ProdutosVariacoes\Repositorios\Filtros\" />
   </ItemGroup>
 

@@ -9,7 +9,7 @@ namespace Comanda.DataTransfer.ProdutosVariacoes.Response
         public string Descricao { get; set; }
         public decimal Preco { get; set; }
         public int Ordem { get; set; }
-        public AtivoInativoEnum Status { get; set; }
+        public StatusEnum Status { get; set; }
         public DateTime DataCadastro { get; set; }
     }
 }

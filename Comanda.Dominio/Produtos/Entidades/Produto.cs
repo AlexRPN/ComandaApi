@@ -34,7 +34,7 @@ namespace Comanda.Dominio.Produtos.Entidades
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public int TempoPreparo { get; private set; }
-        public AtivoInativoEnum Status { get; private set; }
+        public StatusEnum Status { get; private set; }
         public SituacaoProdutoEnum SituacaoProduto { get; private set; }
         public DateTime DataCadastro { get; private set; }
         public DateTime DataAlteracao { get; private set; }
@@ -97,7 +97,7 @@ namespace Comanda.Dominio.Produtos.Entidades
             TempoPreparo = tempoPreparo;
         }
 
-        public void SetStatus(AtivoInativoEnum status)
+        public void SetStatus(StatusEnum status)
         {
             Status = status;
         }

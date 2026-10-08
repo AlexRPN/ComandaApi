@@ -16,6 +16,6 @@ namespace Comanda.Dominio.Usuarios.Servicos.Interfaces
         Task<PaginacaoConsulta<Usuario>> ListarPaginadoAsync(IQueryable<Usuario> query, int qt, int pg, string cpOrd,
                                                              TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken);
         Task<Usuario> EditarAsync(UsuarioEditarComando comando, CancellationToken cancellationToken);
-        Task<Usuario> AlterarStatusAsync(int id, AtivoInativoEnum status, CancellationToken cancellationToken);
+        Task<Usuario> AlterarStatusAsync(int id, StatusEnum status, CancellationToken cancellationToken);
     }
 }

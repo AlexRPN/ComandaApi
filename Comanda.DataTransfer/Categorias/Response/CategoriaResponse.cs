@@ -8,7 +8,7 @@ namespace Comanda.DataTransfer.Categorias.Response
         public int EmpresaId { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
-        public AtivoInativoEnum Status { get; set; }
+        public StatusEnum Status { get; set; }
         public DateTime DataCadastro { get; set; }
         public string Mensagem { get; set; }
     }

@@ -11,6 +11,9 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication("Bearer").AddJwtBearer();
+
 // Configuração de comunicação com o front end
 builder.Services.AddCors(options =>
 {
@@ -63,11 +66,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseCors("Angular");
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

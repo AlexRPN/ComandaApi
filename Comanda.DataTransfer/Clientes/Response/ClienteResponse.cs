@@ -12,7 +12,7 @@ namespace Comanda.DataTransfer.Clientes.Response
         public int PontosFidelidade { get; private set; }
         public DateTime DataCadastro { get; private set; }
         public DateTime DataAlteracao { get; private set; }
-        public AtivoInativoEnum? Status { get; set; }
+        public StatusEnum? Status { get; set; }
         public EnderecoClienteResponse Endereco { get; set; }
     }
 }

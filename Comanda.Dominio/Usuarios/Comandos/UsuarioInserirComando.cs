@@ -13,7 +13,7 @@ namespace Comanda.Dominio.Usuarios.Comandos
         public string Senha { get; set; }
         public string ConfirmarSenha { get; set; }
         public PerfilEnum Perfil { get; set; }
-        public AtivoInativoEnum Status { get; set; }
+        public StatusEnum Status { get; set; }
         public DateTime DataCadastro { get; set; }
         public DateTime UltimoAcesso { get; set; }
     }

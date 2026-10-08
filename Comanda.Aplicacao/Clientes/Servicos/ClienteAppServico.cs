@@ -138,7 +138,7 @@ namespace Comanda.Aplicacao.Clientes.Servicos
             }
         }
 
-        public async Task<string> AlterarStatusAsync(int id, AtivoInativoEnum status, CancellationToken cancellationToken)
+        public async Task<string> AlterarStatusAsync(int id, StatusEnum status, CancellationToken cancellationToken)
         {
             try
             {

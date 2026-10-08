@@ -15,6 +15,6 @@ namespace Comanda.DataTransfer.Produtos.Request
         public int? CategoriaId { get; set; }
         public string? Nome { get; set; }
         public string? Descricao { get; set; }
-        public AtivoInativoEnum? Status { get; set; }
+        public StatusEnum? Status { get; set; }
     }
 }

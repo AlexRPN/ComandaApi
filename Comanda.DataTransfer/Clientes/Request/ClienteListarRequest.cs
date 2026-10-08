@@ -10,7 +10,7 @@ namespace Comanda.DataTransfer.Clientes.Request
         public int? EmpresaId { get; set; }
         public string? Nome { get; set; }
         public string? Telefone { get; set; }
-        public AtivoInativoEnum? Status { get; set; }
+        public StatusEnum? Status { get; set; }
 
         public ClienteListarRequest() : base(cpOrd: "Nome", tpOrd: TipoOrdenacaoEnum.Asc)
         {

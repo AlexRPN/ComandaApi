@@ -16,7 +16,7 @@ namespace Comanda.Dominio.ProdutosVariacoes.Entidades
         public string Descricao { get; private set; }
         public decimal Preco { get; private set; }
         public int Ordem { get; private set; }
-        public AtivoInativoEnum Status { get; private set; }
+        public StatusEnum Status { get; private set; }
         public DateTime DataCadastro { get; private set; }
         public DateTime DataAlteracao { get; private set; }
 
@@ -66,7 +66,7 @@ namespace Comanda.Dominio.ProdutosVariacoes.Entidades
             Ordem = ordem;
         }
 
-        public void SetStatus(AtivoInativoEnum status)
+        public void SetStatus(StatusEnum status)
         {
             Status = status;
         }

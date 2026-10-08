@@ -25,7 +25,7 @@ namespace Comanda.Dominio.HorariosFuncionamento.Servicos
                     DiaSemana = item.DiaSemana,
                     HoraAbertura = item.HoraAbertura,
                     HoraFechamento = item.HoraFechamento,
-                    Status = AtivoInativoEnum.Ativo
+                    Status = StatusEnum.Ativo
                 });
             }
 

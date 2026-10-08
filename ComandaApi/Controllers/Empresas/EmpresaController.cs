@@ -2,6 +2,7 @@
 using Comanda.DataTransfer.Empresas.Request;
 using Comanda.DataTransfer.Empresas.Response;
 using Comanda.Dominio.Utils.Consultas;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComandaApi.Controllers.Empresas
@@ -65,6 +66,7 @@ namespace ComandaApi.Controllers.Empresas
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize]
         [Route("listar")]
         public async Task<ActionResult<PaginacaoConsulta<EmpresaResponse>>> ListarAsync([FromBody] EmpresaListarRequest request, CancellationToken cancellationToken)
         {

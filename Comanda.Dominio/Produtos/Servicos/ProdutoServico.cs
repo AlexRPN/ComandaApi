@@ -38,7 +38,7 @@ namespace Comanda.Dominio.Produtos.Servicos
                 Nome = comando.Nome,
                 Descricao = comando.Descricao,
                 TempoPreparo = comando.TempoPreparo,
-                Status = AtivoInativoEnum.Ativo,
+                Status = StatusEnum.Ativo,
                 SituacaoProduto = SituacaoProdutoEnum.Disponivel,
                 DataCadastro = DateTime.UtcNow,
                 DataAlteracao = DateTime.UtcNow

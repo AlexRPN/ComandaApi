@@ -25,7 +25,7 @@ namespace Comanda.Dominio.Usuarios.Servicos
         {
             await ValidarCpfAsync(comando.Cpf, cancellationToken);
 
-            autenticacaoServico.CriarSenhaHash(comando.Senha, out byte[] senhaHash, out byte[] senhaSalt);
+            //autenticacaoServico.CriarSenhaHash(comando.Senha, out byte[] senhaHash, out byte[] senhaSalt);
 
             var usuario = new UsuarioComando
             {
@@ -33,10 +33,8 @@ namespace Comanda.Dominio.Usuarios.Servicos
                 Nome = comando.Nome,
                 Cpf = comando.Cpf,
                 Email = comando.Email,
-                SenhaHash = senhaHash,
-                SenhaSalt = senhaSalt,
                 Perfil = comando.Perfil,
-                Status = AtivoInativoEnum.Ativo,
+                Status = StatusEnum.Ativo,
                 DataCadastro = DateTime.UtcNow,
             };
             return await usuarioRepositorio.InserirAsync(usuario, cancellationToken);
@@ -96,7 +94,7 @@ namespace Comanda.Dominio.Usuarios.Servicos
             return usuario;
         }
 
-        public async Task<Usuario> AlterarStatusAsync(int id, AtivoInativoEnum status, CancellationToken cancellationToken)
+        public async Task<Usuario> AlterarStatusAsync(int id, StatusEnum status, CancellationToken cancellationToken)
         {
             Usuario usuario = await usuarioRepositorio.RecuperarPorIdAsync(id, cancellationToken);
 

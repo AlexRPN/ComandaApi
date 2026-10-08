@@ -1,5 +1,6 @@
 ﻿using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.Usuarios.Comandos;
+using Comanda.Dominio.UsuariosCredenciais.Entidades;
 using Comanda.Dominio.Utils.Enumeradores;
 
 namespace Comanda.Dominio.Usuarios.Entidades
@@ -10,18 +11,19 @@ namespace Comanda.Dominio.Usuarios.Entidades
         // Relacionamento 1:N com Empresa
         public int EmpresaId { get; set; }
         public Empresa Empresa { get; set; }
+
+        // Relacionamento 1:1 com UsuarioCredencial
+        public UsuarioCredencial UsuarioCredencial { get; set; }
         #endregion
 
         public int Id { get; private set; }
         public string Nome { get; private set; }
         public string Cpf { get; private set; }
         public string Email { get; private set; }
-        public byte[] SenhaHash { get; private set; }
-        public byte[] SenhaSalt { get; private set; }
         public PerfilEnum Perfil { get; private set; }
-        public AtivoInativoEnum Status { get; private set; }
+        public StatusEnum Status { get; private set; }
         public DateTime DataCadastro { get; private set; }
-        public DateTime UltimoAcesso { get; private set; }
+        public DateTime? DataAlteracao { get; private set; }
 
         private Usuario()
         {
@@ -34,15 +36,13 @@ namespace Comanda.Dominio.Usuarios.Entidades
             SetEmpresaId(comando.EmpresaId);
             SetCpf(comando.Cpf);
             SetEmail(comando.Email);
-            SetSenhaHash(comando.SenhaHash);
-            SetSenhaSalt(comando.SenhaSalt);
             SetPerfil(comando.Perfil);
             SetStatus(comando.Status);
-            DataCadastro = comando.DataCadastro;
-            SetUltimoAcesso(comando.UltimoAcesso);
+            SetDataCadastro(comando.DataCadastro);
+            SetDataAlteracao(comando.DataAlteracao);
         }
 
-        public void SetStatus(AtivoInativoEnum status)
+        public void SetStatus(StatusEnum status)
         {
             Status = status;
         }
@@ -87,34 +87,29 @@ namespace Comanda.Dominio.Usuarios.Entidades
             Email = email;
         }
 
-        public void SetSenhaHash(byte[] senhaHash)
-        {
-            if (senhaHash == null || senhaHash.Length == 0)
-            {
-                throw new ArgumentException("SenhaHash não pode ser nulo ou vazio.");
-            }
-
-            SenhaHash = senhaHash;
-        }
-
-        public void SetSenhaSalt(byte[] senhaSalt)
-        {
-            if (senhaSalt == null || senhaSalt.Length == 0)
-            {
-                throw new ArgumentException("SenhaSalt não pode ser nulo ou vazio.");
-            }
-
-            SenhaSalt = senhaSalt;
-        }
-
         public void SetPerfil(PerfilEnum perfil)
         {
             Perfil = perfil;
         }
 
-        public void SetUltimoAcesso(DateTime ultimoAcesso)
+        public void SetDataAlteracao(DateTime dataAlteracao)
         {
-            UltimoAcesso = ultimoAcesso;
+            if (dataAlteracao < DateTime.Now || dataAlteracao > DateTime.Now)
+            {
+                throw new ArgumentException("Data de alteração não pode ser anterior ou posterior à data atual!");
+            }
+
+            DataAlteracao = dataAlteracao;
+        }
+
+        public void SetDataCadastro(DateTime dataCadastro)
+        {
+            if (dataCadastro < DateTime.Now || dataCadastro > DateTime.Now)
+            {
+                throw new ArgumentException("Data de cadastro não pode ser anterior ou posterior à data atual!");
+            }
+
+            DataCadastro = dataCadastro;
         }
     }
 }

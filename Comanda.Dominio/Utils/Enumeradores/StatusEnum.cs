@@ -2,12 +2,15 @@
 
 namespace Comanda.Dominio.Utils.Enumeradores
 {
-    public enum AtivoInativoEnum
+    public enum StatusEnum
     {
+        [Description("Inativo")]
+        Inativo = 0,
+
         [Description("Ativo")]
         Ativo = 1,
 
-        [Description("Inativo")]
-        Inativo = 0
+        [Description("Bloqueado")]
+        Bloqueado = 2
     }
 }

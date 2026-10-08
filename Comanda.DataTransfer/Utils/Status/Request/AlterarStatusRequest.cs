@@ -5,6 +5,6 @@ namespace Comanda.DataTransfer.Utils.Status.Request
     public class AlterarStatusRequest
     {
         public int Id { get; set; }
-        public AtivoInativoEnum Status { get; set; }
+        public StatusEnum Status { get; set; }
     }
 }

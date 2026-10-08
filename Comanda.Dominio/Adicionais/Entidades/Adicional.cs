@@ -15,7 +15,7 @@ namespace Comanda.Dominio.Adicionais.Entidades
         public int Id { get; private set; }
         public string Nome { get; private set; }
         public decimal Valor { get; private set; }
-        public AtivoInativoEnum Status { get; private set; }
+        public StatusEnum Status { get; private set; }
         public DateTime DataCadastro { get; private set; }
         public DateTime DataAlteracao { get; private set; }
 
@@ -55,7 +55,7 @@ namespace Comanda.Dominio.Adicionais.Entidades
             Valor = valor;
         }
 
-        public void SetStatus(AtivoInativoEnum status)
+        public void SetStatus(StatusEnum status)
         {
             Status = status;
         }

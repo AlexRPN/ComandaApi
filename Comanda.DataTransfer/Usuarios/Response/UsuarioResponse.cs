@@ -10,7 +10,7 @@ namespace Comanda.DataTransfer.Usuarios.Response
         public string Cpf { get; private set; }
         public string Email { get; private set; }
         public PerfilEnum Perfil { get; private set; }
-        public AtivoInativoEnum Status { get; private set; }
+        public StatusEnum Status { get; private set; }
         public DateTime DataCadastro { get; private set; }
         public DateTime UltimoAcesso { get; private set; }
         public EmpresaResponse Empresa { get; set; }

@@ -10,7 +10,7 @@ namespace Comanda.DataTransfer.Clientes.Request
         public string Telefone { get; set; }
         public int? PontosFidelidade { get; set; }
         public DateTime DataCadastro { get; set; }
-        public AtivoInativoEnum Status { get; set; }
+        public StatusEnum Status { get; set; }
         public EnderecoClienteRequest Endereco { get; set; }
     }
 }

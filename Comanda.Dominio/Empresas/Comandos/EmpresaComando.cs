@@ -15,7 +15,7 @@ namespace Comanda.Dominio.Empresas.Comandos
         public string Email { get; set; }
         public string Logo { get; set; }
         public string BannerPrincipal { get; set; }
-        public AtivoInativoEnum Status { get; set; }
+        public StatusEnum Status { get; set; }
         public DateTime DataCadastro { get; set; }
         public DateTime DataAlteracao { get; set; }
         public EnderecoEmpresaComando Endereco { get; set; }
