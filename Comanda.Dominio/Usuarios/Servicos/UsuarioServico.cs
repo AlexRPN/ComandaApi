@@ -35,7 +35,7 @@ namespace Comanda.Dominio.Usuarios.Servicos
                 Email = comando.Email,
                 Perfil = comando.Perfil,
                 Status = StatusEnum.Ativo,
-                DataCadastro = DateTime.UtcNow,
+                DataCadastro = DateTime.Now,
             };
             return await usuarioRepositorio.InserirAsync(usuario, cancellationToken);
         }

@@ -94,21 +94,11 @@ namespace Comanda.Dominio.Usuarios.Entidades
 
         public void SetDataAlteracao(DateTime dataAlteracao)
         {
-            if (dataAlteracao < DateTime.Now || dataAlteracao > DateTime.Now)
-            {
-                throw new ArgumentException("Data de alteração não pode ser anterior ou posterior à data atual!");
-            }
-
             DataAlteracao = dataAlteracao;
         }
 
         public void SetDataCadastro(DateTime dataCadastro)
         {
-            if (dataCadastro < DateTime.Now || dataCadastro > DateTime.Now)
-            {
-                throw new ArgumentException("Data de cadastro não pode ser anterior ou posterior à data atual!");
-            }
-
             DataCadastro = dataCadastro;
         }
     }

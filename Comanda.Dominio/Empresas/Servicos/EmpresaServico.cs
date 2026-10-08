@@ -43,12 +43,12 @@ namespace Comanda.Dominio.Empresas.Servicos
 
         public async Task<Empresa> ValidarAsync(int id, CancellationToken cancellationToken)
         {
-            var empresa = await empresaRepositorio.RecuperarAsync(x => x.Id == id &&
-                                                                  x.Status == StatusEnum.Ativo,
-                                                                  cancellationToken);
+            var empresa = await empresaRepositorio.RecuperarAsync(x => x.Id == id, cancellationToken);
 
-            if (empresa == null)
-                throw new Exception("Empresa não encontrada!");
+            if (empresa.Status == StatusEnum.Inativo || empresa.Status == StatusEnum.Bloqueado)
+            {
+                throw new ArgumentException("Empresa não está ativa.");
+            }
 
             return empresa;
         }

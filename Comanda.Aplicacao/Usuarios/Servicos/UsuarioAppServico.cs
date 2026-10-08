@@ -43,12 +43,7 @@ namespace Comanda.Aplicacao.Usuarios.Servicos
                 await unitOfWork.BeginTransactionAsync(cancellationToken);
 
                 logger.LogInformation("Iniciando inserção de usuário.");
-                var empresaValida = await empresaServico.ValidarAsync(comando.EmpresaId, cancellationToken);
-
-                if (empresaValida == null || (empresaValida.Status == StatusEnum.Inativo))
-                {
-                    throw new Exception("Empresa inválida ou inativa.");
-                }
+                await empresaServico.ValidarAsync(comando.EmpresaId, cancellationToken);
 
                 await usuarioServico.InserirAsync(comando, cancellationToken);
 
