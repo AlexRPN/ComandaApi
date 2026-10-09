@@ -9,6 +9,7 @@ on:
       - development
       - homologacao
       - master
+      - 'release/**'
 
   pull_request:
     branches:
