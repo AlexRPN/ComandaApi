@@ -1,0 +1,7 @@
+{
+  "stryker-config": {
+    "test-projects": [ "Comanda.Dominio.Testes" ],
+    "reporters": [ "html" ],
+    "timeout-ratio": 1.5
+  }
+}

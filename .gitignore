@@ -360,4 +360,11 @@ MigrationBackup/
 .ionide/
 
 # Fody - auto-generated XML schema
+
+# Test and coverage reports
+TestResults/
+coverage-report/
+StrykerOutput/
+.config/
+*.trx
 FodyWeavers.xsd
