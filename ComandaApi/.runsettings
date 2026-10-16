@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <DataCollectionRunSettings>
+	<DataCollectors>
+	  <DataCollector friendlyName="XPlat code coverage">
+		<Configuration>
+		  <Format>cobertura</Format>
+		  <Exclude>[*.Tests]*,[*.Test]*</Exclude>
+		  <IncludeTestAssembly>false</IncludeTestAssembly>
+		  <SkipAutoProps>false</SkipAutoProps>
+		  <UseSourceLink>false</UseSourceLink>
+		  <SingleHit>false</SingleHit>
+		  <DeterministicReport>false</DeterministicReport>
+		  <MergeWith></MergeWith>
+		  <Attributes></Attributes>
+		  <InstrumentationExclusions></InstrumentationExclusions>
+		  <IncludeStaticConstructors>false</IncludeStaticConstructors>
+		  <IncludeAsyncStateMachines>true</IncludeAsyncStateMachines>
+		</Configuration>
+	  </DataCollector>
+	</DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

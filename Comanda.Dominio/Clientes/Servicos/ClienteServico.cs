@@ -34,7 +34,7 @@ namespace Comanda.Dominio.Clientes.Servicos
             return await clienteRepositorio.InserirAsync(cliente, cancellationToken);
         }
 
-        private async Task ValidarTelefoneDuplicadoAsync(int empresaId, string telefone, CancellationToken cancellationToken)
+        public async Task ValidarTelefoneDuplicadoAsync(int empresaId, string telefone, CancellationToken cancellationToken)
         {
             var cliente = await clienteRepositorio.RecuperarAsync(x => x.EmpresaId == empresaId &&
                                                                        x.Telefone == telefone, cancellationToken);
@@ -89,7 +89,7 @@ namespace Comanda.Dominio.Clientes.Servicos
 
         public async Task<Cliente> AlterarStatusAsync(int id, StatusEnum status, CancellationToken cancellationToken)
         {
-            Cliente cliente = await RecuperarAsync(id, cancellationToken);
+            Cliente cliente = await clienteRepositorio.RecuperarPorIdAsync(id, cancellationToken);
 
             if (cliente is null)
             {

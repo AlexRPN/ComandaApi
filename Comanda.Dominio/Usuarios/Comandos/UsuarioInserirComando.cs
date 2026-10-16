@@ -5,7 +5,6 @@ namespace Comanda.Dominio.Usuarios.Comandos
 {
     public class UsuarioInserirComando
     {
-        public int Id { get; set; }
         public int EmpresaId { get; set; }
         public string Nome { get; set; }
         public string Cpf { get; set; }

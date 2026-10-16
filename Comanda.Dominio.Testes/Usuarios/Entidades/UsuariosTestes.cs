@@ -184,6 +184,15 @@ namespace Comanda.Dominio.Testes.Usuarios.Entidades
                 // Act & Assert
                 Assert.Throws<ArgumentException>(() => sut.SetEmail(emailInvalido));
             }
+
+            [Fact]
+            public void Quando_EmailForNulo_Espero_Excecao()
+            {
+                // Arrange
+                var emailNulo = (string?)null;
+                // Act & Assert
+                Assert.Throws<ArgumentException>(() => sut.SetEmail(emailNulo));
+            }
         }
     }
 }
