@@ -85,7 +85,7 @@ namespace Comanda.Dominio.Categorias.Servicos
 
             if (categoria == null)
             {
-                throw new Exception("Categoria não encontrada!");
+                throw new ArgumentNullException("Categoria não encontrada!");
             }
 
             categoria.SetStatus(status);

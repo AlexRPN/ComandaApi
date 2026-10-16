@@ -2,6 +2,7 @@
 using Comanda.Dominio.Clientes.Entidades;
 using Comanda.Dominio.Clientes.Repositorios.Filtros;
 using Comanda.Dominio.Genericos;
+using Comanda.Dominio.Utils.Enumeradores;
 
 namespace Comanda.Dominio.Clientes.Repositorios.Interfaces
 {

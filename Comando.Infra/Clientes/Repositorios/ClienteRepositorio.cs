@@ -2,6 +2,7 @@
 using Comanda.Dominio.Clientes.Entidades;
 using Comanda.Dominio.Clientes.Repositorios.Filtros;
 using Comanda.Dominio.Clientes.Repositorios.Interfaces;
+using Comanda.Dominio.Utils.Enumeradores;
 using Comanda.Infra.Data;
 using Comanda.Infra.Genericos;
 using Microsoft.EntityFrameworkCore;

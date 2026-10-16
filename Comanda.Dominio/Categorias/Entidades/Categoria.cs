@@ -47,7 +47,7 @@ namespace Comanda.Dominio.Categorias.Entidades
         {
             if (string.IsNullOrWhiteSpace(nome))
             {
-                throw new ArgumentNullException("O nome da categoria não pode ser nulo ou vazio!");
+                throw new ArgumentException("O nome da categoria não pode ser nulo ou vazio!");
             }
 
             Nome = nome;
@@ -57,7 +57,7 @@ namespace Comanda.Dominio.Categorias.Entidades
         {
             if (string.IsNullOrWhiteSpace(descricao))
             {
-                throw new ArgumentNullException("A descrição não pode ser nulo ou vazio!");
+                throw new ArgumentException("A descrição não pode ser nulo ou vazio!");
             }
 
             Descricao = descricao;
@@ -80,11 +80,6 @@ namespace Comanda.Dominio.Categorias.Entidades
 
         public void SetDataAlteracao(DateTime dataAlteracao)
         {
-            if (dataAlteracao < DateTime.Now)
-            {
-                throw new ArgumentException("A data de alteração não pode ser menor que a data atual!");
-            }
-
             DataAlteracao = dataAlteracao;
         }
     }

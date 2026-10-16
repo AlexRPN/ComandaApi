@@ -3,7 +3,6 @@ using Comanda.Dominio.Usuarios.Entidades;
 using Comanda.Dominio.Usuarios.Repositorios.Filtros;
 using Comanda.Dominio.Usuarios.Repositorios.Interfaces;
 using Comanda.Dominio.Usuarios.Servicos.Interfaces;
-using Comanda.Dominio.Utils.Autenticacoes.Servicos.Interfaces;
 using Comanda.Dominio.Utils.Consultas;
 using Comanda.Dominio.Utils.Enumeradores;
 using Comanda.Dominio.Utils.Filtros.Enumeradores;
@@ -13,12 +12,9 @@ namespace Comanda.Dominio.Usuarios.Servicos
     public class UsuarioServico : IUsuarioServico
     {
         private readonly IUsuarioRepositorio usuarioRepositorio;
-        private readonly IAutenticacaoServico autenticacaoServico;
-        public UsuarioServico(IUsuarioRepositorio usuarioRepositorio,
-                              IAutenticacaoServico autenticacaoServico)
+        public UsuarioServico(IUsuarioRepositorio usuarioRepositorio)
         {
             this.usuarioRepositorio = usuarioRepositorio;
-            this.autenticacaoServico = autenticacaoServico;
         }
 
         public async Task<Usuario> InserirAsync(UsuarioInserirComando comando, CancellationToken cancellationToken)
@@ -40,9 +36,9 @@ namespace Comanda.Dominio.Usuarios.Servicos
             return await usuarioRepositorio.InserirAsync(usuario, cancellationToken);
         }
 
-        public async Task<IQueryable<Usuario>> FiltrarAsync(UsuarioListarFiltro comando, CancellationToken cancellationToken)
+        public Task<IQueryable<Usuario>> FiltrarAsync(UsuarioListarFiltro comando, CancellationToken cancellationToken)
         {
-            return await usuarioRepositorio.FiltrarAsync(comando, cancellationToken);
+            return usuarioRepositorio.FiltrarAsync(comando, cancellationToken);
         }
 
         public Task<PaginacaoConsulta<Usuario>> ListarPaginadoAsync(IQueryable<Usuario> query, int qt, int pg, string cpOrd, TipoOrdenacaoEnum tpOrd, CancellationToken cancellationToken)
@@ -56,7 +52,7 @@ namespace Comanda.Dominio.Usuarios.Servicos
 
             if (usuario == null)
             {
-                throw new Exception("Usuário não encontrado!");
+                throw new ArgumentException("Usuário não encontrado!");
             }
 
             return usuario;
@@ -68,7 +64,7 @@ namespace Comanda.Dominio.Usuarios.Servicos
 
             if (usuario != null)
             {
-                throw new Exception("Cpf informado já está cadastrado no sistema!");
+                throw new ArgumentException("Cpf informado já está cadastrado no sistema!");
             }
 
             return usuario;
@@ -100,7 +96,7 @@ namespace Comanda.Dominio.Usuarios.Servicos
 
             if (usuario == null)
             {
-                throw new Exception("Usuário não encontrado!");
+                throw new ArgumentException("Usuário não encontrado!");
             }
 
             usuario.SetStatus(status);
