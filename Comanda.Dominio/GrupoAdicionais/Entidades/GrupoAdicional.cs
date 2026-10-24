@@ -43,7 +43,7 @@ namespace Comanda.Dominio.GrupoAdicionais.Entidades
         {
             if (string.IsNullOrWhiteSpace(nome))
             {
-                throw new ArgumentNullException("O Adicional não pode ser nulo ou vazio!");
+                throw new ArgumentException("O Adicional não pode ser nulo ou vazio!");
             }
 
             Nome = nome;

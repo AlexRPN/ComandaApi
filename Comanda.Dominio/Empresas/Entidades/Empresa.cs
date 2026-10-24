@@ -66,11 +66,21 @@ namespace Comanda.Dominio.Empresas.Entidades
 
         public void SetNomeFantasia(string nomeFantasia)
         {
+            if(string.IsNullOrEmpty(nomeFantasia))
+            {
+                throw new ArgumentException("Nome Fantasia não pode ser nulo ou vazio!");
+            }
+
             NomeFantasia = nomeFantasia;
         }
 
         public void SetRazaoSocial(string razaoSocial)
         {
+            if(string.IsNullOrEmpty(razaoSocial))
+            {
+                throw new ArgumentException("Razão Social não pode ser nulo ou vazio!");
+            }
+
             RazaoSocial = razaoSocial;
         }
 

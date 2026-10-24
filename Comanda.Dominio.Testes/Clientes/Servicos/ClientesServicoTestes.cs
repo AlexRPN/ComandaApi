@@ -72,16 +72,10 @@ namespace Comanda.Dominio.Testes.Clientes.Servicos
                     .Returns(clienteExistente);
 
                 // Act
-                Func<Task> act = () =>
-                    sut.ValidarTelefoneDuplicadoAsync(
-                        empresaId,
-                        telefone,
-                        CancellationToken.None);
+                Func<Task> act = () => sut.ValidarTelefoneDuplicadoAsync(empresaId, telefone, CancellationToken.None);
 
                 // Assert
-                await act.Should()
-                    .ThrowAsync<Exception>()
-                    .WithMessage("Já existe um cliente cadastrado com esse telefone.");
+                await act.Should().ThrowAsync<Exception>().WithMessage("Já existe um cliente cadastrado com esse telefone.");
             }
         }
 
