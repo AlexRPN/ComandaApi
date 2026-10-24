@@ -27,9 +27,9 @@ namespace Comanda.Dominio.GrupoAdicionais.Servicos
             return await grupoAdicionalRepositorio.InserirAsync(gruposAdicionais, cancellationToken);
         }
 
-        public Task<GrupoAdicional> RecuperarAsync(int empresaId, int grupoAdicionalId, CancellationToken cancellationToken)
+        public async Task<GrupoAdicional> RecuperarAsync(int empresaId, int grupoAdicionalId, CancellationToken cancellationToken)
         {
-            var grupoAdicional = grupoAdicionalRepositorio.RecuperarAsync(x => x.EmpresaId == empresaId && x.Id == grupoAdicionalId, cancellationToken);
+            var grupoAdicional = await grupoAdicionalRepositorio.RecuperarAsync(x => x.EmpresaId == empresaId && x.Id == grupoAdicionalId, cancellationToken);
 
             if (grupoAdicional is null)
             {

@@ -1,5 +1,4 @@
-﻿
-using Comanda.Dominio.Categorias.Comandos;
+﻿using Comanda.Dominio.Categorias.Comandos;
 using Comanda.Dominio.Categorias.Entidades;
 using Comanda.Dominio.Categorias.Repositorios.Filtros;
 using Comanda.Dominio.Categorias.Repositorios.Interfaces;
@@ -13,7 +12,6 @@ using Comanda.Dominio.Utils.Filtros.Enumeradores;
 using FizzWare.NBuilder;
 using FluentAssertions;
 using NSubstitute;
-using NSubstitute.Core;
 using System.Linq.Expressions;
 
 namespace Comanda.Dominio.Testes.Categorias.Servicos
