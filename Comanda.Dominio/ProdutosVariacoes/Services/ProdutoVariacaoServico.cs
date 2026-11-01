@@ -35,8 +35,7 @@ namespace Comanda.Dominio.ProdutosVariacoes.Services
                     Preco = comando.Preco,
                     Ordem = comando.Ordem,
                     Status = StatusEnum.Ativo,
-                    DataCadastro = DateTime.UtcNow,
-                    DataAlteracao = DateTime.UtcNow
+                    DataCadastro = DateTime.UtcNow
                 });
             }
 

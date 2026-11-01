@@ -14,46 +14,42 @@ namespace Comanda.Dominio.HorariosFuncionamento.Servicos
             this.horarioFuncionamentoRepositorio = horarioFuncionamentoRepositorio;
         }
 
-        public async Task<IEnumerable<HorarioFuncionamentoComando>> InserirAsync(IEnumerable<HorarioFuncionamentoInserirComando> comando, CancellationToken cancellationToken)
+        public async Task<IEnumerable<HorarioFuncionamento>> InserirAsync(IEnumerable<HorarioFuncionamentoComando> comando, CancellationToken cancellationToken)
         {
-            var horariosFuncionamento = new List<HorarioFuncionamentoComando>();
+            var horariosFuncionamentosComando = new List<HorarioFuncionamentoComando>();
+
             foreach (var item in comando)
             {
-                horariosFuncionamento.Add(new HorarioFuncionamentoComando
+                horariosFuncionamentosComando.Add(new HorarioFuncionamentoComando
                 {
                     EmpresaId = item.EmpresaId,
                     DiaSemana = item.DiaSemana,
                     HoraAbertura = item.HoraAbertura,
                     HoraFechamento = item.HoraFechamento,
-                    Status = StatusEnum.Ativo
+                    Status = StatusEnum.Ativo 
                 });
             }
 
-            await horarioFuncionamentoRepositorio.InserirAsync(horariosFuncionamento, cancellationToken);
-            return horariosFuncionamento;
+            var horarioFuncionamento = await horarioFuncionamentoRepositorio.InserirAsync(horariosFuncionamentosComando, 
+                                                                                          cancellationToken);
+
+            return horarioFuncionamento;
         }
 
-        public async Task<IEnumerable<HorarioFuncionamento>> EditarAsync(int empresaId, IEnumerable<HorarioFuncionamentoEditarComando> comando, CancellationToken cancellationToken)
+        public async Task<IEnumerable<HorarioFuncionamento>> EditarAsync(int empresaId,             
+                                                                        IEnumerable<HorarioFuncionamentoEditarComando> comando, 
+                                                                        CancellationToken cancellationToken)
         {
             if (!comando.Any())
             {
                 throw new ArgumentException("Nenhum horário informado.");
             }
 
-            var horariosExistentes = (await horarioFuncionamentoRepositorio
-                .ListarAsync(x => x.EmpresaId == empresaId, cancellationToken))
-                .ToList();
+            var horariosExistentes = await RecuperarAsync(empresaId, cancellationToken);
 
             foreach (var item in comando)
             {
-                var horarioExistente = horariosExistentes
-                    .FirstOrDefault(x => x.DiaSemana == item.DiaSemana);
-
-                if (horarioExistente == null)
-                {
-                    throw new ArgumentException(
-                        $"Horário para o dia {item.DiaSemana} não encontrado.");
-                }
+                var horarioExistente = horariosExistentes.FirstOrDefault(x => x.DiaSemana == item.DiaSemana);
 
                 horarioExistente.SetHoraAbertura(item.HoraAbertura);
                 horarioExistente.SetHoraFechamento(item.HoraFechamento);
@@ -64,11 +60,12 @@ namespace Comanda.Dominio.HorariosFuncionamento.Servicos
             return horariosExistentes;
         }
 
-        public async Task<IEnumerable<HorarioFuncionamento>> ValidarAsync(int id, CancellationToken cancellationToken)
+        public async Task<IEnumerable<HorarioFuncionamento>> RecuperarAsync(int idEmpresa, CancellationToken cancellationToken)
         {
-            HorarioFuncionamento horarioFuncionamento = await horarioFuncionamentoRepositorio.RecuperarAsync(id, cancellationToken);
+            var horarios = (await horarioFuncionamentoRepositorio.ListarAsync(x => x.EmpresaId == idEmpresa,
+                                                                              cancellationToken));
 
-            return new List<HorarioFuncionamento> { horarioFuncionamento };
+            return horarios;
         }
     }
 }

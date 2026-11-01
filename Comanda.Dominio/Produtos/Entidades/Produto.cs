@@ -76,7 +76,7 @@ namespace Comanda.Dominio.Produtos.Entidades
         {
             if (string.IsNullOrWhiteSpace(nome))
             {
-                throw new ArgumentNullException("O nome do produto não pode ser nulo ou vazio!");
+                throw new ArgumentException("O nome do produto não pode ser nulo ou vazio!");
             }
 
             Nome = nome;
@@ -86,7 +86,7 @@ namespace Comanda.Dominio.Produtos.Entidades
         {
             if (string.IsNullOrWhiteSpace(descricao))
             {
-                throw new ArgumentNullException("A descrição do produto não pode ser nulo ou vazio!");
+                throw new ArgumentException("A descrição do produto não pode ser nulo ou vazio!");
             }
 
             Descricao = descricao;
@@ -104,7 +104,7 @@ namespace Comanda.Dominio.Produtos.Entidades
 
         public void SetDataCadastro(DateTime dataCadastro)
         {
-            if (dataCadastro < DateTime.Now)
+            if (dataCadastro < DateTime.Now.Date)
             {
                 throw new Exception("A data de cadastro não pode ser anterior a data atual!");
             }
