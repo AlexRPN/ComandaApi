@@ -12,12 +12,9 @@ namespace Comanda.Dominio.Produtos.Servicos
     public class ProdutoServico : IProdutoServico
     {
         private readonly IProdutoRepositorio produtoRepositorio;
-        private readonly IProdutoDapperRepositorio produtoDapperRepositorio;
-        public ProdutoServico(IProdutoRepositorio produtoRepositorio,
-                              IProdutoDapperRepositorio produtoDapperRepositorio)
+        public ProdutoServico(IProdutoRepositorio produtoRepositorio)
         {
             this.produtoRepositorio = produtoRepositorio;
-            this.produtoDapperRepositorio = produtoDapperRepositorio;
         }
 
         public async Task<Produto> InserirAsync(ProdutoComando comando, CancellationToken cancellationToken)
@@ -40,8 +37,8 @@ namespace Comanda.Dominio.Produtos.Servicos
                 TempoPreparo = comando.TempoPreparo,
                 Status = StatusEnum.Ativo,
                 SituacaoProduto = SituacaoProdutoEnum.Disponivel,
-                DataCadastro = DateTime.UtcNow,
-                DataAlteracao = DateTime.UtcNow
+                DataCadastro = DateTime.Now.Date,
+                DataAlteracao = DateTime.Now.Date
             };
 
             return await produtoRepositorio.InserirAsync(produto, cancellationToken);

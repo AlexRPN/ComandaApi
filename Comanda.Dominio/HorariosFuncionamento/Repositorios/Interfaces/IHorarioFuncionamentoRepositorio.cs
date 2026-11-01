@@ -6,6 +6,6 @@ namespace Comanda.Dominio.HorariosFuncionamento.Repositorios.Interfaces
 {
     public interface IHorarioFuncionamentoRepositorio : IGenericoRepositorio<HorarioFuncionamento>
     {
-        Task<IEnumerable<HorarioFuncionamentoComando>> InserirAsync(IEnumerable<HorarioFuncionamentoComando> comando, CancellationToken cancellationToken);
+        Task<IEnumerable<HorarioFuncionamento>> InserirAsync(IEnumerable<HorarioFuncionamentoComando> comando, CancellationToken cancellationToken);
     }
 }

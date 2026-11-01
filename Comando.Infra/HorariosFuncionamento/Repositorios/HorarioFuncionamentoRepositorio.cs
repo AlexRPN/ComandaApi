@@ -13,26 +13,18 @@ namespace Comanda.Infra.HorariosFuncionamento.Repositorios
         {
         }
 
-        public async Task<IEnumerable<HorarioFuncionamentoComando>> InserirAsync(IEnumerable<HorarioFuncionamentoComando> comando, CancellationToken cancellationToken)
+        public async Task<IEnumerable<HorarioFuncionamento>> InserirAsync(IEnumerable<HorarioFuncionamentoComando> comando, CancellationToken cancellationToken)
         {
             try
             {
-                var horariosFuncionamento = comando
-                    .Select(x => new HorarioFuncionamento(x))
-                    .ToList();
+                var horariosFuncionamento = comando.Select(x => new HorarioFuncionamento(x))
+                                                   .ToList();
 
-                await appDbContext.HorariosFuncionamento.AddRangeAsync(
-                    horariosFuncionamento,
-                    cancellationToken);
+                await appDbContext.HorariosFuncionamento.AddRangeAsync(horariosFuncionamento, cancellationToken);
 
                 await appDbContext.SaveChangesAsync(cancellationToken);
 
-                for (int i = 0; i < comando.Count(); i++)
-                {
-                    comando.ElementAt(i).Id = horariosFuncionamento[i].Id;
-                }
-
-                return comando;
+                return horariosFuncionamento;
 
             }
             catch (Exception ex)

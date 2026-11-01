@@ -44,7 +44,7 @@ namespace Comanda.Aplicacao.Empresas.Servicos
         {
             try
             {
-                var horariosFuncionamento = new List<HorarioFuncionamentoInserirComando>();
+                var horariosFuncionamento = new List<HorarioFuncionamentoComando>();
 
                 logger.LogInformation("Iniciando cadastro de empresa: {NomeFantasia}", request.NomeFantasia);
                 EmpresaInserirComando comando = request.Adapt<EmpresaInserirComando>();
@@ -66,7 +66,7 @@ namespace Comanda.Aplicacao.Empresas.Servicos
 
                 foreach (var horario in request.HorariosFuncionamento)
                 {
-                    HorarioFuncionamentoInserirComando horarioComando = horario.Adapt<HorarioFuncionamentoInserirComando>();
+                    HorarioFuncionamentoComando horarioComando = horario.Adapt<HorarioFuncionamentoComando>();
                     horarioComando.EmpresaId = empresa.Id;
                     horariosFuncionamento.Add(horarioComando);
                 }

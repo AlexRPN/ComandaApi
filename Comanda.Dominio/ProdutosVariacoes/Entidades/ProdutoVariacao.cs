@@ -73,7 +73,7 @@ namespace Comanda.Dominio.ProdutosVariacoes.Entidades
 
         public void SetDataCadastro(DateTime dataCadastro)
         {
-            if (dataCadastro < DateTime.Now)
+            if (dataCadastro < DateTime.Now.Date)
             {
                 throw new ArgumentException("Data de cadastro não pode ser anterior à data atual.");
             }
@@ -83,11 +83,6 @@ namespace Comanda.Dominio.ProdutosVariacoes.Entidades
 
         public void SetDataAlteracao(DateTime dataAlteracao)
         {
-            if (dataAlteracao < DataCadastro)
-            {
-                throw new ArgumentException("Data de alteração não pode ser anterior à data de cadastro.");
-            }
-
             DataAlteracao = dataAlteracao;
         }
     }
