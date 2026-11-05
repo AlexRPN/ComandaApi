@@ -6,6 +6,8 @@ using Comanda.Aplicacao.Empresas.Servicos;
 using Comanda.Aplicacao.Empresas.Servicos.Interfaces;
 using Comanda.Aplicacao.GruposAdicionais.Servicos;
 using Comanda.Aplicacao.GruposAdicionais.Servicos.Interfaces;
+using Comanda.Aplicacao.HorariosFuncionamento.Servicos;
+using Comanda.Aplicacao.HorariosFuncionamento.Servicos.Interfaces;
 using Comanda.Aplicacao.Produtos.Servicos;
 using Comanda.Aplicacao.Produtos.Servicos.Interfaces;
 using Comanda.Aplicacao.Transacoes.Interfaces;
@@ -127,6 +129,7 @@ namespace Comanda.Ioc.InjecoesDependenciaConfig
             services.AddScoped<ICategoriaAppServico, CategoriaAppServico>();
             services.AddScoped<IProdutoAppServico, ProdutoAppServico>();
             services.AddScoped<IGrupoAdicionalAppServico, GrupoAdicionalAppServico>();
+            services.AddScoped<IHorarioFuncionamentoAppServico, HorarioFuncionamentoAppServico>();
 
             return services;
         }

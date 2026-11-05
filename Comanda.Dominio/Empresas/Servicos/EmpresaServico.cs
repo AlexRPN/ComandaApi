@@ -53,6 +53,11 @@ namespace Comanda.Dominio.Empresas.Servicos
             return empresa;
         }
 
+        public async Task<Empresa> RecuperarAsync(int id, CancellationToken cancellationToken)
+        {
+            return await empresaRepositorio.RecuperarAsync(x => x.Id == id, cancellationToken);
+        }
+
         public async Task<PaginacaoConsulta<Empresa>> ListarAsync(IQueryable<Empresa> query, int qt, int pg, string cpOrd,
                                                             TipoOrdenacaoEnum tpOrd,
                                                             CancellationToken cancellationToken)

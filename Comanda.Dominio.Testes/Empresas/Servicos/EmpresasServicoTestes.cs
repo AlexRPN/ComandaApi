@@ -218,5 +218,26 @@ namespace Comanda.Dominio.Testes.Empresas.Servicos
                 resultado.Count().Should().Be(5);
             }
         }
+
+        public class RecuperarAsyncMetodo : EmpresasServicoTestes
+        {
+            [Fact]
+            public async Task Quando_EmpresaExistente_Espero_RetornarEmpresa()
+            {
+                // Arrange
+                var empresaExistente = new Empresa(empresaComando);
+
+                // Mock do repositório para retornar a empresa existente
+                empresaRepositorioMock.RecuperarAsync(Arg.Any<Expression<Func<Empresa, bool>>>(), Arg.Any<CancellationToken>())
+                    .Returns(Task.FromResult(empresaExistente));
+
+                // Act
+                var resultado = await sut.RecuperarAsync(empresaExistente.Id, CancellationToken.None);
+
+                // Assert
+                resultado.Should().NotBeNull();
+                resultado.Id.Should().Be(empresaExistente.Id);
+            }
+        }
     }
 }

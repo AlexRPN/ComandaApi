@@ -12,6 +12,8 @@ namespace Comanda.Aplicacao.HorariosFuncionamento.Profiles
         public void Register(TypeAdapterConfig config)
         {
             config.NewConfig<HorarioFuncionamentoRequest, HorarioFuncionamentoComando>();
+            config.NewConfig<HorarioFuncionamentoEditarRequest, HorarioFuncionamentoEditarComando>();
+            config.NewConfig<HorarioFuncionamentoEditarComando, HorarioFuncionamentoResponse>();
             config.NewConfig<HorarioFuncionamentoComando, HorarioFuncionamentoResponse>();
             config.NewConfig<HorarioFuncionamento, HorarioFuncionamentoResponse>();
             config.NewConfig<EmpresaRequest, HorarioFuncionamentoEditarComando>();
