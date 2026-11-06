@@ -62,17 +62,6 @@ namespace Comanda.Aplicacao.Empresas.Servicos
                 enderecoComando.EmpresaId = empresa.Id;
                 await enderecoEmpresaServico.InserirAsync(enderecoComando, cancellationToken);
 
-                logger.LogInformation("Iniciando cadastro de horários de funcionamento para empresa: {EmpresaId}", empresa.Id);
-
-                foreach (var horario in request.HorariosFuncionamento)
-                {
-                    HorarioFuncionamentoComando horarioComando = horario.Adapt<HorarioFuncionamentoComando>();
-                    horarioComando.EmpresaId = empresa.Id;
-                    horariosFuncionamento.Add(horarioComando);
-                }
-
-                var horariosInseridos = await horarioFuncionamentoServico.InserirAsync(horariosFuncionamento, cancellationToken);
-
                 logger.LogInformation("Cadastro da empresa {RazaoSocial} concluído com sucesso: {EmpresaId}", empresa.RazaoSocial, empresa.Id);
 
                 var mensagem = $"Empresa {empresa.RazaoSocial} cadastrada com sucesso!";
@@ -90,8 +79,6 @@ namespace Comanda.Aplicacao.Empresas.Servicos
 
             EnderecoEmpresaEditarComando enderecoComando = request.Endereco.Adapt<EnderecoEmpresaEditarComando>();
 
-            IEnumerable<HorarioFuncionamentoEditarComando> horariosComando = request.HorariosFuncionamento.Adapt<IEnumerable<HorarioFuncionamentoEditarComando>>();
-
             try
             {
                 await unitOfWork.BeginTransactionAsync(cancellationToken);
@@ -104,8 +91,6 @@ namespace Comanda.Aplicacao.Empresas.Servicos
                 EnderecoEmpresa enderecoEmpresa = await enderecoEmpresaServico.EditarAsync(enderecoComando, cancellationToken);
 
                 logger.LogInformation("Iniciando atualização de horários de funcionamento para empresa: {NomeFantasia}", empresa.NomeFantasia);
-
-                IEnumerable<HorarioFuncionamento> horariosFuncionamento = await horarioFuncionamentoServico.EditarAsync(empresa.Id, horariosComando, cancellationToken);
 
                 await unitOfWork.CommitAsync(cancellationToken);
                 await unitOfWork.CommitTransactionAsync(cancellationToken);

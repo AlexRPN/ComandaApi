@@ -1,5 +1,4 @@
 ﻿using Comanda.DataTransfer.EnderecosEmpresas.Request;
-using Comanda.DataTransfer.HorariosFuncionamento.Request;
 
 namespace Comanda.DataTransfer.Empresas.Request
 {
@@ -15,6 +14,5 @@ namespace Comanda.DataTransfer.Empresas.Request
         public string? Logo { get; set; }
         public string? BannerPrincipal { get; set; }
         public EnderecoEmpresaRequest Endereco { get; set; }
-        public IEnumerable<HorarioFuncionamentoRequest> HorariosFuncionamento { get; set; }
     }
 }

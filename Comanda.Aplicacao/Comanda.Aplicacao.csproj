@@ -24,7 +24,6 @@
   <ItemGroup>
     <Folder Include="EnderecoClientes\Servicos\Interfaces\" />
     <Folder Include="EnderecosEmpresas\Servicos\Interfaces\" />
-    <Folder Include="HorariosFuncionamento\Servicos\Interfaces\" />
   </ItemGroup>
 
 </Project>
