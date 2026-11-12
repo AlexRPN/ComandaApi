@@ -1,6 +1,7 @@
 ﻿using Comanda.Aplicacao.Categorias.Servicos.Interfaces;
 using Comanda.DataTransfer.Categorias.Request;
 using Comanda.DataTransfer.Utils.Status.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComandaApi.Controllers.Categorias
@@ -22,6 +23,7 @@ namespace ComandaApi.Controllers.Categorias
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         [Route("inserir")]
         public async Task<ActionResult> InserirAsync([FromBody] CategoriaRequest request, CancellationToken cancellationToken)
         {
@@ -36,6 +38,7 @@ namespace ComandaApi.Controllers.Categorias
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut]
+        [Authorize]
         [Route("editar")]
         public async Task<ActionResult> EditarAsync([FromBody] CategoriaEditarRequest request, CancellationToken cancellationToken)
         {
@@ -50,6 +53,7 @@ namespace ComandaApi.Controllers.Categorias
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize]
         [Route("recuperar/{id}")]
         public async Task<ActionResult> RecuperarPorIdAsync(int id, CancellationToken cancellationToken)
         {
@@ -64,6 +68,7 @@ namespace ComandaApi.Controllers.Categorias
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize]
         [Route("listar")]
         public async Task<ActionResult> ListarAsync([FromQuery] CategoriaListarRequest filtro, CancellationToken cancellationToken)
         {
@@ -78,6 +83,7 @@ namespace ComandaApi.Controllers.Categorias
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPatch]
+        [Authorize]
         [Route("alterar-status")]
         public async Task<ActionResult> AlterarStatusAsync([FromBody] AlterarStatusRequest request, CancellationToken cancellationToken)
         {

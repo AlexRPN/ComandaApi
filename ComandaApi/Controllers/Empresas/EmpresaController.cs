@@ -24,6 +24,7 @@ namespace ComandaApi.Controllers.Empresas
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         [Route("inserir")]
         public async Task<IActionResult> InserirAsync([FromBody] EmpresaRequest request, CancellationToken cancellationToken)
         {
@@ -38,6 +39,7 @@ namespace ComandaApi.Controllers.Empresas
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut]
+        [Authorize]
         [Route("editar")]
         public async Task<ActionResult> EditarAsync([FromBody] EmpresaRequest request, CancellationToken cancellationToken)
         {
@@ -52,6 +54,7 @@ namespace ComandaApi.Controllers.Empresas
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [Authorize]
         [Route("recuperar/{id}")]
         public async Task<IActionResult> RecuperarAsync(int id, CancellationToken cancellationToken)
         {

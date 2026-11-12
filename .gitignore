@@ -361,6 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 
+# Local development settings may contain secrets
+ComandaApi/appsettings.Development.json
+
 # Test and coverage reports
 TestResults/
 coverage-report/

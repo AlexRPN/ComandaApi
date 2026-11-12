@@ -1,5 +1,6 @@
 ﻿using Comanda.Aplicacao.HorariosFuncionamento.Servicos.Interfaces;
 using Comanda.DataTransfer.HorariosFuncionamento.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComandaApi.Controllers.HorariosFuncionamentos
@@ -21,6 +22,7 @@ namespace ComandaApi.Controllers.HorariosFuncionamentos
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         [Route("inserir")]
         public async Task<IActionResult> InserirAsync([FromBody] IEnumerable<HorarioFuncionamentoRequest> request,
                                                                  CancellationToken cancellationToken)
@@ -36,6 +38,7 @@ namespace ComandaApi.Controllers.HorariosFuncionamentos
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut]
+        [Authorize]
         [Route("editar")]
         public async Task<IActionResult> EditarAsync([FromBody] IEnumerable<HorarioFuncionamentoEditarRequest> request, 
                                                                 CancellationToken cancellationToken)

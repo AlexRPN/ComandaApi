@@ -238,6 +238,20 @@ namespace Comanda.Dominio.Testes.Empresas.Servicos
                 resultado.Should().NotBeNull();
                 resultado.Id.Should().Be(empresaExistente.Id);
             }
+
+            [Fact]
+            public async Task Quando_EmpresaInexistente_Espero_RetornarNull()
+            {
+                // Mock do repositório para retornar null (empresa inexistente)
+                empresaRepositorioMock.RecuperarAsync(Arg.Any<Expression<Func<Empresa, bool>>>(), 
+                                                      Arg.Any<CancellationToken>())
+                                      .Returns(Task.FromResult<Empresa>(null));
+
+                Func<Task> act = async () => await sut.RecuperarAsync(999, CancellationToken.None);
+
+                await act.Should().ThrowAsync<ArgumentException>()
+                         .WithMessage("A Empresa informada não foi encontrada!");
+            }
         }
     }
 }

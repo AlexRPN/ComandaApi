@@ -55,7 +55,14 @@ namespace Comanda.Dominio.Empresas.Servicos
 
         public async Task<Empresa> RecuperarAsync(int id, CancellationToken cancellationToken)
         {
-            return await empresaRepositorio.RecuperarAsync(x => x.Id == id, cancellationToken);
+            var empresaValida = await empresaRepositorio.RecuperarAsync(x => x.Id == id, cancellationToken);
+
+            if (empresaValida is null)
+            {
+                throw new ArgumentException("A Empresa informada não foi encontrada!");
+            }
+
+            return empresaValida;
         }
 
         public async Task<PaginacaoConsulta<Empresa>> ListarAsync(IQueryable<Empresa> query, int qt, int pg, string cpOrd,

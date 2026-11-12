@@ -1,4 +1,5 @@
-﻿using Comanda.Dominio.Usuarios.Comandos;
+﻿using Comanda.Dominio.Empresas.Servicos.Interfaces;
+using Comanda.Dominio.Usuarios.Comandos;
 using Comanda.Dominio.Usuarios.Entidades;
 using Comanda.Dominio.Usuarios.Repositorios.Filtros;
 using Comanda.Dominio.Usuarios.Repositorios.Interfaces;
@@ -12,16 +13,19 @@ namespace Comanda.Dominio.Usuarios.Servicos
     public class UsuarioServico : IUsuarioServico
     {
         private readonly IUsuarioRepositorio usuarioRepositorio;
-        public UsuarioServico(IUsuarioRepositorio usuarioRepositorio)
+        private readonly IEmpresaServico empresaServico;
+        public UsuarioServico(IUsuarioRepositorio usuarioRepositorio, 
+                              IEmpresaServico empresaServico)
         {
             this.usuarioRepositorio = usuarioRepositorio;
+            this.empresaServico = empresaServico;
         }
 
         public async Task<Usuario> InserirAsync(UsuarioInserirComando comando, CancellationToken cancellationToken)
         {
-            await ValidarCpfAsync(comando.Cpf, cancellationToken);
+            await empresaServico.RecuperarAsync(comando.EmpresaId, cancellationToken);
 
-            //autenticacaoServico.CriarSenhaHash(comando.Senha, out byte[] senhaHash, out byte[] senhaSalt);
+            await ValidarCpfAsync(comando.Cpf, cancellationToken);
 
             var usuario = new UsuarioComando
             {
@@ -33,6 +37,7 @@ namespace Comanda.Dominio.Usuarios.Servicos
                 Status = StatusEnum.Ativo,
                 DataCadastro = DateTime.Now,
             };
+
             return await usuarioRepositorio.InserirAsync(usuario, cancellationToken);
         }
 
