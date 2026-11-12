@@ -19,7 +19,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.11" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="11.0.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.23.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.23.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,8 +30,6 @@
     <Folder Include="EnderecoClientes\Repositorios\Filtros\" />
     <Folder Include="GrupoAdicionais\Repositorios\Filtros\" />
     <Folder Include="ImagensProdutos\Repositorios\Filtros\" />
-    <Folder Include="UsuariosCredenciais\Servicos\" />
-    <Folder Include="UsuariosCredenciais\Repositorios\" />
     <Folder Include="ProdutosVariacoes\Repositorios\Filtros\" />
   </ItemGroup>
 

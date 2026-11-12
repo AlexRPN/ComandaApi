@@ -1,4 +1,5 @@
-﻿using Comanda.Dominio.Usuarios.Comandos;
+﻿using Comanda.Dominio.Empresas.Servicos.Interfaces;
+using Comanda.Dominio.Usuarios.Comandos;
 using Comanda.Dominio.Usuarios.Entidades;
 using Comanda.Dominio.Usuarios.Repositorios.Filtros;
 using Comanda.Dominio.Usuarios.Repositorios.Interfaces;
@@ -18,11 +19,13 @@ namespace Comanda.Dominio.Testes.Usuarios.Servicos
         private readonly UsuarioServico sut;
         private readonly UsuarioComando usuarioComando;
         private readonly IUsuarioRepositorio usuarioRepositorio;
+        private readonly IEmpresaServico empresaServico;
         private readonly Usuario usuarioValido;
 
         public UsuariosServicoTestes()
         {
             usuarioRepositorio = Substitute.For<IUsuarioRepositorio>();
+            empresaServico = Substitute.For<IEmpresaServico>();
             usuarioComando = Builder<UsuarioComando>
                 .CreateNew()
                 .With(x => x.Id = 1)
@@ -34,7 +37,7 @@ namespace Comanda.Dominio.Testes.Usuarios.Servicos
                 .With(x => x.Status = StatusEnum.Ativo)
                 .With(x => x.DataCadastro = DateTime.Now)
                 .Build();
-            sut = new(usuarioRepositorio);
+            sut = new(usuarioRepositorio, empresaServico);
         }
 
         public class ValidarCpfMetodo : UsuariosServicoTestes

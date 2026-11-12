@@ -1,6 +1,7 @@
 ﻿using Comanda.Aplicacao.Usuarios.Servicos.Interfaces;
 using Comanda.DataTransfer.Usuarios.Request;
 using Comanda.DataTransfer.Utils.Status.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComandaApi.Controllers.Usuarios
@@ -22,6 +23,7 @@ namespace ComandaApi.Controllers.Usuarios
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         [Route("inserir")]
         public async Task<ActionResult> InserirAsync([FromBody] UsuarioRequest request, CancellationToken cancellationToken)
         {
@@ -36,6 +38,7 @@ namespace ComandaApi.Controllers.Usuarios
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [Authorize]
         [Route("recuperar/{id}")]
         public async Task<ActionResult> RecuperarPorIdAsync(int id, CancellationToken cancellationToken)
         {
@@ -50,6 +53,7 @@ namespace ComandaApi.Controllers.Usuarios
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize]
         [Route("listar")]
         public async Task<ActionResult> ListarPaginadoAsync([FromBody] UsuarioListarRequest request, CancellationToken cancellationToken)
         {
@@ -64,6 +68,7 @@ namespace ComandaApi.Controllers.Usuarios
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut]
+        [Authorize]
         [Route("editar")]
         public async Task<ActionResult> EditarAsync([FromBody] UsuarioEditarRequest request, CancellationToken cancellationToken)
         {
@@ -79,6 +84,7 @@ namespace ComandaApi.Controllers.Usuarios
         /// <param name="cancellationToken">Token de cancelamento</param>
         /// <returns></returns>
         [HttpPatch]
+        [Authorize]
         [Route("alterar-status")]
         public async Task<ActionResult> AlterarStatusAsync([FromBody] AlterarStatusRequest request, CancellationToken cancellationToken)
         {

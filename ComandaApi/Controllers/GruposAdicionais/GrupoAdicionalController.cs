@@ -1,5 +1,6 @@
 ﻿using Comanda.Aplicacao.GruposAdicionais.Servicos.Interfaces;
 using Comanda.DataTransfer.GruposAdicionais.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComandaApi.Controllers.GruposAdicionais
@@ -21,6 +22,7 @@ namespace ComandaApi.Controllers.GruposAdicionais
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         [Route("inserir")]
         public async Task<IActionResult> InserirAsync([FromBody] List<GrupoAdicionalRequest> requests, CancellationToken cancellationToken)
         {

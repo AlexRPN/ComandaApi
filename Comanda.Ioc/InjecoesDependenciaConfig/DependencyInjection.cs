@@ -13,6 +13,8 @@ using Comanda.Aplicacao.Produtos.Servicos.Interfaces;
 using Comanda.Aplicacao.Transacoes.Interfaces;
 using Comanda.Aplicacao.Usuarios.Servicos;
 using Comanda.Aplicacao.Usuarios.Servicos.Interfaces;
+using Comanda.Aplicacao.UsuariosCredenciais.Servicos;
+using Comanda.Aplicacao.UsuariosCredenciais.Servicos.Interfaces;
 using Comanda.Dominio.Adicionais.Repositorios.Interfaces;
 using Comanda.Dominio.Adicionais.Servicos;
 using Comanda.Dominio.Adicionais.Servicos.Interfaces;
@@ -52,6 +54,9 @@ using Comanda.Dominio.ProdutosVariacoes.Services.Interfaces;
 using Comanda.Dominio.Usuarios.Repositorios.Interfaces;
 using Comanda.Dominio.Usuarios.Servicos;
 using Comanda.Dominio.Usuarios.Servicos.Interfaces;
+using Comanda.Dominio.UsuariosCredenciais.Repositorios.Interfaces;
+using Comanda.Dominio.UsuariosCredenciais.Servicos;
+using Comanda.Dominio.UsuariosCredenciais.Servicos.Interfaces;
 using Comanda.Dominio.Utils.Autenticacoes.Servicos;
 using Comanda.Dominio.Utils.Autenticacoes.Servicos.Interfaces;
 using Comanda.Infra.Adicionais.Repositorios;
@@ -70,6 +75,7 @@ using Comanda.Infra.Produtos.Repositorios;
 using Comanda.Infra.ProdutosGruposAdicionais.Repositorios;
 using Comanda.Infra.ProdutosVariacoes.Repositorios;
 using Comanda.Infra.Usuarios;
+using Comanda.Infra.UsuariosCredenciais.Repositorios;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -104,6 +110,7 @@ namespace Comanda.Ioc.InjecoesDependenciaConfig
             services.AddScoped<IImagemProdutoRepositorio, ImagemProdutoRepositorio>();
             services.AddScoped<IAdicionalRepositorio, AdicionalRepositorio>();
             services.AddScoped<IProdutoGrupoAdicionalRepositorio, ProdutoGrupoAdicionalRepositorio>();
+            services.AddScoped<IUsuarioCredencialRepositorio, UsuarioCredencialRepositorio>();
 
             // Serviços
             services.AddScoped<IAutenticacaoServico, AutenticacaoServico>();
@@ -120,6 +127,7 @@ namespace Comanda.Ioc.InjecoesDependenciaConfig
             services.AddScoped<IImagemProdutoServico, ImagemProdutoServico>();
             services.AddScoped<IAdicionalServico, AdicionalServico>();
             services.AddScoped<IProdutoGrupoAdicionalServico, ProdutoGrupoAdicionalServico>();
+            services.AddScoped<IUsuarioCredencialServico, UsuarioCredencialServico>();
 
             // Aplicação
             services.AddScoped<IEmpresaAppServico, EmpresaAppServico>();
@@ -130,6 +138,7 @@ namespace Comanda.Ioc.InjecoesDependenciaConfig
             services.AddScoped<IProdutoAppServico, ProdutoAppServico>();
             services.AddScoped<IGrupoAdicionalAppServico, GrupoAdicionalAppServico>();
             services.AddScoped<IHorarioFuncionamentoAppServico, HorarioFuncionamentoAppServico>();
+            services.AddScoped<IUsuarioCredencialAppServico, UsuarioCredencialAppServico>();
 
             return services;
         }

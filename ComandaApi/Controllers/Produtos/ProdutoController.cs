@@ -1,5 +1,6 @@
 ﻿using Comanda.Aplicacao.Produtos.Servicos.Interfaces;
 using Comanda.DataTransfer.Produtos.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComandaApi.Controllers.Produtos
@@ -21,6 +22,7 @@ namespace ComandaApi.Controllers.Produtos
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         [Route("inserir")]
         // Usar [FromForm] quando o serviço de upload de arquivos estiver sendo utilizado, caso contrário, usar [FromBody]
         public async Task<IActionResult> InserirAsync([FromBody] ProdutoRequest request, CancellationToken cancellationToken)
@@ -36,6 +38,7 @@ namespace ComandaApi.Controllers.Produtos
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize]
         [Route("listar")]
         public async Task<IActionResult> ListarPaginadoAsync([FromQuery] ProdutoListarRequest request, 
                                                                         CancellationToken cancellationToken)

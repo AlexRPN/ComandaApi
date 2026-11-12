@@ -24,7 +24,6 @@ namespace Comanda.Dominio.Testes.UsuariosCredenciais.Entidades
                     NomeUsuario = "usuario_teste",
                     SenhaHash = new byte[] { 1, 2, 3 },
                     SenhaSalt = new byte[] { 4, 5, 6 },
-                    ConfirmarSenha = "senha_teste",
                     DataAlteracaoSenha = DateTime.Now.Date,
                     UltimoAcesso = DateTime.Now.Date,
                     DataFimBloqueio = DateTime.Now.Date.AddDays(1)

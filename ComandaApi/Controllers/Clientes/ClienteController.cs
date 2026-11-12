@@ -1,6 +1,7 @@
 ﻿using Comanda.Aplicacao.Clientes.Servicos.Interfaces;
 using Comanda.DataTransfer.Clientes.Request;
 using Comanda.DataTransfer.Utils.Status.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComandaApi.Controllers.Clientes
@@ -22,6 +23,7 @@ namespace ComandaApi.Controllers.Clientes
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         [Route("inserir")]
         public async Task<ActionResult> InserirAsync([FromBody] ClienteRequest request, CancellationToken cancellationToken)
         {
@@ -36,6 +38,7 @@ namespace ComandaApi.Controllers.Clientes
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize]
         [Route("listar")]
         public async Task<ActionResult> ListarAsync([FromBody] ClienteListarRequest request, CancellationToken cancellationToken)
         {
@@ -50,6 +53,7 @@ namespace ComandaApi.Controllers.Clientes
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPut]
+        [Authorize]
         [Route("editar")]
         public async Task<ActionResult> EditarAsync([FromBody] ClienteEditarRequest request, CancellationToken cancellationToken)
         {
@@ -64,6 +68,7 @@ namespace ComandaApi.Controllers.Clientes
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize]
         [Route("recuperar/{id}")]
         public async Task<ActionResult> RecuperarAsync(int id, CancellationToken cancellationToken)
         {
@@ -79,6 +84,7 @@ namespace ComandaApi.Controllers.Clientes
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPatch]
+        [Authorize]
         [Route("alterar-status")]
         public async Task<ActionResult> AlterarStatus([FromBody] AlterarStatusRequest request, CancellationToken cancellationToken)
         {
