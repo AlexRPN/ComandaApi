@@ -376,6 +376,43 @@ namespace Comanda.Infra.Migrations
                     b.ToTable("ImagensProdutos");
                 });
 
+            modelBuilder.Entity("Comanda.Dominio.Mesas.Entidades.Mesa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Capacidade")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataAlteracao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataCadastro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EmpresaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Situacao")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmpresaId", "Numero")
+                        .IsUnique();
+
+                    b.ToTable("Mesas");
+                });
+
             modelBuilder.Entity("Comanda.Dominio.Produtos.Entidades.Produto", b =>
                 {
                     b.Property<int>("Id")
@@ -650,6 +687,17 @@ namespace Comanda.Infra.Migrations
                         .IsRequired();
 
                     b.Navigation("Produto");
+                });
+
+            modelBuilder.Entity("Comanda.Dominio.Mesas.Entidades.Mesa", b =>
+                {
+                    b.HasOne("Comanda.Dominio.Empresas.Entidades.Empresa", "Empresa")
+                        .WithMany()
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Empresa");
                 });
 
             modelBuilder.Entity("Comanda.Dominio.Produtos.Entidades.Produto", b =>
