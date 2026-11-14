@@ -30,8 +30,6 @@
     <Folder Include="EnderecoClientes\Repositorios\Filtros\" />
     <Folder Include="GrupoAdicionais\Repositorios\Filtros\" />
     <Folder Include="ImagensProdutos\Repositorios\Filtros\" />
-    <Folder Include="Mesas\Servicos\" />
-    <Folder Include="Mesas\Repositorios\" />
     <Folder Include="ProdutosVariacoes\Repositorios\Filtros\" />
   </ItemGroup>
 

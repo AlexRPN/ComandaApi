@@ -26,7 +26,7 @@ namespace Comanda.Dominio.Genericos
         Task<T?> RecuperarAsync(int id, CancellationToken cancellationToken);
         Task<T?> RecuperarAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);
 
-        Task<T> InserirAsync(T entidade);
+        Task<T> InserirAsync(T entidade, CancellationToken cancellationToken);
 
         Task<T> EditarAsync(T entidade, CancellationToken cancellationToken);
         Task ExcluirAsync(T entidade);

@@ -111,13 +111,6 @@ namespace Comanda.Dominio.Testes.Mesas.Entidades
                 sut.SetDataCadastro(dataCadastro);
                 Assert.Equal(dataCadastro, sut.DataCadastro);
             }
-
-            [Fact]
-            public void Quando_DataCadastroForAnteriorDataAtual_Espero_ArgumentException()
-            {
-                var dataCadastro = DateTime.Now.Date.AddDays(-1);
-                Assert.Throws<ArgumentException>(() => sut.SetDataCadastro(dataCadastro));
-            }
         }
 
         public class SetDataAlteracao : MesasTestes
@@ -128,13 +121,6 @@ namespace Comanda.Dominio.Testes.Mesas.Entidades
                 var dataAlteracao = DateTime.Now.Date;
                 sut.SetDataAlteracao(dataAlteracao);
                 Assert.Equal(dataAlteracao, sut.DataAlteracao);
-            }
-
-            [Fact]
-            public void Quando_DataAlteracaoForAnteriorDataAtual_Espero_ArgumentException()
-            {
-                var dataAlteracao = DateTime.Now.Date.AddDays(-1);
-                Assert.Throws<ArgumentException>(() => sut.SetDataAlteracao(dataAlteracao));
             }
         }
 

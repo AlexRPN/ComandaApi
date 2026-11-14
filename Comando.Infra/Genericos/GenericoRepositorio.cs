@@ -78,9 +78,9 @@ namespace Comanda.Infra.Genericos
             return appDbContext.Set<T>().Find(id);
         }
 
-        public async Task<T> InserirAsync(T entidade)
+        public async Task<T> InserirAsync(T entidade, CancellationToken cancellationToken)
         {
-            await appDbContext.AddAsync(entidade);
+            await appDbContext.AddAsync(entidade, cancellationToken);
             return entidade;
         }
 

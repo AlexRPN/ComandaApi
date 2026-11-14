@@ -68,7 +68,7 @@ namespace Comanda.Dominio.Testes.Autenticacoes.Servico
             const string tokenKey = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
             const string issuer = "ComandaApi";
             const string audience = "ComandaApi";
-            configuration["JwtSettings:Token"].Returns(tokenKey);
+            configuration["JwtSettings:SecretKey"].Returns(tokenKey);
             configuration["JwtSettings:Issuer"].Returns(issuer);
             configuration["JwtSettings:Audience"].Returns(audience);
 
@@ -119,7 +119,7 @@ namespace Comanda.Dominio.Testes.Autenticacoes.Servico
         public void Quando_CriarTokenJwtSemChaveConfigurada_Espero_LancarExcecao()
         {
             // Arrange
-            configuration["JwtSettings:Token"].Returns((string?)null);
+            configuration["JwtSettings:SecretKey"].Returns((string?)null);
             var usuario = new Usuario(new UsuarioComando
             {
                 Nome = "Alex",
@@ -140,7 +140,7 @@ namespace Comanda.Dominio.Testes.Autenticacoes.Servico
             // Act & Assert
             var excecao = Assert.Throws<InvalidOperationException>(
                 () => sut.CriarTokenJwt(credencial, CancellationToken.None));
-            Assert.Equal("JwtSettings:Token não foi configurado.", excecao.Message);
+            Assert.Equal("JwtSettings:SecretKey não foi configurado.", excecao.Message);
         }
     }
 }
