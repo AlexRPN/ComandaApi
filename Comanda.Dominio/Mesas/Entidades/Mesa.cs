@@ -60,17 +60,11 @@ namespace Comanda.Dominio.Mesas.Entidades
 
         public void SetDataCadastro(DateTime dataCadastro)
         {
-            if(dataCadastro < DateTime.Now.Date)
-                throw new ArgumentException("A data de cadastro não pode ser anterior à data atual.");
-
             DataCadastro = dataCadastro;
         }
 
         public void SetDataAlteracao(DateTime dataAlteracao)
         {
-            if(dataAlteracao < DateTime.Now.Date)
-                throw new ArgumentException("A data de alteração não pode ser anterior à data atual.");
-
             DataAlteracao = dataAlteracao;
         }
 

@@ -43,8 +43,8 @@ namespace Comanda.Dominio.Utils.Autenticacoes.Servicos
                 new Claim("UsuarioId", usuarioCredencial.UsuarioId.ToString())
             };
 
-            var tokenKey = configuration["JwtSettings:Token"]
-                ?? throw new InvalidOperationException("JwtSettings:Token não foi configurado.");
+            var tokenKey = configuration["JwtSettings:SecretKey"]
+                ?? throw new InvalidOperationException("JwtSettings:SecretKey não foi configurado.");
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(tokenKey));
 
