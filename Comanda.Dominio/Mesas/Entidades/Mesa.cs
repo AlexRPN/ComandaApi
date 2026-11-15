@@ -1,7 +1,9 @@
 ﻿
 using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.Mesas.Comandos;
+using Comanda.Dominio.Pedidos.Entidades;
 using Comanda.Dominio.Utils.Enumeradores;
+using System.Collections;
 
 namespace Comanda.Dominio.Mesas.Entidades
 {
@@ -11,6 +13,9 @@ namespace Comanda.Dominio.Mesas.Entidades
         // Relacionamento 1:N com Empresa
         public int EmpresaId { get; private set; }
         public Empresa Empresa { get; private set; }
+
+        // Relacionamento 1:N com Pedido
+        public ICollection<Pedido> Pedidos { get; private set; }
         #endregion
 
         public int Id { get; private set; }

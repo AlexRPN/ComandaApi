@@ -413,6 +413,66 @@ namespace Comanda.Infra.Migrations
                     b.ToTable("Mesas");
                 });
 
+            modelBuilder.Entity("Comanda.Dominio.Pedidos.Entidades.Pedido", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataPedido")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EmpresaId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MesaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Observacao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("PrevisaoEntrega")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Situacao")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipoPedido")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ValorEntrega")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorProduto")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("ValorTaxaServico")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("EmpresaId");
+
+                    b.HasIndex("MesaId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Pedidos");
+                });
+
             modelBuilder.Entity("Comanda.Dominio.Produtos.Entidades.Produto", b =>
                 {
                     b.Property<int>("Id")
@@ -700,6 +760,37 @@ namespace Comanda.Infra.Migrations
                     b.Navigation("Empresa");
                 });
 
+            modelBuilder.Entity("Comanda.Dominio.Pedidos.Entidades.Pedido", b =>
+                {
+                    b.HasOne("Comanda.Dominio.Clientes.Entidades.Cliente", "Cliente")
+                        .WithMany("Pedidos")
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Comanda.Dominio.Empresas.Entidades.Empresa", "Empresa")
+                        .WithMany("Pedidos")
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Comanda.Dominio.Mesas.Entidades.Mesa", "Mesa")
+                        .WithMany("Pedidos")
+                        .HasForeignKey("MesaId");
+
+                    b.HasOne("Comanda.Dominio.Usuarios.Entidades.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Empresa");
+
+                    b.Navigation("Mesa");
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("Comanda.Dominio.Produtos.Entidades.Produto", b =>
                 {
                     b.HasOne("Comanda.Dominio.Categorias.Entidades.Categoria", "Categoria")
@@ -780,6 +871,8 @@ namespace Comanda.Infra.Migrations
                 {
                     b.Navigation("EnderecoCliente")
                         .IsRequired();
+
+                    b.Navigation("Pedidos");
                 });
 
             modelBuilder.Entity("Comanda.Dominio.Empresas.Entidades.Empresa", b =>
@@ -793,6 +886,8 @@ namespace Comanda.Infra.Migrations
 
                     b.Navigation("HorariosFuncionamento");
 
+                    b.Navigation("Pedidos");
+
                     b.Navigation("Produtos");
 
                     b.Navigation("Usuarios");
@@ -803,6 +898,11 @@ namespace Comanda.Infra.Migrations
                     b.Navigation("Adicionais");
 
                     b.Navigation("ProdutosGruposAdicionais");
+                });
+
+            modelBuilder.Entity("Comanda.Dominio.Mesas.Entidades.Mesa", b =>
+                {
+                    b.Navigation("Pedidos");
                 });
 
             modelBuilder.Entity("Comanda.Dominio.Produtos.Entidades.Produto", b =>
