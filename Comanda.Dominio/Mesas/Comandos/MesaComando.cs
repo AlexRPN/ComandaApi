@@ -5,7 +5,6 @@ namespace Comanda.Dominio.Mesas.Comandos
 {
     public class MesaComando
     {
-        public int Id { get; set; }
         public int EmpresaId { get; set; }
         public int Numero { get; set; }
         public int Capacidade { get; set; }

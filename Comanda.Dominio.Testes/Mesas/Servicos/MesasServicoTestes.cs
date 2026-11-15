@@ -25,7 +25,6 @@ namespace Comanda.Dominio.Testes.Mesas.Servicos
             empresaServicoMock = Substitute.For<IEmpresaServico>();
             mesaComando = Builder<MesaComando>
                 .CreateNew()
-                .With(x => x.Id = 1)
                 .With(x => x.EmpresaId = 1)
                 .With(x => x.Numero = 1)
                 .With(x => x.Capacidade = 4)
