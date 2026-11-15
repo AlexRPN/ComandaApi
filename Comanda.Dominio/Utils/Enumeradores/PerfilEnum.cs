@@ -18,6 +18,9 @@ namespace Comanda.Dominio.Utils.Enumeradores
         Entregador,
 
         [Description("Gerente")]
-        Gerente
+        Gerente,
+
+        [Description("Garçom")]
+        Garcom
     }
 }

@@ -8,6 +8,7 @@ using Comanda.Dominio.GrupoAdicionais.Entidades;
 using Comanda.Dominio.HorariosFuncionamento.Entidades;
 using Comanda.Dominio.ImagensProdutos.Entidades;
 using Comanda.Dominio.Mesas.Entidades;
+using Comanda.Dominio.Pedidos.Entidades;
 using Comanda.Dominio.Produtos.Entidades;
 using Comanda.Dominio.ProdutosGruposAdicionais.Entidades;
 using Comanda.Dominio.ProdutosVariacoes.Entidades;
@@ -46,5 +47,6 @@ namespace Comanda.Infra.Data
         public DbSet<ProdutoGrupoAdicional> ProdutosGruposAdicionais { get; set; }
         public DbSet<UsuarioCredencial> UsuariosCredenciais { get; set; }
         public DbSet<Mesa> Mesas { get; set; }
+        public DbSet<Pedido> Pedidos { get; set; }
     }
 }
