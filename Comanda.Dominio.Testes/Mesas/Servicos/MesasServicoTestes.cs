@@ -121,5 +121,107 @@ namespace Comanda.Dominio.Testes.Mesas.Servicos
                          .WithMessage("Não foi possível inserir a mesa.");
             }
         }
+
+        public class EditarAsync : MesasServicoTestes
+        {
+            [Fact]
+            public async Task Quando_MesaForValida_Espero_MesaEditada()
+            {
+                var comando = new MesaEditarComando
+                {
+                    Id = 1,
+                    EmpresaId = 1,
+                    Capacidade = 6,
+                    Situacao = SituacaoMesaEnum.Livre
+                };
+                var mesa = new Mesa(mesaComando);
+
+                mesaRepositorioMock.RecuperarAsync(Arg.Any<Expression<Func<Mesa, bool>>>(),
+                                                   Arg.Any<CancellationToken>())
+                                   .Returns(mesa);
+                mesaRepositorioMock.EditarAsync(Arg.Any<Mesa>(), Arg.Any<CancellationToken>())
+                                   .Returns(mesa);
+
+                var resultado = await sut.EditarAsync(comando, CancellationToken.None);
+
+                resultado.Should().BeSameAs(mesa);
+                resultado.EmpresaId.Should().Be(comando.EmpresaId);
+                resultado.Capacidade.Should().Be(comando.Capacidade);
+                resultado.Situacao.Should().Be(comando.Situacao);
+                resultado.DataAlteracao.Should().Be(DateTime.Now.Date);
+                await mesaRepositorioMock.Received(1).EditarAsync(mesa, Arg.Any<CancellationToken>());
+            }
+
+            [Fact]
+            public async Task Quando_MesaNaoEncontrada_Espero_ArgumentException()
+            {
+                var comando = new MesaEditarComando
+                {
+                    Id = 1,
+                    EmpresaId = 1,
+                    Capacidade = 4,
+                    Situacao = SituacaoMesaEnum.Livre
+                };
+                mesaRepositorioMock.RecuperarAsync(Arg.Any<Expression<Func<Mesa, bool>>>(),
+                                                   Arg.Any<CancellationToken>())
+                                   .Returns(Task.FromResult<Mesa?>(null));
+
+                Func<Task> act = async () => await sut.EditarAsync(comando, CancellationToken.None);
+
+                await act.Should()
+                         .ThrowAsync<ArgumentException>()
+                         .WithMessage("Mesa inválida para a empresa informada!");
+                await mesaRepositorioMock.DidNotReceive().EditarAsync(Arg.Any<Mesa>(), Arg.Any<CancellationToken>());
+            }
+
+            [Theory]
+            [InlineData(0)]
+            [InlineData(-1)]
+            public async Task Quando_CapacidadeForInvalida_Espero_ArgumentException(int capacidade)
+            {
+                var comando = new MesaEditarComando
+                {
+                    Id = 1,
+                    EmpresaId = 1,
+                    Capacidade = capacidade,
+                    Situacao = SituacaoMesaEnum.Livre
+                };
+                var mesa = new Mesa(mesaComando);
+                mesaRepositorioMock.RecuperarAsync(Arg.Any<Expression<Func<Mesa, bool>>>(),
+                                                   Arg.Any<CancellationToken>())
+                                   .Returns(mesa);
+
+                Func<Task> act = async () => await sut.EditarAsync(comando, CancellationToken.None);
+
+                await act.Should()
+                         .ThrowAsync<ArgumentException>()
+                         .WithMessage("A capacidade da mesa deve ser maior que zero.");
+                await mesaRepositorioMock.DidNotReceive().EditarAsync(Arg.Any<Mesa>(), Arg.Any<CancellationToken>());
+            }
+
+            [Fact]
+            public async Task QuandoRepositorioNaoEditarMesa_Espero_ArgumentException()
+            {
+                var comando = new MesaEditarComando
+                {
+                    Id = 1,
+                    EmpresaId = 1,
+                    Capacidade = 4,
+                    Situacao = SituacaoMesaEnum.Livre
+                };
+                var mesa = new Mesa(mesaComando);
+                mesaRepositorioMock.RecuperarAsync(Arg.Any<Expression<Func<Mesa, bool>>>(),
+                                                   Arg.Any<CancellationToken>())
+                                   .Returns(mesa);
+                mesaRepositorioMock.EditarAsync(Arg.Any<Mesa>(), Arg.Any<CancellationToken>())
+                                   .Returns(Task.FromResult<Mesa>(null!));
+
+                Func<Task> act = async () => await sut.EditarAsync(comando, CancellationToken.None);
+
+                await act.Should()
+                         .ThrowAsync<ArgumentException>()
+                         .WithMessage("Erro ao editar mesa!");
+            }
+        }
     }
 }

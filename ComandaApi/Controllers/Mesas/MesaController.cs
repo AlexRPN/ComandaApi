@@ -30,5 +30,21 @@ namespace ComandaApi.Controllers.Mesas
             var response = await mesaAppServico.InserirAsync(request, cancellationToken);
             return Ok(response);
         }
+
+        /// <summary>
+        /// Edita uma mesa
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Authorize]
+        [Route("editar")]
+        public async Task<IActionResult> EditarAsync([FromBody] MesaEditarRequest request, 
+                                                                CancellationToken cancellationToken)
+        {
+            var response = await mesaAppServico.EditarAsync(request, cancellationToken);
+            return Ok(response);
+        }
     }
 }

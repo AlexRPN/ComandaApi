@@ -48,5 +48,30 @@ namespace Comanda.Dominio.Mesas.Servicos
 
             return mesaInserida;
         }
+
+        public async Task<Mesa> EditarAsync(MesaEditarComando comando, CancellationToken cancellationToken)
+        {
+            Mesa? mesa = await mesaRepositorio.RecuperarAsync(x => x.Id == comando.Id &&
+                                                                   x.EmpresaId == comando.EmpresaId,
+                                                                   cancellationToken);
+
+            if(mesa is null)
+            {
+                throw new ArgumentException("Mesa inválida para a empresa informada!");
+            }
+
+            mesa.SetCapacidade(comando.Capacidade);
+            mesa.SetDataAlteracao(DateTime.Now.Date);
+            mesa.SetSituacao(comando.Situacao);
+
+            var mesaEditada = await mesaRepositorio.EditarAsync(mesa, cancellationToken);
+
+            if(mesaEditada is null)
+            {
+                throw new ArgumentException("Erro ao editar mesa!");
+            }
+
+            return mesaEditada;
+         }
     }
 }

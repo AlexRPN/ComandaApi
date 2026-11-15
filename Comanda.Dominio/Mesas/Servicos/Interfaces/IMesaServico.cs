@@ -7,5 +7,6 @@ namespace Comanda.Dominio.Mesas.Servicos.Interfaces
     public interface IMesaServico
     {
         Task<Mesa> InserirAsync(MesaComando comando, CancellationToken cancellationToken);
+        Task<Mesa> EditarAsync(MesaEditarComando comando, CancellationToken cancellationToken);
     }
 }
