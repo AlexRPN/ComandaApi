@@ -2,6 +2,7 @@
 using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.GrupoAdicionais.Entidades;
 using Comanda.Dominio.ImagensProdutos.Entidades;
+using Comanda.Dominio.PedidosItens.Entidades;
 using Comanda.Dominio.Produtos.Comandos;
 using Comanda.Dominio.ProdutosGruposAdicionais.Entidades;
 using Comanda.Dominio.ProdutosVariacoes.Entidades;
@@ -28,6 +29,9 @@ namespace Comanda.Dominio.Produtos.Entidades
 
         // Tabela intermediária para o relacionamento N:N entre Produto e GrupoAdicional
         public ICollection<ProdutoGrupoAdicional> ProdutosGruposAdicionais { get; private set; } = [];
+
+        // Relacionamento 1:N com PedidoItem
+        public ICollection<PedidoItem> PedidoItem { get; set; }
         #endregion
 
         public int Id { get; private set; }

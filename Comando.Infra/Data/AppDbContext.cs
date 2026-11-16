@@ -9,6 +9,7 @@ using Comanda.Dominio.HorariosFuncionamento.Entidades;
 using Comanda.Dominio.ImagensProdutos.Entidades;
 using Comanda.Dominio.Mesas.Entidades;
 using Comanda.Dominio.Pedidos.Entidades;
+using Comanda.Dominio.PedidosItens.Entidades;
 using Comanda.Dominio.Produtos.Entidades;
 using Comanda.Dominio.ProdutosGruposAdicionais.Entidades;
 using Comanda.Dominio.ProdutosVariacoes.Entidades;
@@ -48,5 +49,6 @@ namespace Comanda.Infra.Data
         public DbSet<UsuarioCredencial> UsuariosCredenciais { get; set; }
         public DbSet<Mesa> Mesas { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<PedidoItem> PedidoItens { get; set; }
     }
 }
