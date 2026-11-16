@@ -1,5 +1,6 @@
 ﻿using Comanda.Dominio.Adicionais.Comandos;
 using Comanda.Dominio.GrupoAdicionais.Entidades;
+using Comanda.Dominio.PedidosItensAdicionais.Entidades;
 using Comanda.Dominio.Utils.Enumeradores;
 
 namespace Comanda.Dominio.Adicionais.Entidades
@@ -10,6 +11,9 @@ namespace Comanda.Dominio.Adicionais.Entidades
         // Relacionamento 1:N com GrupoAdicional
         public GrupoAdicional GrupoAdicional { get; private set; }
         public int GrupoAdicionalId { get; private set; }
+
+        // Relacionamento 1:N com PedidoItemAdicional
+        public ICollection<PedidoItemAdicional> PedidoItensAdicionais { get; private set; }
         #endregion
 
         public int Id { get; private set; }

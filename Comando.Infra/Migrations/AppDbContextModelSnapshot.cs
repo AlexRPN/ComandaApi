@@ -508,6 +508,35 @@ namespace Comanda.Infra.Migrations
                     b.ToTable("PedidoItens");
                 });
 
+            modelBuilder.Entity("Comanda.Dominio.PedidosItensAdicionais.Entidades.PedidoItemAdicional", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AdicionalId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PedidoItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdicionalId");
+
+                    b.HasIndex("PedidoItemId");
+
+                    b.ToTable("PedidosItensAdicionais");
+                });
+
             modelBuilder.Entity("Comanda.Dominio.Produtos.Entidades.Produto", b =>
                 {
                     b.Property<int>("Id")
@@ -845,6 +874,25 @@ namespace Comanda.Infra.Migrations
                     b.Navigation("Produto");
                 });
 
+            modelBuilder.Entity("Comanda.Dominio.PedidosItensAdicionais.Entidades.PedidoItemAdicional", b =>
+                {
+                    b.HasOne("Comanda.Dominio.Adicionais.Entidades.Adicional", "Adicional")
+                        .WithMany("PedidoItensAdicionais")
+                        .HasForeignKey("AdicionalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Comanda.Dominio.PedidosItens.Entidades.PedidoItem", "PedidoItem")
+                        .WithMany("Adicionais")
+                        .HasForeignKey("PedidoItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Adicional");
+
+                    b.Navigation("PedidoItem");
+                });
+
             modelBuilder.Entity("Comanda.Dominio.Produtos.Entidades.Produto", b =>
                 {
                     b.HasOne("Comanda.Dominio.Categorias.Entidades.Categoria", "Categoria")
@@ -916,6 +964,11 @@ namespace Comanda.Infra.Migrations
                     b.Navigation("Usuario");
                 });
 
+            modelBuilder.Entity("Comanda.Dominio.Adicionais.Entidades.Adicional", b =>
+                {
+                    b.Navigation("PedidoItensAdicionais");
+                });
+
             modelBuilder.Entity("Comanda.Dominio.Categorias.Entidades.Categoria", b =>
                 {
                     b.Navigation("Produtos");
@@ -962,6 +1015,11 @@ namespace Comanda.Infra.Migrations
             modelBuilder.Entity("Comanda.Dominio.Pedidos.Entidades.Pedido", b =>
                 {
                     b.Navigation("PedidoItem");
+                });
+
+            modelBuilder.Entity("Comanda.Dominio.PedidosItens.Entidades.PedidoItem", b =>
+                {
+                    b.Navigation("Adicionais");
                 });
 
             modelBuilder.Entity("Comanda.Dominio.Produtos.Entidades.Produto", b =>

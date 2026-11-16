@@ -1,6 +1,7 @@
 ﻿
 using Comanda.Dominio.Pedidos.Entidades;
 using Comanda.Dominio.PedidosItens.Comandos;
+using Comanda.Dominio.PedidosItensAdicionais.Entidades;
 using Comanda.Dominio.Produtos.Entidades;
 
 namespace Comanda.Dominio.PedidosItens.Entidades
@@ -15,6 +16,9 @@ namespace Comanda.Dominio.PedidosItens.Entidades
         // Relacionamento 1:N com Produto
         public Produto Produto { get; private set; }
         public int ProdutoId { get; private set; }
+
+        // Relacionamento 1:N com PedidoItemAdicional
+        public ICollection<PedidoItemAdicional> Adicionais { get; private set; }
         #endregion
 
         public int Id { get; private set; }
