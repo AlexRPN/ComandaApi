@@ -473,6 +473,41 @@ namespace Comanda.Infra.Migrations
                     b.ToTable("Pedidos");
                 });
 
+            modelBuilder.Entity("Comanda.Dominio.PedidosItens.Entidades.PedidoItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Observacao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PedidoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProdutoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ValorTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorUnitario")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PedidoId");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.ToTable("PedidoItens");
+                });
+
             modelBuilder.Entity("Comanda.Dominio.Produtos.Entidades.Produto", b =>
                 {
                     b.Property<int>("Id")
@@ -791,6 +826,25 @@ namespace Comanda.Infra.Migrations
                     b.Navigation("Usuario");
                 });
 
+            modelBuilder.Entity("Comanda.Dominio.PedidosItens.Entidades.PedidoItem", b =>
+                {
+                    b.HasOne("Comanda.Dominio.Pedidos.Entidades.Pedido", "Pedido")
+                        .WithMany("PedidoItem")
+                        .HasForeignKey("PedidoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Comanda.Dominio.Produtos.Entidades.Produto", "Produto")
+                        .WithMany("PedidoItem")
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pedido");
+
+                    b.Navigation("Produto");
+                });
+
             modelBuilder.Entity("Comanda.Dominio.Produtos.Entidades.Produto", b =>
                 {
                     b.HasOne("Comanda.Dominio.Categorias.Entidades.Categoria", "Categoria")
@@ -905,9 +959,16 @@ namespace Comanda.Infra.Migrations
                     b.Navigation("Pedidos");
                 });
 
+            modelBuilder.Entity("Comanda.Dominio.Pedidos.Entidades.Pedido", b =>
+                {
+                    b.Navigation("PedidoItem");
+                });
+
             modelBuilder.Entity("Comanda.Dominio.Produtos.Entidades.Produto", b =>
                 {
                     b.Navigation("ImagemProduto");
+
+                    b.Navigation("PedidoItem");
 
                     b.Navigation("ProdutoVariacao");
 

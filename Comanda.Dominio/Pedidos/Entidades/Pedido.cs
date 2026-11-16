@@ -3,6 +3,7 @@ using Comanda.Dominio.Clientes.Entidades;
 using Comanda.Dominio.Empresas.Entidades;
 using Comanda.Dominio.Mesas.Entidades;
 using Comanda.Dominio.Pedidos.Comandos;
+using Comanda.Dominio.PedidosItens.Entidades;
 using Comanda.Dominio.Usuarios.Entidades;
 using Comanda.Dominio.Utils.Enumeradores;
 
@@ -26,6 +27,9 @@ namespace Comanda.Dominio.Pedidos.Entidades
         // Relacionamento 1:N com Usuário (Garçom)
         public Usuario? Usuario { get; private set; }
         public int? UsuarioId { get; private set; }
+
+        // Relacionamento 1:N com PedidoItem
+        public ICollection<PedidoItem> PedidoItem { get; set; }
         #endregion
 
         public int Id { get; private set; }
